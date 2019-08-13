@@ -1,0 +1,74 @@
+<!--
+	2011-01-09 edit by 玉玲
+	-------------------------------------------------------
+	登入時判斷是否有輸入訂貨人email與訂貨人電話，若未輸入出現警示訊息。	
+	-------------------------------------------------------
+-->
+<script>
+var errOrdersemail_null="{$errOrdersemail_null}";
+var errOrderstel_null="{$errOrderstel_null}";
+{literal}
+function orderslogin_chk(){
+	var msg="";
+	if (document.getElementById('orders_email').value==""){
+		msg+=errOrdersemail_null+"\n\n";
+	}
+	if (document.getElementById('orders_tel').value==""){
+		msg+=errOrderstel_null+"\n\n";
+	}
+	if (msg!=""){		
+		alert(msg); return false;
+	} else {		
+		return true;
+	}
+}
+{/literal}
+</script>
+<form name="orders_login" id="orders_login" action="orders_query.php?act=loginchk" method="post" onSubmit="return orderslogin_chk();">
+{if $ordersemail=='' and $orderstel==''}
+<table width="100%" align="left" border="0" cellpadding="0" cellspacing="0" class="user_login_table">
+  <tr>
+    <th align="center" valign="middle" class="user_login_title">
+	  <span class="user_login_content">{$OrdersQueryTitle}</span>
+    </th>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" class="user_login_title">
+	  <span class="user_login_content">
+	    <img src="themes/{$themes_na}/images/userid.png" alt="{$loginid}" align="absmiddle" />
+	    {$orderemail}<BR>
+        <input name="orders_email" type="text" id="orders_email" class="user_login_textfield"/>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" class="user_login_title">
+      <span class="user_login_content">
+        <img src="themes/{$themes_na}/images/userpw.png" alt="{$pwd}" align="absmiddle" />
+		{$ordertel}<BR>
+        <input name="orders_tel" type="text" id="orders_tel" class="user_login_textfield"/>
+      </span>
+	</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" class="user_login_content">    
+      <input type="submit" name="button" id="button" value="{$login}" class="user_login_btn" style="width:60px; height:25px;" />
+	</td>
+  </tr>
+</table>
+{else}
+<table width="100%" align="left" border="0" cellpadding="0" cellspacing="0"  class="user_login_table">
+  <tr>
+    <th align="center" valign="middle" class="user_login_title">
+	  <span class="user_login_content">{$OrdersQueryTitle}</span>
+    </th>
+  </tr>
+  <tr>
+	<td class="user_login_title" align="center">
+		<a href="orders_query.php?act=sel_ords">{$ordersquerycenter}</a>&nbsp;
+		<input type="button" class="user_login_btn" value="{$btn_logout}" onclick="location.href='orders_query.php?act=logout';">
+	</td>
+  </tr>
+</table>
+{/if}
+</form>

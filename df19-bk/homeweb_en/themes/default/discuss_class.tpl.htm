@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="title" content="{$website_title}{$website_info}" />
+<meta name="description" content="{$website_descript}" />
+<meta name="keywords" content="{$websitw_keyword}{$website_info}" />
+<title>{$website_info}{$website_title}</title>
+<script src="themes/{$themes_na}/css/MenuToDown.js" type="text/javascript"></script>
+<script src="themes/{$themes_na}/css/MenuToRight.js" type="text/javascript"></script>
+<script src="themes/{$themes_na}/css/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="themes/{$themes_na}/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	discuss_class.tpl.htm		討論區 的 HTML樣板頁面
+	│	開發者		│	玉玲
+	│	版本		│	v03.00.02.1040801
+	├=======================================================================================┤
+	│	1.	v03.00.02.1040801	2011/04/28	廷俊		修正討論區不使用版面設定
+	│	2.  v03.00.10.1062001	2011-06-22	玉玲	新增判斷螢幕解析度大小函式 container_js。
+	│   3.	v03.00.10.1062001	2011-06-28	玉玲	修正討論區用IE7顯示時，回覆內容無法顯示，且與圖片的空白間距過大。
+	└=======================================================================================┘
+-->
+<script language="javascript">
+<!--
+/*註解
+2010-04-29 edit by 廷俊
+------------------------------------------------------
+增加	var warming_no_admin="{$warming_no_admin}";
+增加	var warming_mail="{$warming_mail}";
+------------------------------------------------------
+2010-04-30 edit by 廷俊
+------------------------------------------------------
+增加	var manager="{$manager}";
+增加	var manager1="{$manager1}";
+------------------------------------------------------		
+*/
+var manager="{$manager}";
+var manager1="{$manager1}";
+var warming_na="{$warming_na}";
+var warming_content="{$warming_content}";
+var warming_title="{$warming_title}";
+var warming_no_admin="{$warming_no_admin}";
+var warming_mail="{$warming_mail}";
+{literal}
+/*function postdicz(tyid){
+	document.getElementById('distyid').innerText=tyid;
+	if(document.getElementById('pofileornot').value=='1'){
+		document.getElementById('permitfile').style.display='';
+	}
+	document.getElementById('postdiscuz').style.display='';
+}*/
+
+function cancelpost(){
+	document.getElementById('postdiscuz').style.display='none';
+}
+/*註解
+2010-04-30 edit by 廷俊
+------------------------------------------------------
+1.判斷前台回覆人要限制不可輸入"管理員"、"管理者"、"admin"的字眼。
+2.資料驗證回覆人的"MAIL"	createuser_mail
+3.更改欄位用name取value的寫法，因為樣板的html有些text沒有id
+------------------------------------------------------		
+*/
+function chkrepost(){
+	msg="";
+	var createuser_na=document.message_write.createuser_na.value;
+	var replycontent=document.message_write.replycontent.value;
+	var createuser_mail=document.message_write.createuser_mail.value;
+	var ck_admin = new RegExp("admin");
+	var ck_manager = new RegExp(manager);
+	var ck_manager1 = new RegExp(manager1);
+	var ck_mail = /^[^@^\s]+@[^\.@^\s]+(\.[^\.@^\s]+)+$/;
+
+	if(createuser_na==''){
+		msg += warming_na + "\r\n";
+	}
+	if(replycontent==''){
+		msg += warming_content + "\r\n";
+	}
+	//判斷前台發佈人要限制不可輸入"管理員"、"管理者"、"admin"的字眼。
+	if(ck_admin.test(createuser_na.replace(/\s/g,"")) || ck_manager.test(createuser_na.replace(/\s/g,"")) || ck_manager1.test(createuser_na.replace(/\s/g,""))){
+		msg += warming_no_admin + "\r\n";
+	}
+	//資料驗證發佈人的"MAIL"
+	if(createuser_mail != "" && !ck_mail.test(createuser_mail)){
+		msg += warming_mail + "\r\n";
+	}
+	
+	if(msg==''){
+		return true;
+	}else{
+		alert(msg);
+		return false;
+	}	
+}
+/*註解
+2010-04-30 edit by 廷俊
+------------------------------------------------------
+1.判斷前台發佈人要限制不可輸入"管理員"、"管理者"、"admin"的字眼。
+2.資料驗證發佈人的"MAIL"	post_email
+3.更改欄位用name取value的寫法，因為樣板的html有些text沒有id
+------------------------------------------------------		
+*/
+function chkpost(){
+	msg="";
+	var post_na=document.message_post.post_na.value;
+	var distitle=document.message_post.distitle.value;
+	var discontent=document.message_post.discontent.value;
+	var post_email=document.message_post.post_email.value;
+	var ck_admin = new RegExp("admin");
+	var ck_manager = new RegExp(manager);
+	var ck_manager1 = new RegExp(manager1);
+	var ck_mail = /^[^@^\s]+@[^\.@^\s]+(\.[^\.@^\s]+)+$/;
+
+	if(post_na==''){
+		msg += warming_na + "\r\n";
+	}
+	if(distitle==''){
+		msg += warming_title + "\r\n";
+	}
+	if(discontent==''){
+		msg += warming_content + "\r\n";
+	}
+	//判斷前台發佈人要限制不可輸入"管理員"、"管理者"、"admin"的字眼。
+	if(ck_admin.test(post_na.replace(/\s/g,"")) || ck_manager.test(post_na.replace(/\s/g,"")) || ck_manager1.test(post_na.replace(/\s/g,""))){
+		msg += warming_no_admin + "\r\n";
+	}
+	//資料驗證發佈人的"MAIL"
+	if(post_email != "" && !ck_mail.test(post_email)){
+		msg += warming_mail + "\r\n";
+	}
+	
+	if(msg==''){
+		return true;
+	}else{
+		alert(msg);
+		return false;
+	}
+}
+{/literal}
+-->
+</script>
+
+<body>
+{if $container!=0}
+<!-- 頁面置中及寬度設定 -->
+<div id="container" style="width:{$container};">
+
+<!-- 上方MENU位置設定 -->
+{include file="modules/toplink_menu.tpl.htm"}
+
+<!-- 頁頭位置設定 -->
+{include file="modules/header.tpl.htm"}
+
+<iframe src="javascript:void(0);" name="outputTarget" height="0" width="0" style="display:none;" id="outputTarget"></iframe>
+
+<table width="100%" height="{$PageHeightDefault}" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<!-- 頁身 中間 主要區域位置設定 --> 
+		<td id="main" valign="top" style="width:{$center}">
+
+			<!-- 討論區分類列表 START --> 
+			<table valign="top" width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td align="center" valign="top">
+					<img src="themes/{$themes_na}/images/discuss_title.gif" alt="{$discuzlist}" />
+				</td>
+			  </tr>
+			  
+			<!-- 討論區所有分類列表 -->
+			{if $act=='list'}
+			  <tr>
+				<td valign="top">
+				{include file="modules/discuss_list.tpl.htm"}
+				</td>
+			  </tr>
+			<!-- 討論區討論區特定分類列表 -->
+			{elseif $act=='typelist'}
+
+			  <tr>
+				<td valign="top">
+				{include file="modules/discusstype_list.tpl.htm"}
+				</td>
+			  </tr>
+			<!-- 討論區單一明細內容 -->
+			{elseif $act=='content'}
+			  <tr>
+				<td valign="top">
+				{include file="modules/massage_list.tpl.htm"}
+				</td>
+			  </tr>
+			  <tr>
+			<!-- 回覆主題 -->
+				<td valign="top">
+				{include file="modules/massage_write.tpl.htm"}
+				</td>
+			  </tr>
+			<!-- 討論區發布文章 -->
+			{elseif $act=='post'}
+			  <tr>
+				<td valign="top">
+				{include file="modules/discuss_post.tpl.htm"}
+				</td>
+			  </tr>
+			{else}
+			{/if}
+			</table>
+			<!-- 討論區分類列表 END --> 
+			
+		</td>
+	</tr>
+</table>
+<!-- 頁尾位置設定 -->
+<div id="footer">{include file="modules/footer.tpl.htm"}</div>
+
+</div>
+{/if}
+
+<!-- 判斷螢幕解析度大小 -->
+{$container_js}
+
+</body>
+</html>

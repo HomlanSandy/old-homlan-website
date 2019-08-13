@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	usersgrouplist.htm	閱讀權限 的 HTM列表頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.0.0081001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0081001	2010/08/10	廷俊	新增、修改、刪除成功提示訊息
+	└=======================================================================================┘
+*/ -->
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_Add}" onclick="location.href='{$BtnAddUserUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-10 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 					
+-->
+{$Message}
+<!--
+	2010-06-18 edit by 廷俊
+	------------------------------------------------------
+	預設一般會員，不可刪除
+	------------------------------------------------------		
+-->
+<div id="show_table2" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>           
+      <td width="" height="25" align="center" valign="middle" class="table_td_01">{$UserGroupNa}</td>
+	  <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$UserGroupInfo}</td>
+      <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$UserGroupOp}</td>
+    </tr>
+	{section name=i loop=$umGroup}
+    <tr>
+	   <td height="25" valign="middle" align="left" class="table_td_02">{$umGroup[i].group_na}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umGroup[i].info_state}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02"><a href="{$umGroup[i].group_url}">{$UserGroupEdit}</a>{if $umGroup[i] neq $umGroup[0]}&nbsp;|&nbsp;<a href="{$umGroup[i].degroup_url}" onclick="return confirm('{$cheDelete}?');">{$UserGroupDel}</a>{/if}</td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+	{$PerPageNme}
+	{$umSetPageList}
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

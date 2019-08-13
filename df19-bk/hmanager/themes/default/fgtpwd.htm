@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{#website_title#}</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	fgtpwd.htm	後台LOGIN忘記密碼 的 htm檔
+	│	開發者		│	玉玲
+	│	版本		│	v2.0.0.0101901
+	├=======================================================================================┤
+	│	1.	v2.0.0.0101901	2010/10/19	廷俊	改版後把貓頭鷹的圖樣拿掉
+	│	2.	v2.0.8.1011401	2011/01/14	廷俊	a.將CSS設定背景圖，修改至login的PHP處理頁
+	│											b.EZPORTAL版顯示後台LOGIN背景圖，欲設/hmanager/images/hmanager_login.gif
+	│											c.OEM版顯示後台LOGIN背景圖，欲設/hyfiles/hmanager_login.gif
+	└=======================================================================================┘
+*/-->
+<script>
+var id_null_error="{$id_null_error}";
+var logpwd_null_error="{$logpwd_null_error}";
+{literal}
+function chkpost(){	
+	var errorMsg="";
+	if (document.getElementById('textfield').value=="")
+	{
+		errorMsg+=id_null_error+"\n";
+	}
+	if (document.getElementById('textfield3').value=="")
+	{
+		errorMsg+=id_null_error+"\n";
+	}
+	if (errorMsg!="")
+	{
+		alert(errorMsg);
+		return false;
+	} else {
+		return true;
+	}
+}
+{/literal}
+</script>
+<body id="login_bg">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<form name="loginfrm" method="post" action="{$loginfrm_cat}" onsubmit="return chkpost();">
+<table width="600" height="400" border="0" align="center" cellpadding="0" cellspacing="0" class="login_table" background="{$hmanager_login}">
+  <tr>
+    <td width="250" height="320" align="right" valign="middle"></td>
+    <td width="350" height="320" align="left" valign="top">
+      <table width="320" height="250" border="0" align="left" cellpadding="2" cellspacing="2">
+        <tr>
+          <td height="10" align="left" valign="top">&nbsp;</td>
+          </tr>
+        <tr>
+          <td height="50" align="center" valign="top">H-manager 後台管理系統</td>
+        </tr>
+        <tr>
+          <td align="center" valign="middle" style="color:#F90;">密碼查詢</td>
+        </tr>
+        <tr>
+          <td align="left" valign="middle">{$Login_Account}
+          <input name="Login_Id" type="text" class="login_textfield" id="textfield" /></td>
+          </tr>
+        <tr>
+          <td align="left" valign="middle">{$Login_EnterChk}&nbsp;<img src="{$capcha_url}" border="0" align="absmiddle"> <input name="login_passwd" type="text" class="login_textfield" id="textfield3" style="text-align:center;" size="6" maxlength="6" /></td>
+        </tr>
+        <tr>
+          <td align="center" valign="middle"><input name="button" type="submit" class="login_btn" id="button" value="{$Btn_Account}" />
+		<input name="button" type="reset" class="login_btn" id="button2" value="{$Btn_Reset}" /></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td height="75" colspan="2" align="center" valign="top" class="login_vision">Powered By HYWARE</td>
+  </tr>
+</table>
+</form>
+{$temp_log}</body>
+</html>

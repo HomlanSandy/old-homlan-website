@@ -1,0 +1,160 @@
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	demand_list.tpl.htm		前台需求單 的HTML處理頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0091301
+	├=======================================================================================┤
+	│	1.	v1.0.1.0091301	2010/09/13	廷俊	建立前台需求單
+	│	2.	v2.0.4.0120701	2010/12/07 	廷俊	a.需求單設定開放可不限會員
+	│											b.需求單新增需求者、電子郵件、聯絡電話、聯絡地址欄位
+	│											c.驗證需求者空白
+	│											d.驗證需求者的mail空白、有效mail格式
+	│											e.驗證需求者的聯絡電話空白
+	│											f.驗證需求者的聯絡地址空白
+	│											g.若是會員登入需求者，預設資料從會員資料撈
+	│											h.會員可動態勾選聯絡電話
+	└=======================================================================================┘
+*/ -->
+<script>
+var Warming_DemandQuantity="{$Warming_DemandQuantity}";
+var Warming_DemandNa="{$Warming_DemandNa}";
+var Warming_DemandMail="{$Warming_DemandMail}";
+var Warming_DemandTel="{$Warming_DemandTel}";
+var Warming_DemandAddress="{$Warming_DemandAddress}";
+var EnterChk="{$EnterChk}";
+var Error_int_Quantity="{$Error_int_Quantity}";
+var Error_DemandMail="{$Error_DemandMail}";
+{literal}
+//會員可動態勾選聯絡電話
+function dynamic(value){
+	document.getElementById("demand_tel").value=value;
+}
+//驗證需求單表單欄位
+function chkpost(){	
+	var msg="";
+	var ck_int = /^[1-9]+[0-9]*]*$/;
+	var ck_mail = /^[^@^\s]+@[^\.@^\s]+(\.[^\.@^\s]+)+$/;
+	var quantity=document.getElementById('quantity').value;
+	var demand_na=document.getElementById('demand_na').value;
+	var demand_mail=document.getElementById('demand_mail').value;
+	var demand_tel=document.getElementById('demand_tel').value;
+	var demand_address=document.getElementById('demand_address').value;
+	//驗證需求數量空白、整數數值
+	if (quantity=="")
+	{
+		msg += Warming_DemandQuantity + "\r\n";
+	}else if(!ck_int.test(quantity)){
+		msg += Error_int_Quantity + "\r\n";
+	}
+	//驗證需求者空白
+	if (demand_na=="")
+	{
+		msg += Warming_DemandNa + "\r\n";
+	}
+	//驗證需求者的mail空白、有效mail格式
+	if (demand_mail=="")
+	{
+		msg += Warming_DemandMail + "\r\n";
+	}else if(!ck_mail.test(demand_mail)){
+		msg += Error_DemandMail + "\r\n";
+	}
+	//驗證需求者的聯絡電話空白
+	if (demand_tel=="")
+	{
+		msg += Warming_DemandTel + "\r\n";
+	}
+	//驗證需求者的聯絡地址空白
+	if (demand_address=="")
+	{
+		msg += Warming_DemandAddress + "\r\n";
+	}	
+	//驗證碼防空白
+	if (document.getElementById('captcha_num').value=="")
+	{
+		msg += EnterChk + "\r\n";
+	}
+	if (msg!="")
+	{
+		alert(msg);
+		return false;
+	} else {
+		return true;
+	}
+}
+{/literal}
+</script>
+<table width="100%" class="demand_list_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="demand_list_title" align="left" valign="middle"><img src="themes/{$themes_na}/images/demand3.gif" border="0" align="absmiddle" />{$Demand_single}</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">  
+<!-- /*
+	2010-12-07 edit by 廷俊
+	-------------------------------------------
+	1.需求單設定開放可不限會員
+	2.需求單新增需求者、電子郵件、聯絡電話、聯絡地址欄位
+	3.會員可動態勾選聯絡電話
+	-------------------------------------------
+*/ -->
+	<form method="post" action="demand.php?act=save" onsubmit="return chkpost();">
+	<table width="100%" align="center" border="0" cellpadding="2" cellspacing="2" class="demand_list_content">
+	<!--需求者資訊-->
+		<tr>
+			<td align="right" class="demand_list_head" width="100">{$DemandProduct}</td>
+			<td align="left" class="demand_list">{$smallpic}{$infos_na}</td>
+		</tr>
+		<tr>
+			<td align="right" class="demand_list_head" width="100">{$DemandQuantity}</td>
+			<td align="left" class="demand_list">
+				<INPUT TYPE="hidden" NAME="infos_id" id="infos_id" value="{$infos_id}">
+				<INPUT TYPE="text" NAME="quantity" id="quantity" value="1">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="demand_list_head">{$DemandNa}</td>
+			<td align="left" class="demand_list">
+				<INPUT TYPE="text" NAME="demand_na" id="demand_na" value="{$demand_na}">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="demand_list_head">{$DemandMail}</td>
+			<td align="left" class="demand_list">
+				<INPUT TYPE="text" NAME="demand_mail" id="demand_mail" value="{$demand_mail}" size="50">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="demand_list_head" valign="top">{$DemandTel}</td>
+			<td align="left" class="demand_list">
+				{$demand_users_tel}
+				<INPUT TYPE="text" NAME="demand_tel" id="demand_tel" value="{$demand_tel}" size="50">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="demand_list_head" valign="top">{$DemandAddress}</td>
+			<td align="left" class="demand_list">
+				<INPUT TYPE="text" NAME="demand_address" id="demand_address" value="{$demand_address}" size="50">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="demand_list_head">{$EnterChk}</td>
+			<td align="left" class="demand_list">
+				<img src="{$capcha_url}" border="0" align="absmiddle">
+				<input name="captcha_num" type="text" id="captcha_num" size="4" maxlength="4" style="text-align:center;" />
+			</td>
+		</tr>
+		<!--按鈕-->
+		<tr>
+			<td align="center" class="demand_list" colspan="2">
+				<input type="submit" class="demand_btn" value="{$btn_saveout}">
+				<input type="button" class="demand_btn" value="{$btn_cancle}" onClick="JavaScript:document.location='index.php';"/>
+			</td>
+		</tr>
+    </table>
+	</form>
+    </td>
+  </tr>
+</table>
+

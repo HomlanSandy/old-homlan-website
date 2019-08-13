@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head>
+<!--/*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	webshareconfig.htm		後台網站共用設定 的 HTML檔
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.8.1011901
+	├=======================================================================================┤
+	│	1.	v2.0.8.1011901	2011/01/19	廷俊	新增網站共用設定的功能頁面
+	│	2.	v2.0.8.1012001	2011/01/20	廷俊	a.顯示網站共用設定值
+	│											b.顯示預設語言的設定值
+	│											c.預設語言的欄位後方，備註不啟用前導頁時執行
+	│											d.預設語言的欄位列出所有語言
+	│											e.disabled序號無效的語言
+	│	3.	v2.0.8.1021401	2011/02/14	廷俊	1.移除前台會員新增、後台會員新增的設定方式，修正為前台、後台統一新增會員資料
+	│											2.新增會員資料庫設定的功能欄位，分為統一、個別設定
+	│											3.新增會員資料庫設定的備註說明
+	│	4.	v2.0.8.1021401	2011/02/14	廷俊	1.寄送表單觸發的驗證函數
+	│											2.若網站共用設定，會員資料庫設定由個別設定更改為統一
+	│											3.警告提醒視窗，請確定執行會員資料整合？
+	│											4.新增前導頁設定的備註說明
+	│	5.	v03.00.06.1052301	2011/05/27	廷俊	新增前導頁標題的功能設定
+	│	6.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->	
+<script type="text/javascript">
+<!--
+var warming_UsersDBInsert="{$warming_UsersDBInsert}";
+{literal}
+//寄送表單觸發的驗證函數
+function chkpost(){
+	//若網站共用設定，會員資料庫設定由個別設定更改為統一
+	if(document.getElementById("s3").value==0 && document.getElementsByName("s3")[0].checked==true){	
+ 		//警告提醒視窗，請確定執行會員資料整合？
+		if(confirm(warming_UsersDBInsert)){
+			return true;
+		}else{
+			return false;
+		} 
+	}
+}
+-->
+</script>
+{/literal}
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>      
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-10 edit by 廷俊
+	----------------------------------------------------
+	修改成功訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<!--
+	2010-08-10 edit by 廷俊
+	----------------------------------------------------
+	新增寄送表單觸發的驗證函數
+	----------------------------------------------------
+	2011-01-20 edit by 廷俊
+	----------------------------------------------------
+	a.顯示網站共用設定值
+	b.顯示預設語言的設定值
+	c.預設語言的欄位後方，備註不啟用前導頁時執行
+	d.預設語言的欄位列出所有語言
+	e.disabled序號無效的語言
+	---------------------------------------------------- 			
+	2011-02-14 edit by 廷俊
+	----------------------------------------------------
+	1.移除前台會員新增、後台會員新增的設定方式，修正為前台、後台統一新增會員資料
+	2.新增會員資料庫設定的功能欄位，分為統一、個別設定
+	3.新增會員資料庫設定的備註說明
+	---------------------------------------------------- 			
+	2011-02-16 edit by 廷俊
+	----------------------------------------------------
+	新增前導頁設定的備註說明
+	---------------------------------------------------- 
+	2011-05-27 edit by 廷俊
+	------------------------------------------------------
+	新增前導頁標題的功能設定
+	------------------------------------------------------		
+-->
+<form name="frm" method="post" action="{$frm_save}" enctype="multipart/form-data" onsubmit="return chkpost();"> 
+<div id="show_table3">
+	<table border="0" cellpadding="2" cellspacing="2" width="85%" height="100%" align="center">			
+		<tr>
+			<td colspan="2" align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top" width="150">{$PrecursorPage}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="{$precursor_page}" value="1" {$precursor_page_yes}>{$Enable}
+				<INPUT TYPE="radio" NAME="{$precursor_page}" value="0" {$precursor_page_no}>{$NotEnabled}
+				<br>
+				<span class="text_note">{$PrecursorPage_ps}</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$DefaultLanguage}</th>
+			<td align="left">
+			{section name=i loop=$languages}
+				{if $languages[i].info_state}
+				<INPUT TYPE="radio" NAME="{$default_lang}" value="{$languages[i].lang_id}" {if $languages[i].lang_id==$default_lang_value}checked{/if}>
+				{$languages[i].lang_na}
+				{else}
+				<INPUT TYPE="radio" NAME="{$default_lang}" value="{$languages[i].lang_id}" disabled>
+				<span style="color:gray;">{$languages[i].lang_na}</span>
+				{/if}
+			{/section}
+				<br>
+				<span class="text_note">{$DefaultLanguage_ps}</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$WebsiteTitle}</th>
+			<td align="left"><INPUT TYPE="text" NAME="{$website_title}" size="50" value="{$website_title_value}"></td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$UsersDBInsert}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="{$users_data_insert}" value="1" {$users_data_insert_yes}>{$AllLanguage}
+				<INPUT TYPE="radio" NAME="{$users_data_insert}" value="0" {$users_data_insert_no}>{$OnlyLanguage}
+				<INPUT TYPE="hidden" id="{$users_data_insert}" value="{$users_data_insert_value}" >
+				<br>
+				<span class="text_note">{$UsersDBInsert_ps}</span>				
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<INPUT TYPE="submit" value="{$Btn_Save}" {$dis}>
+				<INPUT TYPE="reset">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+</form>
+{$temp_log}</body>
+</html>

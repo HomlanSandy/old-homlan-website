@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	func_useredit.htm	後台帳號管理 的 HTML處理頁面
+	│	開發者		│	玉玲
+	│	版本		│	v1.0.1.0091401
+	├=======================================================================================┤
+	│	1.	v1.0.1.0091401	2010/09/14	廷俊	驗證管理者帳號必須選擇權限群組
+	│	2.	v2.0.1.0112501	2010/11/25	娜娜	當編輯儲存時不需驗證帳號是否重複
+	│	3.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/ -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var name_error="{$name_error}";
+var account_error="{$account_error}";
+var logintxt_error="{$logintxt_error}";//$_LANG['logintxt_error']="帳號重複，請輸入其他帳號!";
+var login_input_error="{$login_input_error}";
+var warming_gp="{$warming_gp}";
+var act="{$act}";
+{literal}
+/*
+ 	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	驗證管理者帳號必須選擇權限群組
+	----------------------------------------------------  
+*/
+	function chkpost(){	
+		var teststr=/^[a-zA-Z0-9_]+$/; 
+		msg="";
+		if(document.getElementById("manager_na").value==""){
+			msg += name_error+"\r\n";
+		}
+		if(document.getElementById("manager_LoginId").value==''){
+			msg += account_error+"\r\n";
+		} else {
+			 if(!teststr.test(document.getElementById("manager_LoginId").value)){
+				msg += login_input_error+"\r\n";
+			 }
+		}
+		if(act=='add')
+		{
+			if (document.getElementById("logintxt").innerText!=''){
+				msg += logintxt_error+"\r\n";
+			}
+		}
+		if(document.getElementById("manager_funcgroup").value==0){
+			msg += warming_gp + "\r\n";
+		}	
+		if(msg==''){
+			return true;
+		} else {	
+			alert(msg);	
+			return false;	
+		}
+	
+	}
+	
+	function chkloginid(){
+		document.getElementById("logintxt").innerText='';
+		var datastr=document.getElementById("manager_LoginId").value;
+		if (datastr!=''){
+			document.getElementById("ifm").src="func_manager.php?act=loginidchk&data=" + datastr;
+		}
+		
+	}
+//-->
+{/literal}
+</SCRIPT>
+
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_List}" onclick="location.href='{$BtnListUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="show_table3">
+	<form name="frm" method="post" action="{$frm_act}" onsubmit="return chkpost();">
+	<table width="100%" height="100%" border="0" cellpadding="2" cellspacing="2">
+    <tr>
+    <td valign="top">
+
+		<table border="0" cellpadding="1" cellspacing="1" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left" class="text_note">&nbsp;<INPUT TYPE="hidden" NAME="manager_id" id="manager_id" value="{$manager_id_value}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$manager_na}</th>
+				<td align="left" class="text_note"><INPUT TYPE="text" NAME="manager_na" id="manager_na" size="20" value="{$manager_na_value}">*</td>
+			</tr>	
+			<tr>
+				<th align="right">{$manager_email}</th>
+				<td align="left" class="text_note"><INPUT TYPE="text" NAME="manager_email" id="manager_email" size="50" value="{$manager_email_value}"></td>
+			</tr>	
+			<tr>
+				<th align="right">{$manager_tel}</th>
+				<td align="left"><INPUT TYPE="text" NAME="manager_tel" id="manager_tel" size="20" value="{$manager_tel_value}"></td>
+			</tr>	
+			<tr>
+				<th align="right">{$manager_LoginId}</th>
+				<td align="left"><INPUT TYPE="text" NAME="manager_LoginId" id="manager_LoginId" size="20" value="{$manager_LoginId_value}" {if $act=='add'}{if $sys_default neq 'sys'}onblur="chkloginid();"{/if}{/if} {$umreadonly}>{$login_input_type}<span id="logintxt" class="text_note">*</span></td>
+			</tr>	
+			{if $act=='add'}
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left"><span id="logintxt" class="text_note">{$default_password}</span></td>
+			</tr>
+			{/if}
+			<tr>
+				<th align="right">{$manager_funcgroup}</th>
+				<td align="left">
+					<SELECT NAME="manager_funcgroup" id="manager_funcgroup">					
+					{section name=j loop=$umFuncGroup}
+					<option VALUE="{$umFuncGroup[j].group_id}" {$umFuncGroup[j].group_sel}>{$umFuncGroup[j].group_na}</option>
+					{/section}
+					</SELECT>
+					<span id="logintxt" class="text_note">*</span>
+				</td>
+			</tr>				
+			<tr>
+				<th align="right">{$FlistInfo}</th>
+				<td align="left"><INPUT TYPE="radio" NAME="info_state" value="1" {$checkedyes}>{$FlistInfoYes}<INPUT TYPE="radio" NAME="info_state" value="0" {$checkedno}>{$FlistInfoNo}</td>
+			</tr>			
+			<tr>
+				<td colspan="2" align="center"><INPUT TYPE="submit" name="btn_save" value="{$Btn_Save}"><INPUT TYPE="reset" name="btn_reset"></td>
+			</tr>					
+		</table>
+    </td>
+    </tr>
+    </table>
+	</form>
+	<iframe width=00% height=00% id="ifm"></iframe>
+</div>
+
+{$temp_log}</body>
+</html>

@@ -1,0 +1,329 @@
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	payment_list.tpl.htm		前台付款方式 的HTML處理頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0090901
+	├=======================================================================================┤
+	│	1.	v1.0.1.0090901	2010/09/09	廷俊	建立前台付款方式
+	│	2.	v1.0.1.0092101	2010/09/21	廷俊	驗證所有欄位的特殊符號字元
+	│	3.	v03.00.02.1040801	2011/05/03	廷俊		a.若購物流程只設定一種付款方式，則已預設勾選不需驗證
+	│													b.取得付購物流程的付款方式數量，驗證是否使用勾選付款方式
+	│	4.	v03.00.04.1050701	2011/05/10	廷俊		購物流程開放所有付款方式
+	└=======================================================================================┘
+*/ -->
+<script type="text/javascript">
+<!--
+var payment_detail_1='{$payment_detail_1}';
+var payment_detail_2='{$payment_detail_2}';
+var payment_detail_3='{$payment_detail_3}';
+var payment_detail_4='{$payment_detail_4}';
+var payment_detail_5='{$payment_detail_5}';
+var payment_detail_6='{$payment_detail_6}';
+var payment_count='{$payment_count}';
+var receive_tel_span='{$receive_tel_span}';
+var order_tel_span='{$order_tel_span}';
+var Select_Payment='{$Select_Payment}';
+var Select_ReceiveTel='{$Select_ReceiveTel}';
+var warming_OrderNa='{$warming_OrderNa}';
+var warming_OrderMail='{$warming_OrderMail}';
+var warming_OrderTel='{$warming_OrderTel}';
+var warming_ReceiveNa='{$warming_ReceiveNa}';
+var warming_ReceiveTel='{$warming_ReceiveTel}';
+var warming_ReceiveAddress='{$warming_ReceiveAddress}';
+var err_OrderMail='{$err_OrderMail}';
+var err_ReceiveMail='{$err_ReceiveMail}';
+var err_Symbol='{$err_Symbol}';
+{literal}
+
+/*
+	2011-05-10 edit by 廷俊
+	-------------------------------------------
+	購物流程開放所有付款方式
+	-------------------------------------------
+*/	
+//動態顯示付款方式的詳細資料
+function dynamic(){
+	if(document.getElementsByName("payment_mode")[0].checked){
+		document.getElementById("payment_detail").innerHTML=payment_detail_1;
+	}else if(document.getElementsByName("payment_mode")[1].checked){
+		document.getElementById("payment_detail").innerHTML=payment_detail_2;
+	}else if(document.getElementsByName("payment_mode")[2].checked){
+		document.getElementById("payment_detail").innerHTML=payment_detail_3;
+	}else if(document.getElementsByName("payment_mode")[3].checked){
+		document.getElementById("payment_detail").innerHTML=payment_detail_4;
+	}else if(document.getElementsByName("payment_mode")[4].checked){
+		document.getElementById("payment_detail").innerHTML=payment_detail_5;
+	}else if(document.getElementsByName("payment_mode")[5].checked){
+		document.getElementById("payment_detail").innerHTML=payment_detail_6;
+	}
+}
+
+//收件人資訊勾選"與訂貨人資訊相同"時，自動動態填入欄位值，否則為空
+//收件人資訊勾選"與訂貨人資訊相同"時，連絡電話可從訂貨人的家裡電話、公司電話、手機做勾選
+function Same_Placing(){
+	if(document.getElementById("same").checked){
+		document.getElementById("receive_na").value=document.getElementById("order_na").value;
+		document.getElementById("receive_mail").value=document.getElementById("order_mail").value;
+		document.getElementById("receive_address").value=document.getElementById("order_address").value;
+		document.getElementById("tel_span").innerHTML=order_tel_span;		
+	}else{
+		document.getElementById("receive_na").value="";
+		document.getElementById("receive_mail").value="";
+		document.getElementById("receive_address").value="";
+		document.getElementById("tel_span").innerHTML=receive_tel_span;
+		document.getElementById("receive_tel").value="";
+	}
+}
+/*
+	2010-09-21 edit by 廷俊
+	-------------------------------------------
+	驗證所有欄位的特殊符號字元
+	-------------------------------------------
+*/
+//驗證付款方式與訂貨、收貨資料表單欄位，包含動態欄位
+function chkrepost(){
+	var msg="";
+	var symbol=false;
+	var ck_mail = /^[^@^\s]+@[^\.@^\s]+(\.[^\.@^\s]+)+$/;
+	var ck_symbol = /[\'\"\\]/;
+	//驗證付款模式(防空白)
+	var chk1=false;
+	//若購物流程只設定一種付款方式，則已預設勾選不需驗證
+	if(payment_count==1){
+		chk1=true;
+	}else{
+		//取得付購物流程的付款方式數量，驗證是否使用勾選付款方式
+		for(i=0;i<payment_count;i++){
+			if(document.getElementsByName("payment_mode")[i].checked){
+				chk1=true;
+			}
+		}
+	}
+	if(chk1==false){
+		msg += Select_Payment + "\r\n";
+	}
+	//驗證訂貨人(防空白、特殊符號)
+	var order_na=document.getElementById("order_na").value;
+	if(order_na.replace(/\s/g,"")==""){
+		msg += warming_OrderNa + "\r\n";
+	}else{
+		if(ck_symbol.test(order_na)){
+			symbol = true;
+		}
+	}
+	//驗證訂貨人email(防空白、格式、特殊符號)
+	var order_mail=document.getElementById("order_mail").value;
+	if(order_mail.replace(/\s/g,"")==""){
+		msg += warming_OrderMail + "\r\n";
+	}else{
+		if(!ck_mail.test(order_mail)){
+			msg += err_OrderMail + "\r\n";
+		}
+		if(ck_symbol.test(order_mail)){
+			symbol = true;
+		}
+	}
+	//驗證訂貨人地址(特殊符號)
+	var order_address=document.getElementById("order_address").value;
+	if(order_address!=""){
+		if(ck_symbol.test(order_address)){
+			symbol = true;
+		}
+	}
+	//驗證訂貨人電話(防空白、特殊符號)
+	var order_tel_1=document.getElementById("order_tel_1").value;
+	var order_tel_2=document.getElementById("order_tel_2").value;
+	var order_tel_3=document.getElementById("order_tel_3").value;
+	if (order_tel_1=="" && order_tel_2=="" && order_tel_3==""){
+		msg += warming_OrderTel + "\r\n";
+	}
+	if(order_tel_1!=""){
+		if(ck_symbol.test(order_tel_1)){
+			symbol = true;
+		}
+	}	
+	if(order_tel_2!=""){
+		if(ck_symbol.test(order_tel_2)){
+			symbol = true;
+		}
+	}	
+	if(order_tel_3!=""){
+		if(ck_symbol.test(order_tel_3)){
+			symbol = true;
+		}
+	}	
+	//驗證收貨人(防空白、特殊符號)
+	var receive_na=document.getElementById("receive_na").value;
+	if(receive_na.replace(/\s/g,"")==""){
+		msg += warming_ReceiveNa + "\r\n";
+	}else{
+		if(ck_symbol.test(receive_na)){
+			symbol = true;
+		}
+	}
+	//驗證收貨人email(格式、特殊符號)
+	var receive_mail=document.getElementById("receive_mail").value;	
+	if(receive_mail!=""){
+		if(!ck_mail.test(receive_mail)){
+			msg += err_ReceiveMail + "\r\n";
+		}
+		if(ck_symbol.test(receive_mail)){
+			symbol = true;
+		}
+	}
+	//驗證收貨人地址(防空白、特殊符號)
+	var receive_address=document.getElementById("receive_address").value;
+	if(receive_address.replace(/\s/g,"")==""){
+		msg += warming_ReceiveAddress + "\r\n";
+	}else{
+		if(ck_symbol.test(receive_address)){
+			symbol = true;
+		}
+	}
+	//驗證收貨人電話(防空白、特殊符號)
+	if(document.getElementById("same").checked){
+		var chk2=false;	
+		for(i=0;i<=2;i++){
+			if(document.getElementsByName("receive_tel_radio")[i].checked){
+				var order_tel=document.getElementById("order_tel_"+(i+1)).value;
+				document.getElementById("receive_tel").value=order_tel;
+				if(order_tel.replace(/\s/g,"")!=""){
+					chk2=true;
+				}
+			}
+		}
+		if(chk2==false){
+			msg += Select_ReceiveTel + "\r\n";
+		}		
+	}else{
+		var receive_tel=document.getElementById("receive_tel").value;
+		if(receive_tel.replace(/\s/g,"")==""){
+			msg += warming_ReceiveTel + "\r\n";
+		}else{
+			if(ck_symbol.test(receive_tel)){
+				symbol = true;
+			}
+		}
+	}
+	if(symbol==true){
+		msg += err_Symbol + "\r\n";
+	}	
+	if(msg==''){
+		return true;
+	}else{
+		alert(msg);
+		return false;
+	}
+}
+{/literal}
+//-->
+</script>
+<table width="100%" class="pay_list_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="pay_list_title" align="left" valign="middle"><img src="themes/{$themes_na}/images/demand2.gif" border="0" align="absmiddle" />{$Payment}</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top"> 
+	<form method="post" action="payment.php?act=save" onsubmit="return chkrepost();" onMouseOver="dynamic();">
+    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2" class="pay_list_content">
+		<!--請選擇付款方式-->
+		<tr>
+			<td align="left" class="pay_list_head" colspan="2"><b>{$Select_Payment}</b></td>
+		</tr>
+		<tr>
+			<td align="left" class="pay_list" colspan="2">{$payment_set}</td>
+		</tr>		
+		<tr>
+			<td align="left" class="pay_list" colspan="2">
+				<span id="payment_detail">{$payment_detail}</span>
+			</td>
+		</tr>
+		<!--訂貨人資訊-->		
+		<tr>
+			<td align="left" class="pay_list_head" colspan="2">
+				<b>{$Placing_Information}</b>
+				{if $Order_Login=="1"} <input type="checkbox" name="Synchronous" checked>{$Synchronous_Member} {/if}
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject" width="120">{$OrderNa}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_na" id="order_na" value="{$order_na}" size="50">
+				<span style="color:red;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject">{$OrderMail}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_mail" id="order_mail" value="{$order_mail}" size="50">
+				<span style="color:red;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject">{$OrderAddress}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_address" id="order_address" value="{$order_address}" size="50">
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject" valign="top">{$OrderTel}</th>
+			<td align="left">{$order_tel}</td>
+		</tr>	
+		<!--收件人資訊-->
+		<tr>
+			<td align="left" class="pay_list_head" colspan="2">
+				<b>{$Recipient_Information}</b>
+				<input type="checkbox" name="same" id="same" onclick="Same_Placing();">{$Same_Placing}
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject">{$ReceiveNa}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_na" id="receive_na" value="{$receive_na}" size="50">
+				<span style="color:red;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject">{$ReceiveMail}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_mail" id="receive_mail" value="{$receive_mail}" size="50">
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject">{$ReceiveAddress}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_address" id="receive_address" value="{$receive_address}" size="50">
+				<span style="color:red;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" class="pay_list_subject">{$ReceiveTel}</th>
+			<td align="left">
+				<span id="tel_span">{$receive_tel_span}</span>
+				<span style="color:red;">*</span>
+			</td>
+		</tr>		
+		<tr>
+			<th align="right" class="pay_list_subject">{$ReceiveDate}</th>
+			<td align="left">
+				<input type="radio" name="receive_date" value="X" id="receive_date" checked>{$Unlimited}
+				<input type="radio" name="receive_date" value="A" id="receive_date" {if $receive_date eq "A"}checked{/if}>{$Morning}
+				<input type="radio" name="receive_date" value="P" id="receive_date" {if $receive_date eq "P"}checked{/if}>{$Afternoon}
+				<input type="radio" name="receive_date" value="N" id="receive_date" {if $receive_date eq "N"}checked{/if}>{$Night}
+			</td>
+		</tr>		
+		<!--按鈕-->
+		<tr>
+			<td align="center" class="pay_list" colspan="2">
+				<input type="submit" class="pay_btn" value="{$Next}">
+				<input type="button" class="pay_btn" value="{$btn_clearcontent}" onClick="window.location.reload();"/>
+				<input type="button" class="pay_btn" value="{$btn_backcart}" onClick="location.href='cart.php';"/>
+			</td>
+		</tr>
+    </table>
+	</form>
+    </td>
+  </tr>
+</table>

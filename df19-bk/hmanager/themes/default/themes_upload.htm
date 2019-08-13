@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	themes_upload.htm		前台樣板上傳 的 HTML處理頁面
+	│	開發者		│	玉玲、Fish、智倩
+	│	版本		│	v1.0.1.0093001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0093001	2010/09/30	廷俊	a.上傳自訂樣版的樣版教學、驗證訊息，修改為語言包
+	│											b.上傳自訂樣版的樣版教學，增加說明"注意： 資料夾名稱 與 ZIP壓縮檔名稱 必須相同！"
+	│	2.	v2.0.0.0101201	2010/10/12	廷俊	軟體名稱為EZPORTAL時，顯示樣版教學與下載
+	│	3.	v03.00.03.1050301	2011/05/04	廷俊	遮蔽樣版教學說明"注意： 資料夾名稱 與 ZIP壓縮檔名稱 必須相同！"
+	│	4.	v03.00.03.1050301	2011/05/05	廷俊	1.驗證是否有上傳檔案
+	│												2.若有上傳檔案，則驗證副檔名
+	│												3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	│												4.取得副檔名
+	│												5.將副檔名轉換為小寫
+	│	5.	v03.00.13.1072701	2011/07/27	玉玲	將瀏覽與上傳的功能鍵先disabled
+	└=======================================================================================┘
+*/ -->
+<script type="text/javascript">
+/*
+	2010-09-30 edit by 廷俊
+	----------------------------------------------------
+	上傳自訂樣版的樣版教學、驗證訊息，修改為語言包
+	---------------------------------------------------- 
+	2011-05-05 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否有上傳檔案
+	2.若有上傳檔案，則驗證副檔名
+	3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	4.取得副檔名
+	5.將副檔名轉換為小寫
+	---------------------------------------------------- 	
+*/
+var upload_select="{$upload_select}";
+var upload_format="{$upload_format}";
+{literal}
+	function chkpost(){
+		var fileName=document.getElementById('upfile').value;
+		//驗證是否有上傳檔案
+		if (fileName==""){
+			alert(upload_select);
+			return false;
+		//若有上傳檔案，則驗證副檔名
+		} else {
+			//取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+			extIndex = fileName.lastIndexOf('.');
+			//取得副檔名
+			fileType = fileName.substr(extIndex+1, fileName.length); 
+			//將副檔名轉換為小寫
+			fileType = fileType.toLowerCase();			
+			if (fileType!='zip'){
+				alert(upload_format);
+				return false;
+			}
+		}		
+	}
+{/literal}
+</script>
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle_themes}</td>
+      <td width="12%" align="right">&nbsp;
+       
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="show_table3">
+ <form method=post action="{$savefrm_url}" enctype="multipart/form-data" onsubmit="return chkpost();">
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+			<tr>
+				<th align="right">{$themesUpload}</th>
+				<td align="left"><INPUT TYPE="file" name="upfile" id="upfile" size="50" disabled></td>
+			</tr>	
+		
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left"><INPUT TYPE="submit" value="{$Btn_Save}" disabled></td>
+			</tr>			
+		</table>
+    </td>
+    </tr>
+    </table>
+</form>
+<!-- /*
+	2010-09-30 edit by 廷俊
+	----------------------------------------------------
+	1.上傳自訂樣版的樣版教學、驗證訊息，修改為語言包
+	2.上傳自訂樣版的樣版教學，增加說明"注意： 資料夾名稱 與 ZIP壓縮檔名稱 必須相同！"
+	----------------------------------------------------
+	2010-10-12 edit by 廷俊
+	------------------------------------------------------
+	軟體名稱為EZPORTAL時，顯示樣版教學與下載
+	------------------------------------------------------
+	2011-05-04 edit by 廷俊
+	----------------------------------------------------
+	遮蔽樣版教學說明"注意： 資料夾名稱 與 ZIP壓縮檔名稱 必須相同！"
+	---------------------------------------------------- 
+*/ -->
+<!-- 樣板教學 -->
+{if $hyware eq true}
+<table border="0" cellspacing="2" cellpadding="5" width="180" align="left">
+    <tbody>
+    <tr>
+    <td width="20">&nbsp;</td>
+    <td><a href="http://faq.hyware.com.tw/ezportal/homeweb/catalog_detail.php?ifid=1" target="_blank"><img src="images/btn_download.gif" width="160" height="60" border="0" align="absmiddle"></a></td>
+    </tr>
+    </tbody>
+    </table>
+<table border="0" cellspacing="2" cellpadding="5" width="540" align="left">
+    <tbody>
+        <tr>
+            <td height="25" colspan="2" bgcolor="#999999" align="center"><span style="color: #ffffff; font-size:12pt;">{$themesTeach}</span></td>
+        </tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step1}</span></td>
+            <td align="left" valign="top">{$Step1_text}</td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step2}</span></td>
+            <td align="left" valign="top">{$Step2_text}</td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step3}</span></td>
+            <td align="left" valign="top">{$Step3_text}</td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step4}</span></td>
+            <td align="left" valign="top">{$Step4_text}<!-- <br><span style="color: #ff0000">{$Step4_ps}</span> --></td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step5}</span></td>
+            <td align="left" valign="top">{$Step5_text}</td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step6}</span></td>
+            <td align="left" valign="top">{$Step6_text}</td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #3366ff">{$Step7}</span></td>
+            <td align="left" valign="top">{$Step7_text}</td>
+		</tr>
+        <tr>
+            <td width="60" align="center" valign="top"><span style="color: #ff6600">{$StepPS}</span></td>
+            <td align="left" valign="top"><span style="color: #ff6600">{$StepPS_text}</span></td>
+		</tr>
+    </tbody>
+</table>
+{/if}
+<br />
+
+</div>
+
+{$temp_log}</body>
+</html>

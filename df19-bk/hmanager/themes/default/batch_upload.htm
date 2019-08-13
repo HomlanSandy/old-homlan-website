@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	batch_upload.htm	批次上傳 的 htm檔
+	│	開發者		│	健嘉
+	│	版本		│	
+	├=======================================================================================┤
+	│	1.					2012/01/02	健嘉	
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+/*
+	2010-10-22 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否上傳檔案
+	2.驗證上傳檔案格式
+	---------------------------------------------------- 			
+	2011-05-05 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否有上傳檔案
+	2.若有上傳檔案，則驗證副檔名
+	3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	4.取得副檔名
+	5.將副檔名轉換為小寫
+	---------------------------------------------------- 	
+*/
+var upload_select="{$upload_select}";
+var upload_format="{$upload_format}";
+var upload_cat_select="{$upload_cat_select}";
+var upload_pic_format="{$upload_pic_format}";
+var upload_pic_select="{$upload_pic_select}";
+
+{literal}
+	function chkpost(){
+		var str="";
+		//驗證是否有選取商品所屬類別
+		var selcatid=document.getElementById('selcatid').value;
+		if(selcatid=="0"){
+			str+=upload_cat_select+"\n";
+			//alert(upload_cat_select);
+			//return false;
+		}
+		
+		var fileName=document.getElementById('upfile').value;
+		//驗證是否有上傳檔案
+		if (fileName==""){
+			str+=upload_select+"\n";
+			//alert(upload_select);
+			//return false;
+		//若有上傳檔案，則驗證副檔名
+		} else {
+			//取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+			extIndex = fileName.lastIndexOf('.');
+			//取得副檔名
+			fileType = fileName.substr(extIndex+1, fileName.length); 
+			//將副檔名轉換為小寫
+			fileType = fileType.toLowerCase();	
+			if (fileType!='csv'){
+				str+=upload_format+"\n";
+				//alert(upload_format);
+				//return false;
+			}
+		}
+		
+		if(str!=""){
+			alert(str);
+			return false;
+		}
+		
+		var fileName1=document.getElementById('upfile1').value;
+		//驗證是否有上傳檔案
+		if (fileName1==""){
+			if(!confirm(upload_pic_select))
+			{
+				return false;
+			}
+			//alert(upload_pic_select);
+		//若有上傳檔案，則驗證副檔名
+		} else {
+			//取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+			extIndex = fileName1.lastIndexOf('.');
+			//取得副檔名
+			fileType = fileName1.substr(extIndex+1, fileName1.length); 
+			//將副檔名轉換為小寫
+			fileType = fileType.toLowerCase();	
+			if (fileType!='zip'){
+				alert(upload_pic_format);
+				return false;
+			}
+		}
+		
+	}
+{/literal}
+</script>
+
+<body>
+{$Message}
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right"></td>
+    </tr>
+  </table>
+</div>
+
+<div id="show_table3" class="main_link">
+	<form name="form" method=post action="batch_upload.php?act=save" enctype="multipart/form-data" onsubmit="return chkpost();">
+	<table width="60%" border="0" cellpadding="1" cellspacing="1" align="center">
+		<tr>     
+			<td>&nbsp;</td>
+		</tr>
+		
+		<tr>
+			<th align="right">{$usersdownload}</th>
+			<td align="left">
+				<a href="{$download_url}">{$downloaded}</a>
+				<a href="{$download_url}"><img src="images/excel.png" border="0"></a>
+			</td>
+		</tr>
+		
+		<tr>
+			<th align="right">{$cat_name}</th>
+			<td align="left">{$catSel}</td>
+		</tr>
+		
+		<tr>
+			<th align="right">{$UploadCSV}</th>
+			<td align="left">
+				<INPUT TYPE="file" name="upfile" id="upfile" size="40">
+			</td>
+		</tr>
+		
+		<tr>
+			<th align="right">{$UploadPIC}</th>
+			<td align="left">
+				<INPUT TYPE="file" name="upfile1" id="upfile1" size="40">
+			</td>
+		</tr>
+	</table>
+	
+	<table width="100%" border="0" cellpadding="1" cellspacing="1" align="center">
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td align="center"><input type="submit" value="{$BTN_yes}"></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+	</table>
+	
+	<table width="65%" border="0" cellpadding="1" cellspacing="1" align="center">
+		<font class="text_note">{$ps}</font><br>
+	</table>
+	
+	</form>	
+</div>
+{$temp_log}</body>
+</html>

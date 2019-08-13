@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head>
+	<script language=javascript>
+<!--
+/*註解
+2010-05-05 edit by 廷俊
+------------------------------------------------------
+增加驗證生效日期須小於等於截止日期
+------------------------------------------------------		
+*/
+var warming_na="{$warming_na}";
+var warming_date="{$warming_date}";
+{literal}
+
+	function delFile(){
+		document.getElementById("unlinkfile").innerText=event.srcElement.value;
+		var td = event.srcElement.parentElement;
+		var tr = td.parentElement;
+		var tbl = tr.parentElement;
+		tbl.deleteRow(tr.rowIndex);
+		document.getElementById("putfile").innerHTML="<INPUT TYPE=file id=myFile NAME=myfile size=30>";
+		//document.getElementById("fileNa").style.display="none";
+		//document.getElementById("myFile").style.display="";
+	}
+	
+	function chkpost(){
+		msg="";
+		if(document.getElementById("disTitle").value==''){
+			msg += warming_na + "\r\n";
+		}
+		if(document.getElementById("f_date_b").value > document.getElementById("f_date_a").value){
+			msg += warming_date + "\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+	
+{/literal}
+//-->
+	</script>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$PageTitle2}" onclick="location.href='{$BtnDisListUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="show_table2">
+<!-- 頁籤起 -->
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">{$DiscuzInfo}</li>
+    <li class="TabbedPanelsTab" tabindex="0">{$DiscuzDesc}</li>
+	{if $discuss_id!=''}
+	<li class="TabbedPanelsTab" tabindex="0">{$ReplyDiscuz}</li>
+	<li class="TabbedPanelsTab" tabindex="0">{$DiscuzReply}</li>
+	{/if}
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent">
+	<FORM enctype="multipart/form-data" METHOD=POST ACTION="discusslist.php?act=save" onsubmit="return chkpost();">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;<INPUT TYPE="hidden" NAME="disId" value="{$discuss_id}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$DiscuzTitle}</th>
+				<td align="left"><INPUT TYPE="text" NAME="disTitle" id="disTitle" size="50" value="{$discuss_title}"><span style="color:red;">*</span></td>
+			</tr>			
+			<tr>
+				<th align="right">{$DiscuzType}</th>
+				<td align="left">{$typesel}</td>
+			</tr>				
+			<!--<tr>
+				<th align="right">{$DiscuzPost}：</th>
+				<td align="left">				
+					<INPUT TYPE="radio" NAME="disPost" value="1" checked>{$ToEvery}
+					<INPUT TYPE="radio" NAME="disPost" value="2" {if $discuss_post=='2'}checked{/if}>{$ToUsers}{$infoSel}							
+				</td>
+			</tr>-->
+			<tr>
+				<th align="right">{$DiscuzInTy}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="disInTy" value="1" checked>{$maindisY}
+					<INPUT TYPE="radio" NAME="disInTy" value="0" {if $info_state=='0'}checked{/if}>{$maindisN}				
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$DiscuzOrder}</th>
+				<td align="left"><INPUT TYPE="text" NAME="disOrder" size="10" value="{$order}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$DiscuzStaDa}</th>
+				<td align="left"><input type="text" name="disDateStart" id="f_date_b" value="{$discuss_date_start}" readonly></td>
+			</tr>
+			<tr>
+				<th align="right">{$DiscuzDeadline}</th>
+				<td align="left"><input type="text" name="disDateStop" id="f_date_a" value="{$discuss_date_stop}" readonly>&nbsp;&nbsp;
+<!--註解
+2010-05-05 edit by 廷俊
+------------------------------------------------------
+不下架功能預設不勾選，並且遮蔽掉
+------------------------------------------------------		
+-->				
+								<!--<input type="checkbox" name="noStopDay" value="1" {$nostopchk}>{$NoDateStop}--></td>
+			</tr>
+			<tr>
+				<th align="right">{$DiscuzFile}</th>
+				<td align="left"><table><tr><td><input type="hidden" name="MAX_FILE_SIZE" value="{$maxfilesize}">{if $discuss_file_name!=''}<input type="checkbox" name="fileNa" id="fileNa" value="{$discuss_file_name}" onclick="delFile();" checked>{$discuss_file_name}{else}<INPUT TYPE="file" id="myFile" NAME="myfile" size="30">{/if}</td></tr><tr><td><div id="putfile"></div><INPUT TYPE="hidden" NAME="unlinkfile" id="unlinkfile" value=""></tr></td><tr><td>{$orDiczFileUrl}<INPUT TYPE="text" NAME="disFileUrl" size="30" value="{$discuss_file_url}"></td></tr></table></td>
+			</tr>
+			<tr>
+				<th align="right">{$PostIP}</th>
+				<td align="left">{$post_ip}</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<INPUT TYPE="submit" value="{$Btn_Save}"><INPUT TYPE="reset" value="{$Btn_Reset}">
+				</td>
+			</tr>
+		</table>
+	</div>
+
+    <div class="TabbedPanelsContent">
+	<!-- 線上編輯器 -->
+	<table border="0" cellpadding="0" cellspacing="0" align="center"  width="98%">			
+		<tr>				
+			<td align="center">{$FckEditor}</td>
+		</tr>
+		<tr>				
+			<td align="center">
+				<INPUT TYPE="submit" value="{$Btn_Save}"><INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+	</table>
+	</div>
+	
+	<div class="TabbedPanelsContent">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%" height="100%">
+			<tr>
+				<th align="right">{$ReplyerMail}</th>
+				<td align="left"><INPUT TYPE="text" NAME="createuser_mail" value="{$createuser_mail}" size=45></td>
+			</tr>
+			<tr>
+				<th align="right">{$ReplyContent}</th>
+				<td align="left"><textarea NAME="replytext" id="disTitle" cols=60 rows=5>{$discussreply_text}</textarea></td>
+			</tr>
+			<tr>
+				<th align="right">{$DiscuzFile}</th>
+				<td align="left"><input type="hidden" name="MAX_FILE_SIZE" value="{$maxfilesize}"><INPUT TYPE="file" NAME="refilena" size="30"><br>{$orDiczFileUrl}<INPUT TYPE="text" NAME="reFileUrl" size="30"></td>
+			</tr>
+			<tr>
+				<td colspan=2 align=center><input type=submit value="{$Btn_Save}"></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="TabbedPanelsContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	{section name=i loop=$umDisReply}
+	<tr>
+		<td align="left" colspan=2>&nbsp;&nbsp;&nbsp;<input type=checkbox name="delreply{$umDisReply[i].discussreply_id}">{$DiscussDelete}<input type=hidden name="replyId[]" value="{$umDisReply[i].discussreply_id}"></td>
+	</tr>
+    <tr>
+		<th align="right" width="20%">{$Replyer}</th>
+		<td align="left">{$umDisReply[i].createuser_id}</td>
+	</tr>
+	<tr>
+		<th align="right">{$ReplyDate}</th>
+		<td align="left">{$umDisReply[i].createuser_date}</td>
+	</tr>
+	<tr>
+		<th align="right">{$ReplyIP}</th>
+		<td align="left">{$umDisReply[i].createuser_ip}</td>
+	</tr>
+	{if $umDisReply[i].download_file!=''}
+	<tr>
+		<th align="right">{$DiscuzFile}</th>
+		<td align="left">{$umDisReply[i].download_file}</td>
+	</tr>
+	{/if}
+	<tr>
+		<th align="right">{$ReplyContent}</th>
+		<td align="left">{$umDisReply[i].discussreply_text}</td>
+	</tr>
+	<tr>
+		<th align="right">{$DiscuzInTy}</th>
+		<td align="left">
+			<INPUT TYPE="radio" NAME="replyState{$umDisReply[i].discussreply_id}" value="1" checked>{$maindisY}
+			<INPUT TYPE="radio" NAME="replyState{$umDisReply[i].discussreply_id}" value="0" {if $umDisReply[i].info_state == '0'}checked{/if}>{$maindisN}
+		</td>
+	</tr>
+	<!--<tr>
+		<th align="right">{$WebmasterReply}：</th>
+		<td align="left"><textarea cols=60 rows=5 name="reply{$umDisReply[i].discussreply_id}">{$umDisReply[i].reply_discussreply_text}</textarea></td>
+	</tr>-->
+	<tr><td colspan=2><hr></td></tr>
+	{/section}
+	<tr>
+		<td colspan=2 align=center><input type=submit value="{$Btn_Save}"></td>
+    </tr>
+    </table>
+	</form>
+	</div>
+
+  </div>
+</div>
+{literal}
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+
+	today = new Date();
+	
+	function catcalc(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date1 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("f_date_a").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_a",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc
+    });
+	
+	function catcald(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date2 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("f_date_b").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_b",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald
+    });
+//-->
+</script>
+{/literal}
+<!-- 頁籤終 -->
+
+</div>
+
+{$temp_log}</body>
+</html>

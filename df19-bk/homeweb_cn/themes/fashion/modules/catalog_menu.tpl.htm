@@ -1,0 +1,49 @@
+<div class="menu">
+{section name=k loop=$umMaininfoCats}
+	{if $umSecInfoCats[k] == ''}
+	<a href="catalog.php?infoscatid={$umMaininfoCats[k].cats_id}">{$umMaininfoCats[k].cats_na}</a>
+    {else}
+		<div class="open">
+		<div>  
+		{section name=p loop=$umSecInfoCats[k]}    
+			{if $umThrInfoCats[k][p] == ''}
+			<a href="catalog.php?infoscatid={$umSecInfoCats[k][p].cats_id}">{$umSecInfoCats[k][p].cats_na}</a>
+			{else}
+			<div class="open">
+			<div>
+				{section name=q loop=$umThrInfoCats[k][p]}				
+				{if $umThrInfoCats[k][p][q] == ''}
+				<a href="catalog.php?infoscatid={$umThrInfoCats[k][p][q].cats_id}">{$umThrInfoCats[k][p][q].cats_na}</a>
+				{else}
+					<div class="open">
+					<div>
+					{section name=x loop=$umForeInfoCats[k][p][q]}
+					{if $umForeInfoCats[k][p][q][x] == ''}
+					<a href="catalog.php?infoscatid={$umForeInfoCats[k][p][q][x].cats_id}">{$umForeInfoCats[k][p][q][x].cats_na}</a>
+					{else}						
+						<div class="open">
+						<div>
+						{section name=y loop=$umFiveInfoCats[k][p][q][x]}							
+							<a href="catalog.php?infoscatid={$umFiveInfoCats[k][p][q][x][y].cats_id}">{$umFiveInfoCats[k][p][q][x][y].cats_na}</a>							
+						{/section}
+						</div>
+						<a href="catalog.php?infoscatid={$umForeInfoCats[k][p][q][x].cats_id}">{$umForeInfoCats[k][p][q][x].cats_na}</a>
+					</div>
+					{/if}
+					{/section}
+					</div>
+					<a href="catalog.php?infoscatid={$umThrInfoCats[k][p][q].cats_id}">{$umThrInfoCats[k][p][q].cats_na}</a>
+					</div>
+				{/if}
+				{/section}
+			</div>
+			<a href="catalog.php?infoscatid={$umSecInfoCats[k][p].cats_id}">{$umSecInfoCats[k][p].cats_na}</a>
+			</div>
+			{/if}
+		{/section}
+		</div>        
+		<a href="catalog.php?infoscatid={$umMaininfoCats[k].cats_id}">{$umMaininfoCats[k].cats_na}</a>
+		</div>
+    {/if}
+{/section}
+</div>

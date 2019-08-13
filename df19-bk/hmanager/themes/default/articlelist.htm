@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_Add}" onclick="location.href='{$BtnAddArtiUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<form name="seachfrm" method="post" action="articlelist.php?act=list">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">
+	  {$articatSel}{$ArticalTitle}
+      <input name="textfield" type="text" size="15" value="{$seartitle}">
+      <img src="images/search_1.gif" width="20" height="20">
+      <input name="button2" type="submit" class="search_btn" id="button2" value="{$ArticalSear}"></td>
+    </tr>
+</table>
+</div>
+</form>
+
+<div id="show_table4" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+	  <td width="8%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalId}</td>
+	  <td width="30%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalTitle}</td>
+      <td width="12%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalType}</td>
+	  <td width="10%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalAsso}</td>
+	  <td width="16%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalPoDate}</td>
+      <td width="10%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalInState}</td>	
+      <td width="" height="25" align="center" valign="middle" class="table_td_01">{$ArticalOperator}</td>
+    </tr>
+	{section name=i loop=$umArtical}
+    <tr>          
+	   <td height="25" valign="middle" align="center" class="table_td_02">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=10}</td>
+	   <td height="25" valign="middle" align="left" class="table_td_02">{$umArtical[i].article_title}</td>
+	   <td height="25" valign="middle" align="left" class="table_td_02">{$umArtical[i].articlecat_na}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">普通</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umArtical[i].createuser_date}</td>	   
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umArtical[i].article_state}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02"><a href="{$umArtical[i].arti_url}">{$ArticalEdit}</a>&nbsp;|&nbsp;<a href="{$umArtical[i].dearti_url}" onclick="return confirm('{$cheDelete}?');">{$ArticalDelete}</a></td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?num_page={$smarty.section.i.rownum}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?num_page={$smarty.section.i.rownum}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

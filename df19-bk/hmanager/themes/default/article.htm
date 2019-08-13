@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head>
+	<script language=javascript>
+<!--
+var warming_na="{$warming_na}";
+{literal}
+
+	function delFile(){
+		document.getElementById("unlinkfile").innerText=event.srcElement.value;
+		var td = event.srcElement.parentElement;
+		var tr = td.parentElement;
+		var tbl = tr.parentElement;
+		tbl.deleteRow(tr.rowIndex);
+		document.getElementById("putfile").innerHTML="<INPUT TYPE=file id=myFile NAME=myfile size=30>";
+		//document.getElementById("fileNa").style.display="none";
+		//document.getElementById("myFile").style.display="";
+	}
+	
+	function chkpost(){
+		msg="";
+		if(document.getElementById("artiTitle").value==''){
+			msg += warming_na + "\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+	
+{/literal}
+//-->
+	</script>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$Btn_Add}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$PageTitle2}" onclick="location.href='{$BtnArtiListUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="show_table2">
+<!-- 頁籤起 -->
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">{$ArticalIn}</li>
+    <li class="TabbedPanelsTab" tabindex="0">{$ArticalDesc}</li>
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent">
+	<FORM enctype="multipart/form-data" METHOD=POST ACTION="articlelist.php?act=save" onsubmit="return chkpost();">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;<INPUT TYPE="hidden" NAME="artiId" value="{$article_id}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalTitle}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiTitle" id="artiTitle" size="50" value="{$article_title}"><span style="color:red;">*</span></td>
+			</tr>			
+			<tr>
+				<th align="right">{$ArticalType}：</th>
+				<td align="left">
+				<SELECT NAME="artiType">
+					{section name=i loop=$umArticat}
+						{if $umArticat[i].articlecat_id==$articlecat_id}
+							<option VALUE="{$umArticat[i].articlecat_id}" selected>{$umArticat[i].articlecat_na}</option>
+						{else}
+							<option VALUE="{$umArticat[i].articlecat_id}">{$umArticat[i].articlecat_na}</option>
+						{/if}
+					{/section}
+				</SELECT>
+				</td>
+			</tr>				
+			<tr>
+				<th align="right">{$ArticalRelat}：</th>
+				<td align="left">				
+					<INPUT TYPE="radio" NAME="artiRank" value="1" checked>{$ArticalSo}
+					<INPUT TYPE="radio" NAME="artiRank" value="2" {if $articlecat_rank==2}checked{/if}>{$ArticalCom}	
+					<INPUT TYPE="radio" NAME="artiRank" value="3" {if $articlecat_rank==3}checked{/if}>{$ArticalIm}
+					<INPUT TYPE="radio" NAME="artiRank" value="4" {if $articlecat_rank==4}checked{/if}>{$ArticalUrg}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$newsPostItem}：</th>
+				<td align="left">				
+					<INPUT TYPE="radio" NAME="newsPost" value="1" checked>{$ToEvery}
+					<INPUT TYPE="radio" NAME="newsPost" value="2" {if $article_post==2}checked{/if}>{$ToUsers}	
+					<SELECT NAME="MemberRank">
+						{section name=i loop=$umMembers}
+							{if $membercat_id==$umMembers[i].memberrank_id}
+								<option VALUE="{$umMembers[i].memberrank_id}" selected>{$umMembers[i].memberrank_na}</option>
+							{else}
+								<option VALUE="{$umMembers[i].memberrank_id}">{$umMembers[i].memberrank_na}</option>
+							{/if}
+						{/section}
+					</SELECT>							
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalInTy}：</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="artiInTy" value="1" checked>{$mainartY}
+					<INPUT TYPE="radio" NAME="artiInTy" value="0" {if $info_state==0}checked{/if}>{$mainartN}				
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalOrder}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiOrder" size="10" value="{$order}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalStaDa}：</th>
+				<td align="left"><input type="text" name="artiDateStart" id="f_date_b" value="{$article_date_start}" readonly></td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalDeadline}：</th>
+				<td align="left"><input type="text" name="artiDateStop" id="f_date_a" value="{$article_date_stop}" readonly></td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalAuthor}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiAuthor" size="50" value="{$article_author}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$ArtiAuthorMail}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiAuthorMail" size="50" value="{$article_authormail}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalUrl}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiUrl" size="50" value="{$article_sourceurl}"></td>
+			</tr>
+			<!--<tr>
+				<th align="right"></th>
+				<td align="left">{if $article_file_name!=''}<input type="checkbox" id="fileNa" onclick="delFile();" checked>{$article_file_name}{else}<INPUT TYPE="file" id="myFile" NAME="myfile" size="30">{/if}</td>
+			</tr>
+			<tr>
+				<th align="right">{$ArticalFile}：</th>
+				<td align="left">{$ArtiFileUrl}<INPUT TYPE="text" NAME="artiFileUrl" size="30" value="{$article_file_url}"></td>
+			</tr>-->
+			<tr>
+				<th align="right">{$ArticalFile}：</th>
+				<td align="left"><table><tr><td><input type="hidden" name="MAX_FILE_SIZE" value="{$maxfilesize}">{if $article_file_name!=''}<input type="checkbox" id="fileNa" name="fileNa" value="{$article_file_name}" onclick="delFile();" checked>{$article_file_name}{else}<INPUT TYPE="file" id="myFile" NAME="myfile" size="30">{/if}</td></tr><tr><td><div id="putfile"></div><INPUT TYPE="hidden" NAME="unlinkfile" id="unlinkfile" value=""></tr></td><tr><td>{$ArtiFileUrl}<INPUT TYPE="text" NAME="artiFileUrl" size="30" value="{$article_file_url}"></td></tr></table></td>
+			</tr>
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<INPUT TYPE="submit" value="{$Btn_Save}"><INPUT TYPE="reset">
+				</td>
+			</tr>
+		</table>
+	</div>
+
+    <div class="TabbedPanelsContent">
+	<!-- 線上編輯器 -->
+		<table border="0" cellpadding="0" cellspacing="0" align="center"  width="98%">			
+		<tr>				
+			<td align="center">{$FckEditor}</td>
+		</tr>
+		<tr>				
+			<td align="center">
+				<INPUT TYPE="submit" value="{$Btn_Save}"><INPUT TYPE="reset">
+			</td>
+		</tr>
+	</table>
+	</FORM>
+	
+	</div>
+
+	<div class="TabbedPanelsContent">內容 3</div>
+
+	<div class="TabbedPanelsContent">內容 4</div>
+
+  </div>
+</div>
+{literal}
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+
+	today = new Date();
+	
+	function catcalc(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date1 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("f_date_a").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_a",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc
+    });
+	
+	function catcald(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date2 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("f_date_b").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_b",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald
+    });
+//-->
+</script>
+{/literal}
+<!-- 頁籤終 -->
+
+</div>
+
+{$temp_log}</body>
+</html>

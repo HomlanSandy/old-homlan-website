@@ -1,0 +1,21 @@
+商品名稱,商品貨號,簡單說明,排序,大圖檔名,小圖檔名,商品狀態,圖文顯示區,詳細說明,定價,售價,庫存量,安全庫存量
+SONY walkman A860,PI_10,SONY walkman A860,1,1_big.jpg,1_small.jpg,1,1,"<h3 style=""color: red"">
+  <span style=""font-family: 標楷體"">
+    <b>SONY walkman A860</b>
+  </span>
+</h3>
+<h1><span style=""font-family: 標楷體"">SONY walkman A860</span></h1>
+<h3 style=""color: red"">&nbsp;</h3>",6990,6990,,0
+SONY walkman S760,PI_20,SONY walkman S760,1,2_big.jpg,2_small.jpg,1,1,"<h3 style=""color: red""><span style=""font-family: 標楷體""><b>SONY walkman A860</b> </span></h3>
+<h3 style=""color: red""><span style=""color: #ffcc00""><span style=""background-color: lime""><span style=""font-family: 標楷體"">SONY walkman A860</span></span></span></h3>
+<h3 style=""color: red"">&nbsp;</h3>",6990,6990,,0
+SONY walkman S750,PI_30,SONY walkman S750,1,3_big.jpg,3_small.jpg,1,1,"<h3 style='color: red'><span style='font-family: 標楷體'><b>SONY walkman A860</b> </span></h3>
+<h3 style='color: red'><span style='color: #ffcc00'><span style='background-color: lime'><span style='font-family: 標楷體'>SONY walkman A860</span></span></span></h3>
+<h3 style='color: red'>&nbsp;</h3>",6990,6990,,0
+SONY walkman W260,PI_40,SONY walkman W260,1,4_big.jpg,4_small.jpg,1,1,SONY walkman W260,6990,6990,,0
+SONY walkman E460,E460,SONY walkman E460,2,5_big.jpg,5_small.jpg,1,1,SONY walkman E460,6990,6990,30,5
+SONY walkman E450,E450,SONY walkman E450,3,6_big.jpg,6_small.jpg,1,1,SONY walkman E450,6990,6990,30,5
+SONY walkman E050,E050,SONY walkman E050,4,7_big.jpg,7_small.jpg,1,1,SONY walkman E050,6990,6990,30,5
+SONY walkman B160,B160,SONY walkman B160,5,8_big.jpg,8_small.jpg,1,1,SONY walkman B160,6990,6990,30,5
+SONY walkman B161,B161,SONY walkman B161,5,9_big.jpg,9_small.jpg,1,1,SONY walkman B161,6990,6990,30,5
+SONY walkman B162,B162,SONY walkman B162,5,10_big.jpg,10_small.jpg,1,1,SONY walkman B162,777,777,0,0

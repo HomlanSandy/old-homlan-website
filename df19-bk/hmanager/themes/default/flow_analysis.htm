@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http//www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head> 
+<!--/*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	flow_analysis.htm	後台流量分析 的HTML編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v03.00.03.1050301
+	├=======================================================================================┤
+	│	1.	v03.00.03.1050301	2011/05/05	廷俊	1.新增後台流量分析功能，包含列表、新增、編輯、儲存、刪除、驗證
+	│												2.分析頁面的設定值
+	│												3.預設頁面-下拉式選單
+	│												4.分類-下拉式選單
+	│												5.明細-下拉式選單
+	│												6.若勾選預設頁面，則需驗證是否有選擇預設頁面的下拉式選單
+	│												7.若勾選分類頁面，則需驗證是否有選擇分類頁面的下拉式選單
+	│												8.若勾選明細頁面，則需驗證是否有選擇明細頁面的下拉式選單
+	│	2.	v03.00.03.1050301	2011/05/06	廷俊	遮蔽預設頁面的下拉式選單，修正只有首頁可加入流量分析
+	│	3.	v03.00.04.1050701	2011/05/09	廷俊	1.新增Google Analytics (分析) - 操作手冊
+	│												2.新增Yahoo!奇摩站長工具 - 操作手冊
+	│												3.新增設定檔編號的備註訊息
+	│												4.新增Help的icon圖示
+	│	4.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+<!--
+/* 
+	2011-05-06 edit by 廷俊
+	----------------------------------------------------
+	遮蔽預設頁面的下拉式選單，修正只有首頁可加入流量分析
+	---------------------------------------------------- 
+*/
+var warming_FlowNa="{$warming_FlowNa}";
+var warming_FlowSet="{$warming_FlowSet}";
+var warming_FlowPage="{$warming_FlowPage}";
+
+{literal}
+
+	//驗證欄位
+	function chkpost(){
+		var msg='';
+		var flow_na=document.getElementById("flow_na").value;
+		var flow_set=document.getElementById("flow_set").value;
+		var flow_page_type=document.getElementsByName("flow_page_type");
+		//var page_id=document.getElementById("page_id").value;
+		var infocat_id=document.getElementById("infocat_id").value;
+		var infos_id=document.getElementById("infos_id").value;
+		if (flow_na ==""){
+			msg += warming_FlowNa + "\r\n";	
+		}
+		if (flow_set ==""){
+			msg += warming_FlowSet + "\r\n";	
+		}
+		//若勾選預設頁面，則需驗證是否有選擇預設頁面的下拉式選單
+		/*if (flow_page_type[0].checked && page_id == 0){
+			msg += warming_FlowPage + "\r\n";	
+		}*/
+		//若勾選分類頁面，則需驗證是否有選擇分類頁面的下拉式選單
+		if (flow_page_type[1].checked && infocat_id == 0){
+			msg += warming_FlowPage + "\r\n";	
+		}
+		//若勾選明細頁面，則需驗證是否有選擇明細頁面的下拉式選單
+		if (flow_page_type[2].checked && infos_id == 0){
+			msg += warming_FlowPage + "\r\n";	
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+
+{/literal}
+//-->
+</script>
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_FlowList}" onclick="location.href='{$BtnFlowListUrl}';" />
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-30 edit by 廷俊
+	----------------------------------------------------
+	新增、修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<!--
+	2011-05-06 edit by 廷俊
+	----------------------------------------------------
+	遮蔽預設頁面的下拉式選單，修正只有首頁可加入流量分析
+	----------------------------------------------------
+	2011-05-09 edit by 廷俊
+	----------------------------------------------------
+	1.新增Google Analytics (分析) - 操作手冊
+	2.新增Yahoo!奇摩站長工具 - 操作手冊
+	3.新增設定檔編號的備註訊息
+	4.新增Help的icon圖示
+	---------------------------------------------------- 	
+-->
+<div id="show_table3">
+<FORM METHOD=POST enctype="multipart/form-data" ACTION="flow_analysis.php?act=save"	onsubmit="return chkpost();" >
+	<table border="0" cellpadding="2" cellspacing="2" align="center" width="90%" height="100%">
+		<tr>
+			<th align="right" width="80">&nbsp;</th>
+			<td align="left"><INPUT TYPE="hidden" NAME="flow_id" id="flow_id" value="{$flow_id}"></td>
+		</tr>
+		<tr>
+			<th align="right">{$FlowNa}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="flow_na" id="flow_na" value="{$flow_na}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$FlowTools}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="flow_tools" value="0" checked>{$FlowGoogle}<a href="{$FlowGoogleHelpUrl}" target="_blank"><img src="images/help.png" border="0"></a>
+				&nbsp;
+				<INPUT TYPE="radio" NAME="flow_tools" value="1" {if $flow_tools=='1'}checked{/if}>{$FlowYahoo}<a href="{$FlowYahooHelpUrl}" target="_blank"><img src="images/help.png" border="0"></a>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$FlowSet}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="flow_set" id="flow_set" value="{$flow_set}">
+				{$FlowSetNote}
+			</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$FlowPage}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="flow_page_type" value="1" checked>{$Index}
+				<!-- {$umPageList} --><p>
+				<INPUT TYPE="radio" NAME="flow_page_type" value="A" {if $flow_page_type=='A'}checked{/if}>{$FlowCatPage}
+				{$umInfocatList}<p>
+				<INPUT TYPE="radio" NAME="flow_page_type" value="B" {if $flow_page_type=='B'}checked{/if}>{$FlowInfosPage}
+				{$umInfosList}			
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$FlowOrder}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="flow_order" id="flow_order" value="{$flow_order}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$FlowState}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="flow_state" value="1" checked>{$FlowStateOn}
+				<INPUT TYPE="radio" NAME="flow_state" value="0" {if $flow_state=='0'}checked{/if}>{$FlowStateOff}
+			</td>
+		</tr>
+		{if $alter_date!=""}
+		<tr>
+			<th align="right">{$AlterDate}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="alter_date" id="alter_date" value="{$alter_date}" disabled>
+			</td>
+		</tr>	
+		<tr>
+			<th align="right">{$AlterUser}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="alter_user" id="alter_user" value="{$alter_user}" disabled>
+			</td>
+		</tr>	
+		{/if}
+		<tr>
+			<th align="right" colspan="2">&nbsp;</th>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}" onclick="window.location.reload();">
+			</td>
+		</tr>
+		<tr>
+			<th align="right" colspan="2">&nbsp;</th>
+		</tr>
+		<tr>
+			<td align="left" colspan="2">
+				<a href="{$FlowGoogleIndexUrl}" target="_blank">{$FlowGoogleIndex}</a><p>
+				<a href="{$FlowGoogleHelpUrl}" target="_blank">{$FlowGoogleHelp}</a><p>
+				<a href="{$FlowYahooIndexUrl}" target="_blank">{$FlowYahooIndex}</a><p>
+				<a href="{$FlowYahooHelpUrl}" target="_blank">{$FlowYahooHelp}</a><p>
+				<span class="text_note">{$FlowNote}</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" colspan="2">&nbsp;</th>
+		</tr>
+	</table>
+</FORM>
+</div>
+{$temp_log}</body>
+</html>

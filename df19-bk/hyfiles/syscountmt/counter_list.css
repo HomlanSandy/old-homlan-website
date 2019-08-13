@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* counter.php 計數器樣式 style01 */
+.counter_bg01{
+	color: #039;
+}
+
+.counter_bg02{
+	color: #000;
+}
+
+.counter_bg03{
+	color: #900;
+}
+
+.counter_bg04{
+	color: #666;
+	border: 1px solid #CCC;
+}

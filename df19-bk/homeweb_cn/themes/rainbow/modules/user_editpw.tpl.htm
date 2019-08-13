@@ -1,0 +1,51 @@
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="js/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+{literal} 
+<!-- 
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	user_editpw.tpl.htm		 修改會員密碼 的 HTM編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.0.0102001
+	├=======================================================================================┤
+	│	1.	v2.0.0.0102001	2010/10/20 	廷俊	新增會員修改密碼頁面
+	└=======================================================================================┘
+-->
+{/literal}
+<form id="user_register" name="user_register" action="user.php?act=save_pw" method="post" onsubmit="return chkpwdata();">
+<div id="frameregister">
+
+<table width="100%" class="user_register_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left" class="user_register_title"><img src="themes/{$themes_na}/images/user_register.gif" alt="{$memberapply}"></td>
+  </tr>
+  <tr>
+    <td align="center">
+    <table width="100%" border="0" class="user_rregister_content" cellspacing="2" cellpadding="2">
+      <tr>
+        <td width="20%" align="right" class="user_register_list">*{$old_passwd}</td>
+        <td width="80%" align="left"><input name="old_passwd" type="password" id="old_passwd" size="30" class="user_register_textfield">{$input_char_text}</td>
+      </tr>
+      <tr>
+        <td width="20%" align="right" class="user_register_list">*{$new_passwd}</td>
+        <td width="80%" align="left"><input name="new_passwd" type="password" id="new_passwd" size="30" class="user_register_textfield">{$input_char_text}</td>
+      </tr>
+      <tr>
+        <td width="20%" align="right" class="user_register_list">*{$chknew_passwd}</td>
+        <td width="80%" align="left"><input name="chknew_passwd" type="password" id="chknew_passwd" size="30" class="user_register_textfield">{$input_char_text}</td>
+      </tr>
+    </table>  
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><input type="submit" name="button4" id="button4" value="{$btn_ok}" class="user_register_btn" style="width:60px; height:25px;" />
+	<input type="reset" name="button3" id="button3" value="{$btn_reset}" class="user_register_btn" style="width:60px; height:25px;" />
+    </td>
+  </tr>
+</table>
+
+</div>
+</form>

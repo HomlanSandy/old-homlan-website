@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	discount_categorylist.htm		後台商品分類折扣列表 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0083001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0083001	2010/08/30	廷俊	a.建立商品分類折扣
+	│											b.遮蔽查詢條件
+	│											c.新增、修改、刪除成功提示訊息
+	└=======================================================================================┘
+-->
+<body>
+  <div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_AddDiscount}" onclick="location.href='{$BtnAddInfoUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-30 edit by 廷俊
+	----------------------------------------------------
+	刪除成功提示訊息
+	---------------------------------------------------- 			
+
+-->
+{$Message}
+<!--
+	2010-08-30 edit by 廷俊
+	----------------------------------------------------
+	遮蔽查詢條件
+	---------------------------------------------------- 
+	
+<form name="seachfrm" method="post" action="discount_categorylist.php?act=list">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">{$DiscountDate}
+      <input name="selcatid" type="text" id="selcatid" size="15" value="{$selcatid}" readonly>
+	  {$DiscountTo}
+      <input name="selcatid2" type="text" id="selcatid2" size="15" value="{$selcatid2}" readonly>
+  
+	  {$DiscountEnd}
+	  <input name="textfield" type="text" id="textfield" size="15" value="{$textfield}">
+	  {$ProductNa}
+	  <input name="textfield2" type="text" id="textfield2" size="15" value="{$textfield2}">
+	  <img src="images/search_1.gif" width="20" height="20">
+      <input name="button2" type="submit" class="search_btn" id="button2" value="{$DiscountSearch}"></td>
+    </tr>
+</table>
+</div>
+</form>
+<div id="show_table4" class="main_link">
+ -->
+
+<div id="show_table2" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$DiscountListId}</td>
+	  <td width="" height="25" align="center" valign="middle" class="table_td_01">{$Category}</td>
+	  <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$Discount}</td>
+	  <td width="120px" height="25" align="center" valign="middle" class="table_td_01">{$DiscountStar}</td>
+	  <td width="120px" height="25" align="center" valign="middle" class="table_td_01">{$DiscountEnd}</td>	
+	  <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$DiscountState}</td>	
+      <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$DiscountOperator}</td>
+    </tr>
+    {section name=i loop=$umDiscount}
+    <tr>     
+	  <td height="25" align="center" valign="middle" class="table_td_02">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=10}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umDiscount[i].discount_na}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umDiscount[i].discount}%</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umDiscount[i].discount_star}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umDiscount[i].discount_end}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umDiscount[i].discount_state}</td>
+      <td height="25" valign="middle" align="center" class="table_td_02"><a href="{$umDiscount[i].discount_url}">{$DiscountEdit}</a>&nbsp;|&nbsp;<a href="{$umDiscount[i].deldiscount_url}" onclick="return confirm('{$cheDelete}?');">{$DiscountDelete}</a></td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+<!--
+	2010-08-06 edit by 廷俊
+	----------------------------------------------------
+	輸入查詢條件後 與 下拉式選擇頁碼，都必須selected查詢條件的值
+	&selcatid={$selcatid}&selcatid2={$selcatid2}&textfield={$textfield}&textfield2={$textfield2}
+	----------------------------------------------------
+	2010-08-30 edit by 廷俊
+	----------------------------------------------------
+	遮蔽查詢條件
+	---------------------------------------------------- 	
+-->
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?num_page={$smarty.section.i.rownum}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?num_page={$smarty.section.i.rownum}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

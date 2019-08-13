@@ -1,0 +1,141 @@
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="js/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+{literal} 
+<!-- 
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	user_selord.tpl.htm		 訂單的詳細內容 的 HTM編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.4.0120801
+	├=======================================================================================┤
+	│	1.	v2.0.4.0120801	2010/12/08 	廷俊	a.新增會員點選查看該筆訂單的詳細內容顯示頁面
+	│											b.會員點選查看該筆訂單的詳細內容版面配置
+	│											c.會員查詢訂單列表顯示訂單內容、收件人資訊、付款方式與寄送資訊區塊
+	│											d.訂單內容包含訂單編號、時間、應付金額、訂貨內容
+	│											e.收件人資訊包含收件者、收件者e-mail、收件者連絡電話、收件者地址、配送時間
+	│											f.付款方式與寄送資訊包含付款方式、付款狀態、付款回應訊息、出貨狀態、出貨回應訊息
+	│											g.下方新增返回訂單查詢列表的功能連結
+	└=======================================================================================┘
+*/-->
+{/literal}
+<form id="user_register" name="user_register" action="user.php?act=save_pw" method="post" onsubmit="return chkpwdata();">
+<div id="frameregister">
+<!--
+	2010-12-08 edit by 廷俊
+	---------------------------------------------------------
+	1.新增會員點選查看該筆訂單的詳細內容顯示頁面
+	2.會員點選查看該筆訂單的詳細內容版面配置
+	3.會員查詢訂單列表顯示訂單內容、收件人資訊、付款方式與寄送資訊區塊
+	4.訂單內容包含訂單編號、時間、應付金額、訂貨內容
+	5.收件人資訊包含收件者、收件者e-mail、收件者連絡電話、收件者地址、配送時間
+	6.付款方式與寄送資訊包含付款方式、付款狀態、付款回應訊息、出貨狀態、出貨回應訊息
+	7.下方新增返回訂單查詢列表的功能連結
+	---------------------------------------------------------
+-->
+<table width="100%" class="user_register_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left" class="user_register_title"><img src="themes/{$themes_na}/images/user_register.gif" alt="{$memberapply}"></td>
+  </tr>
+  <tr>
+    <td align="center">
+	<table width="100%" class="user_rregister_content" border="1" cellpadding="2" cellspacing="2">
+      <tr>
+		<td align="center" class="order_list_head" colspan=2>{$Order}</td>
+      </tr>
+      <tr>
+		<td valign="top" class="order_list_subject">{$OrderId}</td>
+		<td class="order_list">{$umOrdersdate.order_id}</td>
+      </tr>
+      <tr>
+		<td valign="top" class="order_list_subject">{$OrderDate}</td>
+		<td class="order_list">{$umOrdersdate.order_date}</td>
+      </tr>
+      <tr>
+		<td valign="top" class="order_list_subject">{$OrderPrice}</td>
+		<td class="order_list">{$umOrdersdate.order_price}</td>
+      </tr>
+      <tr>
+		<td valign="top" class="order_list_subject">{$OrderData}</td>
+		<td class="order_list">{$umOrdersdate.order_data}</td>
+      </tr>
+	   <tr>
+        <td align="center" class="order_list_head" colspan=2>{$Placing_Information}</td>
+      </tr>
+	  <tr>	
+	   <td valign="top" class="order_list_subject">{$OrderNa}</td>
+        <td class="order_list">{$umOrdersdate.orders_na}</td>
+      </tr>
+	  <tr>	
+        <td valign="top" class="order_list_subject">{$OrderMail}</td>
+        <td class="order_list">{$umOrdersdate.orders_email}</td>
+      </tr>
+	  <tr>	
+        <td valign="top" class="order_list_subject">{$OrderAddress}</td>
+        <td class="order_list">{$umOrdersdate.order_addr}</td>
+      </tr>
+	  <tr>	
+        <td valign="top" class="order_list_subject">{$OrderTel}</td>
+        <td class="order_list">{$umOrdersdate.orders_tel}</td>
+      </tr>
+      <tr>
+        <td align="center" class="order_list_head" colspan=2>{$Recipient_Information}</td>
+      </tr>	 
+      <tr>	
+        <td valign="top" class="order_list_subject">{$ReceiveNa}</td>
+        <td class="order_list">{$umOrdersdate.receive_na}</td>
+      </tr>
+      <tr>
+        <td valign="top" class="order_list_subject">{$ReceiveMail}</td>
+        <td class="order_list">{$umOrdersdate.receive_mail}</td>
+      </tr>
+      <tr>
+        <td valign="top" class="order_list_subject">{$ReceiveTel}</td>
+        <td class="order_list">{$umOrdersdate.receive_tel}</td>
+	  </tr>
+      <tr>
+        <td valign="top" class="order_list_subject">{$ReceiveAddress}</td>
+        <td class="order_list">{$umOrdersdate.receive_address}</td>
+	  </tr>
+      <tr>
+        <td valign="top" class="order_list_subject">{$ReceiveDate}</td>
+        <td class="order_list">{$umOrdersdate.receive_date}</td>
+	  </tr>	   
+      <tr>
+		<td align="center" class="order_list_head" colspan=2>{$Payment_And_Send}</td>
+      </tr>
+      <tr>		
+		<td valign="top" class="order_list_subject">{$Payment}</td>
+		<td class="order_list">{$umOrdersdate.payment_mode}</td>
+	  </tr>
+      <tr>		
+		<td valign="top" class="order_list_subject">{$PaymentState}</td>
+		<td class="order_list">{$umOrdersdate.payment_state}</td>
+	  </tr>
+	  {if $umOrdersdate.payment_text neq ''}
+      <tr>		
+		<td valign="top" class="order_list_subject">{$PaymentText}</td>
+		<td class="order_list">{$umOrdersdate.payment_text}</td>
+	  </tr>
+	  {/if}
+      <tr>		
+		<td valign="top" class="order_list_subject">{$ShipState}</td>
+		<td class="order_list">{$umOrdersdate.ship_state}</td>
+	  </tr>
+	  {if $umOrdersdate.ship_text neq ''}
+      <tr>		
+		<td valign="top" class="order_list_subject">{$ShipText}</td>
+		<td class="order_list">{$umOrdersdate.ship_text}</td>
+      </tr>
+	  {/if}
+	  <tr>
+		<td align="right" class="order_list_head" colspan="2"><a href="orders_query.php?act=sel_ords" target="_self">{$back_selusersord}</a></td>
+	  </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</form>

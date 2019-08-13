@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	groupfunclist.htm	群組權限編輯 的HTML頁面
+	│	開發者		│	玉玲、Fish、智倩
+	│	版本		│	v1.0.1.0091501
+	├=======================================================================================┤
+	│	1.	v1.0.1.0091501	2010/09/15	廷俊	a.修改成功提示訊息
+	│											b.群組權限編輯時，預設頁面不顯示功能列表，選擇群組後再顯示功能列表
+	│											c.更改語言別的說明文字
+	│	2.	v2.0.7.1010501	2011/01/05	廷俊	a.群組權限的編輯畫面，將功能清單細分為有效的多國語言別，用checkbox勾選權限設定的方式
+	│											b.勾選語言標題旁的checkbox，則觸發全選同語言的功能清單
+	│											c.調整群組權限的編輯畫面的版面設定
+	│	3.	v2.0.8.1021801	2011/02/18	廷俊	調整群組權限的編輯畫面的版面設定
+	│	4.	v2.0.8.1030301	2011/03/03	廷俊	1.修正版面配置與語言設定
+	│											2.修正預設載入為群組權限設定頁面
+	│											3.修正預設載入群組權限設定頁面時，執行選取群組後，才顯示列表供編輯設定
+	│											4.修正程式寫法，流程順暢、易閱讀等
+	└=======================================================================================┘
+*/-->
+<script>
+	//勾選語言標題旁的checkbox，則觸發全選同語言的功能清單
+	function chkList(k){ldelim}	
+		var schkvalue=document.getElementById("chkall"+k).checked;
+		var theform=document.updatefrm.elements;
+		for(var i=0;i<theform.length;i++){ldelim}
+			if(theform[i].type == "checkbox" && theform[i].name.indexOf('list_id'+k+'[]')!= "-1"){ldelim}  
+				theform[i].checked = schkvalue;   
+			{rdelim}   
+		{rdelim}
+	{rdelim}
+</script>
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-15 edit by 廷俊
+	----------------------------------------------------
+	修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<form name="seachfrm" method="post" action="{$frm_queryact}">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">
+		{$Group}
+		<select name="selcatid" class="select_btn" id="selcatid">		
+		{section name=i loop=$umGroupLists}
+			<option value="{$umGroupLists[i].group_id}" {$umGroupLists[i].fgroup_sel}>{$umGroupLists[i].group_na}</option>
+		{/section}
+        </select>           
+		<img src="images/search_1.gif" width="20" height="20">
+		<input name="button2" type="submit" class="search_btn" id="button2" value="{$Btn_Query}">
+	</td>
+  </tr>
+</table>
+</div>
+</form>
+<!--
+	2010-09-15 edit by 廷俊
+	----------------------------------------------------
+	群組權限編輯時，預設頁面不顯示功能列表，選擇群組後再顯示功能列表
+	----------------------------------------------------
+	2011-01-05 edit by 廷俊
+	----------------------------------------------------	
+	1.調整群組權限的編輯畫面的版面設定
+	2.群組權限的編輯畫面，將功能清單細分為有效的多國語言別，用checkbox勾選權限設定的方式	
+	----------------------------------------------------
+	2011-02-18 edit by 廷俊
+	----------------------------------------------------	
+	調整群組權限的編輯畫面的版面設定	
+	----------------------------------------------------
+-->
+<div id="show_table4" class="main_link">
+<form name="updatefrm" method="post" action="{$frm_act}">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <!-- 標題 -->
+	<tr>     
+	  <td width="300" height="25" align="center" valign="middle" class="table_td_01">
+	    <input type="hidden" name="group_id" value="{$group_id_value}">
+		{$FlistNa}
+	  </td>
+	  <td width="300" height="25" align="center" valign="middle" class="table_td_01">{$FlistCat}</td>  
+	  <!-- 語言別的權限設定 -->
+	  {section name=i loop=$umLanglists}
+	  <td width="90" height="25" align="center" valign="middle" class="table_td_01">	  
+		  {if $group_id_value neq 0}
+		    <input type="checkbox" id="chkall{$umLanglists[i].lang_id}" onclick="chkList({$umLanglists[i].lang_id});">
+		  {/if}
+		  {$umLanglists[i].lang_na}
+	  </td>
+	  {/section}	  
+    </tr>
+	<!-- 列表 -->
+{if $group_id_value neq 0}
+	{section name=j loop=$umLists}
+    <tr>          
+	  <td height="25" valign="middle" align="left" class="table_td_02">{$umLists[j].list_na}&nbsp;</td>
+	  <td height="25" valign="middle" align="left" class="table_td_02">{$umLists[j].listcat_na}&nbsp;</td>
+	  <!-- 語言別的權限設定 -->
+	  {section name=i loop=$umLanglists}
+	  <td height="25" valign="middle" align="center" class="table_td_02">
+		<input type="checkbox" name="list_id{$umLanglists[i].lang_id}[]" value="{$umLists[j].list_id}" {$umLists[i][j].list_chk}>
+	  </td>
+	  {/section}
+	</tr>
+	{/section}	
+	<tr>     
+	  <td colspan="4" align="center">&nbsp;</td>
+    </tr>	
+	<tr>     
+	  <td colspan="4" align="center">
+	    <input name="button2" type="submit" class="search_btn" value="{$Btn_Save}">
+	    <input name="button2" type="reset" class="search_btn">
+	  </td>
+    </tr>	
+	<tr>     
+	  <td colspan="4" align="center">&nbsp;</td>
+    </tr>
+{/if}
+  </table>
+</form>  
+</div>
+{$temp_log}</body>
+</html>

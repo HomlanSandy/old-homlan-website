@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<script language='javascript'>
+<!--
+var frmstat = 1 ;
+var leftImg="images/arrow_left_1.gif" ;
+var rightImg="images/arrow_right_1.gif" ;
+function hideframe(obj) {
+	if(frmstat) { 
+		parent.menu.cols="0,10,*";
+		frmstat = 0;
+		arrow.src= rightImg
+	}
+	else	{
+		parent.menu.cols="180,10,*";
+		frmstat = 1;
+		arrow.src=leftImg;
+	}
+}
+function MyFavor() {
+	if(document.Favor.Programid.value=="") return false;
+	document.Favor.submit();
+	return true;
+}
+--></script>
+</head>
+<body style="margin:0 0 0 0;">
+<table cellpadding="0" cellspacing="0" width="100%" height="100%" border="0"><tr><td valign="middle" onClick="return hideframe(this);" style="cursor:hand" align="center"><img id='arrow' name="arrow" src="images/arrow_left_1.gif">
+</td></tr></table>
+</body>
+<script language='javascript'>
+Loadded = true;
+</script>
+</html>
+

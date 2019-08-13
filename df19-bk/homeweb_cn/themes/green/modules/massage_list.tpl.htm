@@ -1,0 +1,79 @@
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="massage_list_table">
+  <tr>
+    <td align="left"><img src="themes/{$themes_na}/images/board_list.gif" alt="{$discuzlist}" border="0" align="absmiddle" /></td>
+  </tr>
+</table>
+
+<!-- 主留言 -->
+<table width="100%" border="0" cellpadding="2" cellspacing="2" class="massage_list_content">
+  <tr>
+    <td align="left" class="massage_list_title" colspan=2>{$discuzmaintitle}：{$discuss_title}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzperson}：</td>
+    <td width="80%" align="left">{$users_name}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzmail}：</td>
+    <td width="80%" align="left">{$users_email}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuztime}：</td>
+    <td width="80%" align="left">{$discuss_date_start}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzcontent}：</td>
+    <td width="80%" align="left">{$discuss_text}</td>
+  </tr>
+  {if $filedatastr!=''}
+  <tr>
+	<td width="20%" align="right" class="massage_list">{$attfile}：</td>
+    <td width="80%" align="left">{$filedatastr}</td>
+  </tr>
+  {/if}
+  {if $showipornot=='1'}
+  <tr>
+	<td width="20%" align="right" class="massage_list">{$postip}：</td>
+    <td width="80%" align="left">{$post_ip}</td>
+  </tr>
+  {/if}
+</table>
+{section name=i loop=$umReply}
+<!-- 回覆的留言 -->
+<table width="100%" border="0" cellpadding="2" cellspacing="2" class="massage_list_content">
+
+  {if $replyornot=='1'}
+  <tr>
+    <td colspan="2" align="left" class="massage_reply_title">{$discuzrecontent}<hr></td>
+  </tr>
+  {/if}
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzreperson}：</td>
+    <td width="80%" align="left">{$umReply[i].users_name}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzmail}：</td>
+    <td width="80%" align="left">{$umReply[i].users_email}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzretime}：</td>
+    <td width="80%" align="left">{$umReply[i].edituser_date}</td>
+  </tr>
+  <tr>
+    <td width="20%" align="right" class="massage_list">{$discuzrecontent}：</td>
+    <td width="80%" align="left">{$umReply[i].discussreply_text}</td>
+  </tr>
+  {if $umReply[i].discussrefile!=''}
+  <tr>
+	<td width="20%" align="right" class="massage_list">{$attfile}：</td>
+    <td width="80%" align="left">{$umReply[i].discussrefile}</td>
+  </tr>
+  {/if}
+  {if $showipornot=='1'}
+  <tr>
+	<td width="20%" align="right" class="massage_list">{$reip}：</td>
+    <td width="80%" align="left">{$umReply[i].createuser_ip}</td>
+  </tr>
+  {/if}
+</table>
+{/section}

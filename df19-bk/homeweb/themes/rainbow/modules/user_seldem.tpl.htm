@@ -1,0 +1,87 @@
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="js/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+{literal} 
+<!-- 
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	user_seldem.tpl.htm		 需求單的詳細內容 的 HTM編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.4.0120801
+	├=======================================================================================┤
+	│	1.	v2.0.4.0120801	2010/12/08 	廷俊	a.新增會員點選查看該筆需求單的詳細內容顯示頁面
+	│											b.會員點選查看該筆需求單的詳細內容版面配置置
+	│											c.會員查詢該筆需求單的詳細內容顯示需求單編號、需求時間、需求商品、需求數量、需求回應訊息
+	│											d.下方新增返回需求單查詢列表的功能連結
+	└=======================================================================================┘
+*/-->
+{/literal}
+<form id="user_register" name="user_register" action="user.php?act=save_pw" method="post" onsubmit="return chkpwdata();">
+<div id="frameregister">
+
+<!--
+	2010-12-08 edit by 廷俊
+	---------------------------------------------------------
+	1.新增會員點選查看該筆需求單的詳細內容顯示頁面
+	2.會員點選查看該筆需求單的詳細內容版面配置置
+	3.會員查詢該筆需求單的詳細內容顯示需求單編號、需求時間、需求商品、需求數量、需求回應訊息
+	4.下方新增返回需求單查詢列表的功能連結
+	---------------------------------------------------------
+-->
+<table width="100%" height="100%" border="0" class="user_register_table" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left" class="user_register_title"><img src="themes/{$themes_na}/images/user_register.gif" alt="{$memberapply}"></td>
+  </tr>
+  <tr>
+    <td align="left">
+	<table width="100%" border="1" class="user_rregister_content" cellpadding="2" cellspacing="2">
+      <tr>
+		<td align="center" class="order_list_head" colspan="2">{$Demand}</td>
+      </tr>
+      <tr>
+	    <!-- 需求單邊號 -->
+		<td valign="top" class="order_list_subject">{$DemandId}</td>
+		<td class="order_list">{$umDemand.demand_id}</td>
+      </tr>
+      <tr>
+		<!-- 需求單時間 -->
+		<td valign="top" class="order_list_subject">{$DemandDate}</td>
+		<td class="order_list">{$umDemand.demand_date}</td>
+      </tr>
+	  
+	{section name=b loop=$info_num}
+		<tr>
+			<!-- 需求商品 -->
+			<td valign="top" class="order_list_subject">{$DemandProduct}{$umDemand1[b].num}</td>
+			<td class="order_list">{$umDemand1[b].infos_na}</td>
+		</tr>
+		<tr>
+			<!-- 需求數量 -->
+			<td valign="top" class="order_list_subject">{$DemandQuantity}{$umDemand1[b].num}</td>
+			<td class="order_list">{$umDemand1[b].quantity}</td>
+		</tr>
+	{/section}	
+			  
+	  {if $umDemand.demand_text neq ''}
+      <tr>
+		<!-- 需求單備註訊息 -->
+		<td valign="top" class="order_list_subject">{$DemandText}</td>
+		<td class="order_list">{$umDemand.demand_text}</td>
+      </tr>
+	  {/if}
+	  
+	
+	
+	  
+	  <tr>
+		<!-- 返回需求單列表 -->
+		<td align="right" class="order_list_head" colspan="2"><a href="user.php?act=sel_dem" target="_self">{$back_selusersdem}</a></td>
+	  </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+</form>

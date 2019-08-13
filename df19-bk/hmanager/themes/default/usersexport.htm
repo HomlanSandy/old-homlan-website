@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	usersexport.htm		後台會員名單匯出 的 HTML編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.8.1021701
+	├=======================================================================================┤
+	│	1.	v2.0.8.1021701	2011/02/17	廷俊	1.新增會員名單匯出功能頁面
+	│											2.儲存成功提示訊息
+	│											3.搜尋會員資料項目的欄位，供管理者選擇匯出的欄位資料
+	│											4.匯出項目新增全選控制的checkbox							
+	│	2.	v2.0.8.1021801	2011/02/18	廷俊	若完成匯出，則在功能頁面上方顯示會員名單匯出檔，檔名+點我下載
+	│	3.	v2.0.8.1022201	2011/02/22	廷俊	1.導回會員名單匯出頁面，顯示成功訊息，並顯示完整的檔名(含附檔名)
+	│											2.若完成匯出，則在功能頁面上方顯示會員名單匯出檔，檔名(含附檔名)+點我下載
+	│											3.觸發radio的動態處理
+	│											4.新增檔案類型可供選擇匯出CSV或Excel檔
+	│											5.點選檔案類型觸發radio的動態處理
+	│											6.若檔案類型為CSV，則需顯示「欄位分隔」使用字元、「欄位」使用字元、「下一行」使用字元、將空值取代為
+	│											7.若檔案類型為Excel，則顯示將空值取代為
+	│	4.	v2.0.8.1022301	2011/02/23	廷俊	1.修正不需要選擇檔案類型
+	│											2.修正不需要設定檔案欄位細項
+	│											3.會員名單匯出檔，固定為CSV以逗點分隔的文件
+	│	5.	v2.0.8.1031701	2011/03/17	廷俊	調整版面配置
+	│	6.	v2.0.8.1031801	2011/03/18	廷俊	新增會員名單匯出的提醒事項
+	│	7.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+{literal}
+
+	//匯出項目新增全選控制的checkbox
+	function chkList(){
+		var schkvalue=document.getElementById("chkall").checked;
+		var form=document.form.elements;
+		for(var i=0;i<form.length;i++){
+			if(form[i].type == "checkbox"){  
+				form[i].checked = schkvalue;   
+			}  
+		}
+	}
+
+{/literal}
+</script>
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle_usersexport}</td>
+      <td width="12%" align="right">&nbsp;
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	儲存成功提示訊息
+	---------------------------------------------------- 
+	2011-02-22 edit by 廷俊
+	----------------------------------------------------
+	導回會員名單匯出頁面，顯示成功訊息，並顯示完整的檔名(含附檔名)
+	---------------------------------------------------- 	
+-->
+{$Message}
+<div id="show_table3">
+ <form method=post name="form" action="{$savefrm_url}" enctype="multipart/form-data" onsubmit="return chkpost();">
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+		<table border="0" cellpadding="2" cellspacing="2" align="center" width="80%">
+			<tr>
+				<td align="right" width="100">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+<!--
+	2011-02-18 edit by 廷俊
+	----------------------------------------------------
+	若完成匯出，則在功能頁面上方顯示會員名單匯出檔，檔名+點我下載
+	---------------------------------------------------- 			
+	2011-02-22 edit by 廷俊
+	----------------------------------------------------
+	1.若完成匯出，則在功能頁面上方顯示會員名單匯出檔，檔名(含附檔名)+點我下載
+	2.觸發radio的動態處理
+	3.新增檔案類型可供選擇匯出CSV或Excel檔
+	4.點選檔案類型觸發radio的動態處理
+	5.若檔案類型為CSV，則需顯示「欄位分隔」使用字元、「欄位」使用字元、「下一行」使用字元、將空值取代為
+	6.若檔案類型為Excel，則顯示將空值取代為
+	---------------------------------------------------- 			
+-->
+			{if $download_url neq ""}
+			<tr>
+				<th align="right">{$UsersexportFile}</th>
+				<td align="left">	
+						<a href="{$download_url}">{$Downloaded}</a>
+						<a href="{$download_url}"><img src="images/excel.png" border="0"></a>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+			{/if}
+			<tr>
+				<th align="right">{$FileName}</th>
+				<td align="left"><INPUT TYPE="text" name="file_name" id="file_name" value="{$DefaultVaule}" size="50"></td>
+			</tr>
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+			<tr>
+				<th align="right" valign="top">{$UsersItem}</th>
+				<td align="left">
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr> 
+							<td width="10%" height="20" align="center" valign="middle" class="table_td_01">{$ItemNo}</td>
+							<td width="" height="20" align="center" valign="middle" class="table_td_01">{$ItemName}</td> 
+							<td width="20%" height="20" align="center" valign="middle" class="table_td_01">
+								<input type="checkbox" id="chkall" onclick="chkList();" checked>{$ItemSate}
+							</td>						
+						</tr>
+						{section name=i loop=$ItemList}
+						<tr>
+							<td height="20" valign="middle" align="center" class="table_td_02">{$smarty.section.i.rownum}</td>
+							<td height="20" valign="middle" align="left" class="table_td_02">{$ItemList[i].na}</td>
+							<td height="20" valign="middle" align="center" class="table_td_02">{$ItemList[i].sate}</td> 											
+						</tr>
+						{/section}
+					</table>
+				</td>
+			</tr>	
+			<tr>
+				<td align="center" colspan="2">&nbsp;</td>
+			</tr>	
+<!-- 
+	2011-03-18 edit by 廷俊
+	----------------------------------------------------
+	新增會員名單匯出的提醒事項
+	---------------------------------------------------- 
+-->
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td align="left"><font class="text_note">{$UsersExport_Text}</font></td>
+			</tr>			
+			<tr>
+				<td align="center" colspan="2">&nbsp;</td>
+			</tr>			
+			<tr>
+				<th align="center" colspan="2"><INPUT TYPE="submit" value="{$Btn_Save}"></th>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">&nbsp;</td>
+			</tr>
+		</table>
+    </td>
+    </tr>
+    </table>
+</form>
+</div>
+{$temp_log}</body>
+</html>

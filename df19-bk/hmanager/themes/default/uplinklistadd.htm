@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{#website_title#}</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	uplinklistadd.htm		頁首連結明細 的HTML處理頁面
+	│	開發者		│	玉玲、Fish、智倩
+	│	版本		│	v2.0.8.1031401
+	├=======================================================================================┤
+	│	1.	v2.0.8.1031401	2011/03/14	廷俊	1.調整編輯頁面的版面配置
+	│											2.新增其他連結路徑的備註訊息
+	│											3.表單驗證加入語言包設定
+	│											4.新增必填欄位標記
+	│											4.頁首連結明細新增排序功能
+	│	2.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/ -->
+<script>
+<!--
+/*
+	2011-03-14 edit by 廷俊
+	----------------------------------------------------
+	表單驗證加入語言包設定
+	---------------------------------------------------- 			
+*/
+var warming_link_na="{$warming_link_na}";
+{literal}
+	function save_chk(){
+		var Error_Str="";
+		if (document.all("uplink_na").value==""){
+			Error_Str+=warming_link_na;
+		}
+		if (Error_Str!=""){
+			alert(Error_Str);
+			return false;
+		} else {
+			return true;
+		}
+	}
+-->
+</script>
+{/literal}
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_List}" onclick="location.href='{$Btn_List_Url}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<!-- /*
+	2011-03-14 edit by 廷俊
+	----------------------------------------------------
+	1.調整編輯頁面的版面配置
+	2.新增其他連結路徑的備註訊息
+	3.新增必填欄位標記
+	4.頁首連結明細新增排序功能
+	---------------------------------------------------- 			
+*/ -->
+<div id="show_table3">
+<form name="savefrm" method="post" action="{$savefrm_act}" onsubmit="return save_chk();">
+	<table border="0" cellpadding="2" cellspacing="2" align="center" width="80%" height="100%">
+		<tr>
+			<td width="20%" align="right">&nbsp;</td>
+			<td align="left">
+				<INPUT TYPE="hidden" NAME="uplink_id" size="20" value="{$uplink_id_value}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$link_na}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="uplink_na" id="uplink_na" size="20" value="{$uplink_na_value}">
+				<span class="text_note">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$link_cat}</th>
+			<td align="left">
+				<select name="uplinkcat_id">
+				{section name=i loop=$umlinkcatList}
+					<option value="{$umlinkcatList[i].cat_id}" {$umlinkcatList[i].sel_id}>{$umlinkcatList[i].cat_na}</option>						
+				{/section}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$link_order}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="uplink_order" id="uplink_order" size="20" value="{$uplink_order_value}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$window_open_new}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="winopen_type" value="1" {$openedyes}>{$isopenedyes}
+				<INPUT TYPE="radio" NAME="winopen_type" value="0" {$openedno}>{$isopenedno}
+			</td>
+		</tr>			
+		<tr>
+			<th align="right">{$info_state}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="info_state" value="1" {$checkedyes}>{$infostateYes}
+				<INPUT TYPE="radio" NAME="info_state" value="0" {$checkedno}>{$infostateNo}
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$SelectUrlLink}</th>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right">
+				<input type="radio" name="uplinktype" value="infocat" {$cheinfocat}>{$infocat}
+			</td>
+			<td align="left">{$umInfocatList}</td>
+		</tr>	
+		<tr>
+			<td align="right">
+				<input type="radio" name="uplinktype" value="infolist" {$cheinfolist}>{$infolist}
+			</td>
+			<td align="left">						
+				<select name="infolist_id" style="width:100%">
+				{section name=k loop=$umInfosList}
+					<option value="{$umInfosList[k].infos_id}" {$umInfosList[k].sel_id}>{$umInfosList[k].infos_na}</option>						
+				{/section}
+				</select>					
+			</td>
+		</tr>				
+		<tr>
+			<td align="right">
+				<input type="radio" name="uplinktype" value="form" {$cheform}>{$form}
+			</td>
+			<td align="left">					
+				<select name="form_id">
+				{section name=p loop=$umformList}
+					<option value="{$umformList[p].form_id}" {$umformList[p].formseled}>{$umformList[p].form_catna}->{$umformList[p].form_na}</option>						
+				{/section}
+				</select>
+			</td>
+		</tr>	
+		<tr>
+			<td align="right" valign="top">
+				<input type="radio" name="uplinktype" value="otherlink" {$cheotherlink}>{$other_url}
+			</td>				
+			<td align="left">							
+				<INPUT TYPE="text" NAME="otherurladdr" size="50" value="{$otherurladdr_value}">
+				<br>
+				<span class="text_note">{$other_url_text}</span>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">&nbsp;</td>
+		</tr>	
+		<tr>
+			<td colspan="2" align="center">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">&nbsp;</td>
+		</tr>			
+	</table>
+</form>
+</div>
+
+{$temp_log}</body>
+</html>

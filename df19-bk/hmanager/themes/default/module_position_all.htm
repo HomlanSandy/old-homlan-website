@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<script src="themes/default/css/PagePosition.js" type="text/javascript"></script>
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	module_position_all.htm		後台個別版面設定 的HTML樣板頁面
+	│	開發者		│	玉玲、Fish、智倩
+	│	版本		│	v03.00.02.1040801
+	├=======================================================================================┤
+	│	1.	v03.00.02.1040801	2011/04/29	廷俊	驗證版面頁面設定不可重複設定會員登入區模組
+	│	2.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+-->
+<script type="text/javascript">
+	var warming_pa = "{$warming_pa}";
+	var warming_small = "{$warming_small}";
+	var warming_sum = "{$warming_sum}";	
+	var warming_userlogin = "{$warming_userlogin}";	
+{literal}
+/*
+	2010-05-12 edit by 廷俊
+	------------------------------------------------------
+	使用者設定頁面寬度的驗證錯誤訊息
+	------------------------------------------------------
+	2011-04-29 edit by 廷俊
+	------------------------------------------------------
+	驗證版面頁面設定不可重複設定會員登入區模組
+	------------------------------------------------------		
+*/
+	//表單驗證
+	function chkpost(){
+		msg="";
+		var container = parseInt(document.getElementById('container_w').value);
+		var container_s = document.getElementById('container_s').value;
+		var left = parseInt(document.getElementById('left_w').value);
+		var center = parseInt(document.getElementById('center_w').value);
+		var right = parseInt(document.getElementById('right_w').value);
+		//驗證版面設定的寬度比率值不可大於100%
+		if(container_s =="%" && container >100){
+			msg += warming_pa + "\r\n";
+		}
+		//驗證版面設定的寬度值不可小於0
+		if(container <0 || left <0 || center <0 || right <0){
+			msg += warming_small + "\r\n";
+		}
+		//驗證左、中、右欄區域寬度和必須等於版面總寬度
+		if(left + center + right != container){
+			msg += warming_sum + "\r\n";
+		}
+		
+		//驗證版面頁面設定不可重複設定會員登入區模組
+		var ck_userlogin = 0;
+		var ck_A7 = new RegExp("A7");
+		var ReadGroupId = document.getElementById('ReadGroupId').value;
+		var ReadGroupId2 = document.getElementById('ReadGroupId2').value;
+		var ReadGroupId3 = document.getElementById('ReadGroupId3').value;
+		if(ck_A7.test(ReadGroupId.replace(/\s/g,""))){
+			ck_userlogin++;
+		}
+		if(ck_A7.test(ReadGroupId2.replace(/\s/g,""))){
+			ck_userlogin++;
+		}
+		if(ck_A7.test(ReadGroupId3.replace(/\s/g,""))){
+			ck_userlogin++;
+		}
+		if(ck_userlogin > 1){
+			msg += warming_userlogin + "\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+/*
+	2010-05-12 edit by 廷俊
+	------------------------------------------------------
+	只開放頁面寬度可選擇px或%,左、中、右欄區域不開放
+	------------------------------------------------------		
+*/
+	//動態設定頁面寬度單位	
+	function select_width(){ 
+		if (document.getElementById('container_s').value=="px"){
+			document.getElementById('left_span').innerHTML = "px";
+			document.getElementById('center_span').innerHTML = "px";
+			document.getElementById('right_span').innerHTML = "px";
+			document.getElementById('left_s').value = "px";
+			document.getElementById('center_s').value = "px";
+			document.getElementById('right_s').value = "px";
+		}else if(document.getElementById('container_s').value=="%"){
+			document.getElementById('left_span').innerHTML = "%";
+			document.getElementById('center_span').innerHTML = "%";
+			document.getElementById('right_span').innerHTML = "%";
+			document.getElementById('left_s').value = "%";
+			document.getElementById('center_s').value = "%";
+			document.getElementById('right_s').value = "%";
+		}
+	}
+{/literal}
+</script>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>{$PageTitle_position}</td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="show_table3">
+	<form name="form" method="post" action="{$savefrm_url}&page_id={$smarty.get.page_id}" onsubmit="return chkpost();">
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="5%" height="40" align="left" valign="middle">&nbsp;</td>
+      <td width="95%" height="40" align="left" valign="middle">
+      {$infoSel}&nbsp;{$infoDet}&nbsp;{$infoCm}
+      </td>
+      </tr>
+    <tr>
+      <td colspan="2">
+      <br>
+{if $smarty.get.page_id!=''}
+<table width="90%" height="400" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#CCCCCC">
+    <tr>
+    <td width="30%" height="30" colspan="5" align="center" valign="middle" bgcolor="#FFFFFF">{$page_width}
+<!--
+	2010-05-12 edit by 廷俊
+	------------------------------------------------------
+	只開放頁面寬度可選擇px或%,左、中、右欄區域不開放
+	------------------------------------------------------		
+-->
+	<input id="container_w" name="container_w" type="text" style="width:60px;" value="{$container}">
+	<select id="container_s" name="container_s" onChange="select_width()">
+		{if $container_s=='px'}
+		<option value="px" checked>px</option>
+		<option value="%">%</option>
+		{else}
+		<option value="%" checked>%</option>		
+		<option value="px">px</option>
+		{/if}
+	</select>
+    </td>
+    </tr>
+    <tr>
+    <td width="30%" height="30" colspan="2" align="center" valign="middle" bgcolor="#AADDDD">{$left_width}</td>
+    <td width="30%" height="30" colspan="2" align="center" valign="middle" bgcolor="#AADDDD">{$center_width}</td>
+    <td width="30%" height="30" align="center" valign="middle" bgcolor="#AADDDD">{$right_width}</td>
+    </tr>
+    <tr>
+    <td width="30%" height="30" colspan="2" align="center" valign="middle">{$width}
+	<input id="left_w" name="left_w" type="text" style="width:60px;" value="{$left}">
+	<span id="left_span">{$left_s}</span>
+	<input type="hidden" id="left_s" name="left_s" value={$container_s}>
+    </td>
+    <td width="30%" height="30" colspan="2" align="center" valign="middle">{$width}
+	<input id="center_w" name="center_w" type="text" style="width:60px;" value="{$center}">
+	<span id="center_span">{$center_s}</span>
+	<input type="hidden" id="center_s" name="center_s" value={$container_s}>
+    </td>
+    <td width="30%" height="30" align="center" valign="middle">{$width}
+	<input id="right_w" name="right_w" type="text" style="width:60px;" value="{$right}">
+	<span id="right_span">{$right_s}</span>
+	<input type="hidden" id="right_s" name="right_s" value={$container_s}>
+    </td>
+    </tr>
+<tr>
+<!-- 頁身 左方 區域位置設定 -->
+<td width="30%" height="200" align="center" valign="top" bgcolor="#EEEEEE" id="left">
+  <br>
+<p>
+{$select}
+<br>
+<select name="users_group">
+{section name=m loop=$md}
+<option value="{$md[m].md_id}">{$md[m].md_na}</option>
+{/section}
+</select>
+<input type="button" value="{$Btn_add}" onClick="addgroup();">
+</p>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="right">
+  <input type="hidden" name="ReadGroupId" id="ReadGroupId" value="{$readgroupid}">
+  <input type="hidden" name="ReadGroupNa[]" id="ReadGroupNa" value="{$readgroupna}">
+  {$selectedgp}
+        </td>
+  <td align="left" valign="middle">
+  <INPUT TYPE="button" VALUE="&#8593;" onClick="move('-',1);">
+  <br>
+  <INPUT TYPE="button" VALUE="&#8595;" onClick="move('+',1);">
+  <br>
+  <input type="button" value="{$Btn_del}" onClick="delgroup();">
+  </td>
+      </tr>
+  </table>
+
+</td>
+<td width="5%" align="center" valign="middle" bgcolor="#EEEEEE" id="left">
+<input type="button" value=">" onClick="movea()" name="B1"><BR>
+<input type="button" value="<" onClick="BumpUpa()" name="B2">
+</td>
+
+<!-- 頁身 中間 主要區域位置設定 --> 
+<td width="30%" height="200" align="center" valign="top" bgcolor="#EEEEEE" id="main">
+<br>
+<p>
+{$select}
+<br>
+<select name="users_group2">
+{section name=m loop=$md}
+<option value="{$md[m].md_id}">{$md[m].md_na}</option>
+{/section}
+</select>
+<input type="button" value="{$Btn_add}" onClick="addgroup2();">
+</p>
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="right">
+  <input type="hidden" name="ReadGroupId2" id="ReadGroupId2" value="{$readgroupid2}">{$selectedgp2}
+        </td>
+  <td align="left" valign="middle">
+  <INPUT TYPE="button" VALUE="&#8593;" onClick="move('-',2);">
+  <br>
+  <INPUT TYPE="button" VALUE="&#8595;" onClick="move('+',2);">
+  <br>
+  <input type="button" value="{$Btn_del}" onClick="delgroup2();">
+  </td>
+      </tr>
+  </table>
+
+</td>
+<td width="5%" align="center" valign="middle" bgcolor="#EEEEEE" id="main">
+<input type="button" value=">" onClick="moveb()" name="B3"><BR>
+<input type="button" value="<" onClick="BumpUpb()" name="B4">
+</td>
+
+<!-- 頁身 右方 主要區域位置設定 --> 
+<td width="30%" height="200" align="center" valign="top" bgcolor="#EEEEEE" id="right">
+<br>
+<p>
+{$select}
+<br>
+<select name="users_group3">
+{section name=m loop=$md}
+<option value="{$md[m].md_id}">{$md[m].md_na}</option>
+{/section}
+</select>
+<input type="button" value="{$Btn_add}" onClick="addgroup3();">
+</p>
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="right">
+  <input type="hidden" name="ReadGroupId3" id="ReadGroupId3" value="{$readgroupid3}">{$selectedgp3}
+        </td>
+      <td align="left" valign="middle">
+  <INPUT TYPE="button" VALUE="&#8593;" onClick="move('-',3);">
+  <br>
+  <INPUT TYPE="button" VALUE="&#8595;" onClick="move('+',3);">
+  <br>
+  <input type="button" value="{$Btn_del}" onClick="delgroup3();">
+  </td>
+      </tr>
+  </table>
+  
+  </td>
+</tr>
+<tr>
+<td colspan="5" align="center" valign="middle">
+<INPUT TYPE="submit" value="{$Btn_Save}" style="width:140px;">&nbsp;<INPUT TYPE="reset" value="{$reset_y}" onClick="location.href='module_position_all.php?page_id={$smarty.get.page_id}'">&nbsp;<INPUT TYPE="button" value="{$default_y}" onClick="location='module_position_all.php?default=y&page_id={$smarty.get.page_id}'">
+</td>
+</tr>
+</table>
+{/if}
+    <br>
+    </td></tr>
+    <tr>
+    <td width="5%" align="left" valign="middle">&nbsp;</td>
+    <td width="95%" align="left" valign="middle" class="text_note">{$ps}</td>
+    </tr>
+    </table>
+	</form>
+</div>
+
+{$temp_log}</body>
+</html>

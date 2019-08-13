@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+{literal}  
+<script type="text/javascript">
+<!--
+	function chkpost(){
+		msg="";
+		if(document.getElementById("list_na").value==''){
+			msg += "模組名稱不得為空白\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+//-->
+</script>
+{/literal}
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_List}" onclick="location.href='{$BtnListUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+
+<div id="show_table3">
+
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+	  <form name="fmfunc" method="post" action="funclist.php?act=save" onsubmit="return chkpost();">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;<INPUT TYPE="hidden" NAME="list_id" size="50" value="{$list_id_value}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$FlistNa}</th>
+				<td align="left"><INPUT TYPE="text" NAME="list_na" id="list_na" size="50" value="{$list_na_value}"></td>
+			</tr>		
+			<tr>
+				<th align="right">{$FlistCat}</th>
+				<td align="left">
+				<select name="selfuncmain" class="select_btn" id="selfuncmain">
+				{section name=i loop=$umCats}
+					<option value="{$umCats[i].fcat_id}" {$umCats[i].fcat_sel}>{$umCats[i].fcat_na}</option>
+				{/section}
+				</select>        
+				</td>
+			</tr>		
+			<tr>
+				<th align="right">{$FlistUrl}</th>
+				<td align="left"><INPUT TYPE="text" NAME="list_url" size="50" value="{$list_url_value}"></td>
+			</tr>					
+			<tr>
+				<th align="right">{$FlistOrder}</th>
+				<td align="left"><INPUT TYPE="text" NAME="list_order" size="16" value="{$list_order_value}"></td>
+			</tr>								
+			<tr>
+				<th align="right">{$FlistInfo}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y1" value="1" {$checkedyes}>{$FlistInfoYes}
+					<INPUT TYPE="radio" NAME="Y1" value="0" {$checkedno}>{$FlistInfoNo}
+				</td>
+			</tr>	
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="Mode" value="{$Btn_Save}">
+					<input type="reset">
+				</td>
+			</tr>		
+		</table>
+	  </form>
+    </td>
+    </tr>
+    </table>
+</div>
+
+{$temp_log}</body>
+</html>

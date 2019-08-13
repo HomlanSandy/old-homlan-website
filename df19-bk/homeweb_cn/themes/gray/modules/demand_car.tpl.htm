@@ -1,0 +1,100 @@
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	demand_car.tpl.htm		前台 需求單同購物車 的HTML處理頁面
+	│	開發者		│	健嘉
+	│	版本		│	
+	├=======================================================================================┤
+	│	1.	            	2011/12/23	健嘉	建立前台 需求單同購物車	 頁面   			│
+	└=======================================================================================┘
+*/ -->
+<script>
+var NoValue="{$NoValue}";
+{literal}
+
+function edit_quantity(ifid,quantity){
+	document.location="cart.php?act=edit&ifid="+ifid+"&quantity="+quantity;
+}
+function chknum(){
+	var i=0;
+	var j=0;
+	var str="stock"+i;
+	var no_value=[];
+	
+	while (document.getElementById(str))
+	{
+		if(document.getElementById(str).value==""){
+			alert(NoValue);
+			return false;
+			no_value[j]=i;
+			j+=1;
+		}
+		i=i+1;
+		str="stock"+i;
+	}
+	return true;
+}
+
+{/literal}
+</script>
+
+<form method="POST" action="demand_order.php">
+<table width="100%" class="car_list_table" border="0" align="left" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="car_list_head" align="left" valign="middle"><img src="themes/{$themes_na}/images/demand3.gif" border="0" align="absmiddle" />{$Demand_single}</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+<!-- 
+	2011-02-10 edit by 廷俊
+	------------------------------------------------------
+	1.顯示幣別
+	2.修正版面配置
+	------------------------------------------------------		
+*/	-->   
+    <table width="100%" align="center" border="0" cellpadding="2" cellspacing="2" class="car_list_content">
+{if $Demand_Empty eq ""}
+	<tr>
+		<td width="60%" align="center" class="car_list_title" width="">{$Product_details}</td>
+		<td align="center" class="car_list_title" width="20%">{$Quantity}</td>
+		<td align="center" class="car_list_title" width="20%">{$Change_Details}</td>
+	</tr>
+	{section name=i loop=$umCartList}
+		<tr>
+			<td align="left" class="car_list">
+				<a href="{$umCartList[i].href}" target="_self">{$umCartList[i].smallpic}</a>
+				<a href="{$umCartList[i].href}" target="_self">{$umCartList[i].cart_na}</a><br>	
+			</td>
+			<td align="center" class="car_list">
+				{$umCartList[i].stock_list}<br>
+			</td>
+			<td align="center" class="car_list">
+				<input type="button" value="{$btn_cancle}" class="car_cancel_btn" onClick="JavaScript:document.location='demand.php?act=edit&ifid={$umCartList[i].cart_id}';"/>
+			</td>
+		</tr>
+	{/section} 
+		<tr>
+			<td align="center" class="car_list" colspan="2">
+				<input type="button" value="{$Continue_shopping}" class="car_continue_btn" onClick="history.go(-1);"/>
+				<input type="submit" value="{$Write_Data}" class="car_start_btn" onclick="return chknum();"/>
+			</td>
+			<td align="center" class="car_list" colspan="1">
+				<input type="button" value="{$Clear_Demand}" class="car_btn" onClick="JavaScript:document.location='demand.php?act=delete';"/>
+			</td>
+		</tr>
+{else}
+	  <tr>
+		<td align="center" class="car_list">
+			{$Demand_Empty}<br><br>
+			<input type="button" value="{$Continue_shopping}" class="car_btn" onClick="JavaScript:document.location='index.php';"/>
+		</td>
+      </tr>
+{/if}	  
+    </table>
+    </td>
+  </tr>
+</table>
+</form>
+<br>
+  

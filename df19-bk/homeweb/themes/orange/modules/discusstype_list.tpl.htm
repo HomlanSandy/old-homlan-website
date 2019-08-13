@@ -1,0 +1,19 @@
+<div align="left" class="discuss_list_table"><img src="themes/{$themes_na}/images/class_title.gif" border="0" align="absmiddle" />{$discusstype_na}&nbsp;&nbsp;&nbsp;{$btnpost}<input type="hidden" name="pofileornot" id="pofileornot" value="{$permitfile}" /></div> 
+<!-- 討論區列表 -->
+<table width="100%" class="discuss_list_content" align="left" border="0" cellpadding="2" cellspacing="2" >
+  <tr>
+    <td width="10%" align="center" class="discuss_list_title" id="discuzid">{$discuzid}</td>
+    <td width="45%" align="center" class="discuss_list_title" id="discuztitle">{$discuztitle}</td>
+    <td width="20%" align="center" class="discuss_list_title" id="discuzperson">{$discuzperson}</td>
+    <td width="25%" align="center" class="discuss_list_title" id="discuztime">{$discuztime}</td>
+  </tr>  
+{section name=i loop=$umDiscuz}
+  <tr>
+    <td width="10%" align="center" class="discuss_list" headers="discuzid">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=10}</td>
+    <td width="45%" align="left" class="discuss_list" headers="discuztitle"><a href="board.php?act=con&dizid={$umDiscuz[i].discuss_id}">{$umDiscuz[i].discuss_title}</a></td>
+    <td width="20%" align="center" class="discuss_list" headers="discuzperson">{$umDiscuz[i].users_name}</td>
+    <td width="25%" align="center" class="discuss_list" headers="discuztime">{$umDiscuz[i].edituser_date}</td>
+  </tr>
+{/section}
+</table>
+{$str_page}

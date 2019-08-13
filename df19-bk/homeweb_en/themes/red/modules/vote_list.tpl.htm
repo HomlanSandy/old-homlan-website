@@ -1,0 +1,17 @@
+{section name=ida loop=$voteList}
+	{if $voteList[ida].md_id==$page_left[a].md_id && $voteList[ida].page_id==$page_left[a].page_id && $voteList[ida].page_position==$page_left[a].page_position}
+		<div>{$voteList[ida].vote_content}</div>
+	{/if}
+{/section}
+
+{section name=idb loop=$voteList}
+	{if $voteList[idb].md_id==$page_center[b].md_id && $voteList[idb].page_id==$page_center[b].page_id && $voteList[idb].page_position==$page_center[b].page_position}
+		<div>{$voteList[idb].vote_content}</div>
+	{/if}
+{/section}
+
+{section name=idc loop=$voteList}
+	{if $voteList[idc].md_id==$page_right[c].md_id && $voteList[idc].page_id==$page_right[c].page_id && $voteList[idc].page_position==$page_right[c].page_position}
+		<div>{$voteList[idc].vote_content}</div>
+	{/if}
+{/section}

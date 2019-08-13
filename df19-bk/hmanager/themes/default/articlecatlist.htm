@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_Add}" onclick="location.href='{$BtnAddUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div id="show_table2" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+      <td width="15%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalNa}</td>
+	  <td width="18%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalType}</td>
+	  <td width="35%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalText}</td>
+	  <td width="10%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalOrder}</td>
+      <td width="10%" height="25" align="center" valign="middle" class="table_td_01">{$ArticalInfoSta}</td>
+      <td width="" height="25" align="center" valign="middle" class="table_td_01">{$ArticalOperator}</td>
+    </tr>
+	{section name=i loop=$umArticle}
+    <tr>          
+	   <td height="25" valign="middle" class="table_td_02">{$umArticle[i].articlecat_na}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umArticle[i].artiparent_na}</td>
+	   <td height="25" valign="middle" align="left" class="table_td_02">{$umArticle[i].articlecat_text}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umArticle[i].order}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umArticle[i].infoState}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02"><a href="{$umArticle[i].func_url}">{$ArticalEdit}</a>&nbsp;|&nbsp;<a href="{$umArticle[i].defunc_url}" onclick="return confirm('{$cheDelete}?');">{$ArticalDelete}</a></td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?num_page={$smarty.section.i.rownum}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?num_page={$smarty.section.i.rownum}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

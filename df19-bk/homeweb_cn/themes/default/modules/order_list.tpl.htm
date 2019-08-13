@@ -1,0 +1,141 @@
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	order_list.tpl.htm		前台訂單 的HTML處理頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0091001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0091001	2010/09/10	廷俊	建立前台訂單
+	│	2.	v2.0.8.1021001	2011/02/10	廷俊	a.顯示幣別
+	│											b.修正版面配置
+	└=======================================================================================┘
+*/ -->
+<table width="100%" class="order_list_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="order_list_title" align="left" valign="middle"><img src="themes/{$themes_na}/images/checklist.gif" border="0" align="absmiddle" />{$Orders}</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">  
+	<form method="post" action="order.php?act=save">
+    <table width="100%" align="center" border="0" cellpadding="2" cellspacing="2" class="order_list_content">
+		<!--確認訂單-->
+		<tr>
+			<td align="center" class="order_list_head" width="">{$Shopping_Details}</td>
+			<td align="center" class="order_list_head" width="180">{$Price}</td>
+			<td align="center" class="order_list_head" width="90">{$Quantity}</td>
+			<td align="center" class="order_list_head" width="180">{$Subtotal}</td>
+		</tr>
+<!-- 
+	2011-02-10 edit by 廷俊
+	------------------------------------------------------
+	1.顯示幣別
+	2.修正版面配置
+	------------------------------------------------------		
+*/	-->  
+		<!--購物明細列表-->
+	{section name=i loop=$umCartList}
+		<tr>
+			<td align="left" class="order_list">
+				<a href="{$umCartList[i].href}" target="_self">{$umCartList[i].cart_na}</a>	
+			</td>
+			<td align="center" class="order_list">
+				<del>{$Selling_price}{$currency}{$umCartList[i].price_sale}{$Dollar}</del><br>
+				{$Member_price}{$currency}<span style="color:red;">{$umCartList[i].member_price}</span>{$Dollar}				
+			</td>
+			<td align="center" class="order_list">
+				{$umCartList[i].quantity}
+			</td>
+			<td align="center" class="order_list">
+				{$currency}{$umCartList[i].subtotal}{$Dollar}
+			</td>
+		</tr>
+	{/section} 
+		<!--消費總金額-->
+		<tr>
+			<td align="right" class="order_list_total" colspan="3">
+				{$Shopping_Total}&nbsp;&nbsp;<img src="themes/{$themes_na}/images/SpryMenuBarRight.gif">
+			</td>
+			<td align="center" class="order_list_total">
+				{$currency}<span style="color:red;">{$Total}</span>{$Dollar}
+			</td>
+		</tr>
+		<!--運費-->
+		{if $fare neq ""}
+		<tr>
+			<td align="right" class="order_list_fare" colspan="3">
+				{$Fare}&nbsp;&nbsp;<img src="themes/{$themes_na}/images/SpryMenuBarRight.gif">
+			</td>
+			<td align="center" class="order_list_fare">
+				{$currency}<span style="color:red;">{$fare}</span>{$Dollar}
+			</td>
+		</tr>
+		{/if}
+		<!--手續費-->
+		{if $fee neq ""}
+		<tr>
+			<td align="right" class="order_list_total" colspan="3">
+				{$Fee}&nbsp;&nbsp;<img src="themes/{$themes_na}/images/SpryMenuBarRight.gif">
+			</td>
+			<td align="center" class="order_list_total">
+				{$currency}<span style="color:red;">{$fee}</span>{$Dollar}
+			</td>
+		</tr>
+		{/if}
+		<!--本筆訂單需付款金額-->
+		<tr>
+			<td align="right" class="order_list_fare" colspan="3">
+				{$Order_Payments}&nbsp;&nbsp;<img src="themes/{$themes_na}/images/SpryMenuBarRight.gif">
+			</td>
+			<td align="center" class="order_list_fare">
+				{$currency}<span style="color:red;"><b>{$order_price}</b></span>{$Dollar}
+			</td>
+		</tr>
+	</table>
+	<table width="100%" border="0" align="center" cellpadding="2" cellspacing="2" class="order_list_content">
+		<!--付款方式與寄送資訊-->
+		<tr>
+			<td align="center" class="order_list_head" colspan="4"><b>{$Payment_And_Send}</b></td>		
+		</tr>
+		<tr>
+			<td align="right" class="order_list_subject" width="100">{$Payment}</td>
+			<td align="left" class="order_list" colspan="3">{$payment_mode}
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="order_list_subject">{$ReceiveNa}</td>
+			<td align="left" class="order_list" colspan="3">{$receive_na}
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="order_list_subject">{$ReceiveTel}</td>
+			<td align="left" class="order_list" colspan="3">{$receive_tel}
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="order_list_subject">{$ReceiveMail}</td>
+			<td align="left" class="order_list" colspan="3">{$receive_mail}
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="order_list_subject">{$ReceiveAddress}</td>
+			<td align="left" class="order_list" colspan="3">{$receive_address}
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="order_list_subject">{$ReceiveDate}</td>
+			<td align="left" class="order_list" colspan="3">{$receive_date}
+			</td>
+		</tr>
+		<!--按鈕-->
+		<tr>
+			<td align="center" class="order_list" colspan="4">
+				<input type="submit" class="order_btn" value="{$Confirmation_Checkout}">
+				<input type="button" class="order_btn" value="{$Back_Payment}" onClick="location.href='payment.php';">
+			</td>
+		</tr>
+    </table>
+	</form>
+    </td>
+  </tr>
+</table>

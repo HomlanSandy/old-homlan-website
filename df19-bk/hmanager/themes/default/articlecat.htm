@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript">
+<!--
+var warming_na="{$warming_na}";
+{literal}
+
+	function chkpost(){
+		msg="";
+		if(document.getElementById("artiNa").value==''){
+			msg += warming_na + "\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+	
+{/literal}
+//-->
+</script>
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_Artical}" onclick="location.href='{$BtnListUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div id="show_table3">
+
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+	  <form METHOD=POST action="articlecatlist.php?act=save" onsubmit="return chkpost();">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;<INPUT TYPE="hidden" NAME="artiId" value="{$articlecat_id}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$mainartNa}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiNa" id="artiNa" size="50" value="{$articlecat_na}"><span style="color:red;">*</span></td>
+			</tr>	
+			<tr>
+				<th align="right">{$mainartUpTy}：</th>
+				<td align="left">
+					<select name="parentId">
+					{section name=i loop=$umArticlecat}
+						{if $umArticlecat[i].articlecatId==$parent_id && $umArticlecat[i].articlecatId!=$articlecat_id}
+							<option value="{$umArticlecat[i].articlecatId}" selected>{$umArticlecat[i].articlecatNa}</option>
+						{elseif $umArticlecat[i].articlecatId!=$articlecat_id}
+							<option value="{$umArticlecat[i].articlecatId}">{$umArticlecat[i].articlecatNa}</option>
+						{/if}
+					{/section}
+					</select>
+				</td>
+			</tr>				
+			<tr>
+				<th align="right">{$mainartType}：</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="articalType" value="1" checked>{$mainartSysTy}
+					<INPUT TYPE="radio" NAME="articalType" value="2" {if $articlecat_type==2}checked{/if}>{$mainartconTy}
+					<INPUT TYPE="radio" NAME="articalType" value="3" {if $articlecat_type==3}checked{/if}>{$mainartShop}
+					<INPUT TYPE="radio" NAME="articalType" value="4" {if $articlecat_type==4}checked{/if}>{$mainartTaTy}
+				</td>
+			</tr>	
+			<tr>
+				<th align="right">{$mainartOrder}：</th>
+				<td align="left"><INPUT TYPE="text" NAME="artiOrder" size="16" value="{$order}"></td>
+			</tr>	
+			<tr>
+				<th align="right">{$mainartInTy}：</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="InfoState" size="1" checked>{$mainartY}
+					<INPUT TYPE="radio" NAME="InfoState" size="0" {if $info_state==0}checked{/if}>{$mainartN}
+				</td>
+			</tr>				
+			<tr>
+				<th align="right" valign="top">{$mainartText}：</th>
+				<td align="left"><TEXTAREA NAME="artiText" ROWS="5" COLS="40">{$articlecat_text}</TEXTAREA></td>
+			</tr>
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<input type="submit" name="Mode" value="{$Btn_Save}">
+					<input type="reset">
+				</td>
+			</tr>
+		</table>
+	  </form>
+    </td>
+    </tr>
+    </table>
+</div>
+
+{$temp_log}</body>
+</html>

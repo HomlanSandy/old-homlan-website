@@ -1,0 +1,1359 @@
+@charset "utf-8";
+/* css/default/blue */
+
+/* 頁面背景設定 */
+body {
+	background: #D7E9EB;
+	font-family: Verdana, Arial, Helvetica, sans-serif,"新細明體";
+	font-size: small;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#666666', endColorstr='#D7E9EB',gradientType='0');
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+
+a:link {
+	color: #09F;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #09F;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #C30;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #C30;
+	text-decoration: none;
+}
+
+/* 頁面置中及寬度設定 */
+
+#container {
+	top: 15px;
+	position: relative;
+	margin: 0 auto;
+	width: 95%;
+	height: 100%;
+	background-color: #FFFFFF;
+}
+
+#shadow_left {
+	width: 30%;
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#666666', endColorstr='#0077DD',gradientType='1');
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	float: left;
+}
+
+#shadow_right {
+	width: 30%;
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#006699', endColorstr='#000000',gradientType='1');
+	position: absolute;
+	left: 30%;
+	right: 0px;
+	top: 0px;
+	float: right;
+}
+
+/* 頁頭位置設定 */
+#header {
+	position: relative;
+	width: 100%;
+	float: none;
+	height: 90px;
+	background-image: url(../images/main_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-color: #FFF;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#00CCDD', endColorstr='#0077DD',gradientType='0');
+}
+
+#header_bg{
+	position: relative;
+	width: 100%;
+	height: 30px;
+	color: #0077DD;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#B6CEFB',gradientType='0');
+}
+
+.header_search {
+	width: 40%;
+	color: #0077DD;
+}
+
+.header_userlink {
+	width: 60%;
+	color: #0077DD;
+}
+
+.search_btn{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#00FFFFF', endColorstr='#0077DD',gradientType='0');
+	color: #FFF;
+	background-color: #0077DD;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+/* 頁身 左方 區域位置設定 */
+#left {
+	position: relative;
+	width: 24%;
+	float: none;
+	height: auto;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#CAD8FD', endColorstr='#FFFFFF',gradientType='1');
+}
+
+/* 頁身 中間 主要區域位置設定 */
+#main {
+	position: relative;
+	width: 59%;
+	float: none;
+	height: auto;
+	background-color: #FFF;
+}
+
+#main_right {
+	position: relative;
+	width: 80%;
+	float: none;
+	height: auto;
+	background-color: #FFF;
+}
+
+#main_all {
+	position: relative;
+	width: 100%;
+	float: none;
+	height: auto;
+	background-color: #FFF;
+}
+
+/* 頁身 右方 區域位置設定 */
+#right {
+	position: relative;
+	width: 16%;
+	float: none;
+	height: auto;
+	background-color: #FFF;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#CAD8FD',gradientType='1');
+}
+
+/* 頁尾位置設定 */
+#footer {
+	position: relative;
+	width: 100%;
+	height: auto;
+	float: none;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0099CC', endColorstr='#0077DD',gradientType='0');
+	font-size: small;
+	color: #FFF;
+}
+
+.footer a:link, .footer a:visited{
+	text-decoration: none;
+	color: #FFF;
+}
+.footer a:hover, .footer a:active{
+	color: #FFF;
+	text-decoration: underline;
+}
+
+/* commercial.php 廣告輪播模組 */
+
+.commercial_table{
+	width: 550px;
+	height: 200px;
+	border: 1px solid #5588BB;
+	background-image: url(../images/commercial_bg.png);
+	background-repeat: repeat;
+}
+
+/* user_login.php 會員登入模組 */
+.user_login_table{
+	width: 50%;
+	height: 30px;
+	color: #FFF;
+	background-color: #000;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.user_login_title{
+	height: 30px;
+	background: #000;
+/*	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0077DD', endColorstr='#000000',gradientType='1'); */
+	color: #FFFFFF;
+}
+.user_login_content{
+}
+
+.user_login_textfield{
+	color: #0FF;
+	background-color: #000;
+	border: 1px solid #0FF;
+}
+
+.user_login_btn{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#00FFFFF', endColorstr='#0077DD',gradientType='0');
+	color: #FFF;
+	background-color: #0077DD;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+/* catalog_menu.php 產品分類選單模組 */
+
+#left_menu {
+	position: absolute;
+	width: 22%;
+	height: auto;
+	z-index: 1;
+	left: 2.5%;
+	top: 350px;
+}
+
+#left_menu_top {
+	position: absolute;
+	width: 22%;
+	height: auto;
+	z-index: 1;
+	left: 2.5%;
+	top: 180px;
+}
+
+.menu_first{
+	height: 40px;
+	font-weight: bold;
+	background-image: url(../images/title_down.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	color: #FFF;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#00CCDD', endColorstr='#0077DD',gradientType='0');
+	background-color: #FFF;
+	font-size: medium;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+
+.menu_first a:link, .menu_first a:visited{
+	text-decoration: none;
+	color: #FFF;
+}
+.menu_first a:hover, .menu_first a:active{
+	color: #FFF;
+	text-decoration: underline;
+}
+
+
+.menu_second{
+	color: #09C;
+	background-color: #FFF;
+}
+
+/* 直立右拉式選單 */
+
+ul.MenuBarVertical{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	cursor: default;
+	width: 100%;
+}
+
+ul.MenuBarActive{
+	z-index: 1000;
+}
+
+ul.MenuBarVertical li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	position: relative;
+	text-align: left;
+	cursor: pointer;
+	width: 100%;
+}
+
+ul.MenuBarVertical ul{
+	margin: 3% 0 0 97%;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	position: absolute;
+	z-index: 1020;
+	cursor: default;
+	width: 100%;
+	left: -1000em;
+	top: 0;
+}
+
+ul.MenuBarVertical ul.MenuBarSubmenuVisible{
+	left: 0;
+}
+
+ul.MenuBarVertical ul li{
+	width: 100%;
+}
+
+ul.MenuBarVertical{
+
+}
+
+ul.MenuBarVertical ul{
+	border: 1px solid #07D;
+}
+
+ul.MenuBarVertical a{
+	display: block;
+	cursor: pointer;
+	padding: 0.75em;
+	color: #069;
+	text-decoration: none;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#CAD8FD', endColorstr='#FFFFFF',gradientType='1');
+}
+
+ul.MenuBarVertical a:hover, ul.MenuBarVertical a:focus{
+	background-color: #BCCEFA;
+	color: #FFF;
+}
+
+ul.MenuBarVertical a.MenuBarItemHover, ul.MenuBarVertical a.MenuBarItemSubmenuHover, ul.MenuBarVertical a.MenuBarSubmenuVisible{
+	color: #000;
+	font-weight: bold;
+	border-left-width: 10px;
+	border-left-style: solid;
+	border-left-color: #06C;
+}
+
+ul.MenuBarVertical a.MenuBarItemSubmenu{
+	background-image: url(../images/SpryMenuBarRight.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+
+ul.MenuBarVertical a.MenuBarItemSubmenuHover{
+	background-image: url(../images/SpryMenuBarRightHover.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+
+ul.MenuBarVertical iframe{
+	position: absolute;
+	z-index: 1010;
+	filter:alpha(opacity:0.1);
+}
+
+@media screen, projection
+{
+	ul.MenuBarVertical li.MenuBarItemIE
+	{
+		display: inline;
+		float: left;
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#CAD8FD', endColorstr='#FFFFFF',gradientType='1');
+	}
+}
+
+
+
+/* 上方連結選單 (下拉式選單) */
+
+#top_menu{
+	position: absolute;
+	width: 70%;
+	height: 30px;
+	z-index: 2;
+	top: 30px;
+	right: 0;
+}
+
+.top_menu_table{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0077DD', endColorstr='#000000',gradientType='1');
+}
+
+ul.MenuBarHorizontal{
+	list-style-type: none;
+	font-size: 100%;
+	cursor: default;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+ul.MenuBarActive{
+	z-index: 1000;
+}
+
+ul.MenuBarHorizontal li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	position: relative;
+	text-align: left;
+	cursor: pointer;
+	width: 8em;
+	float: left;
+}
+
+ul.MenuBarHorizontal ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	z-index: 1020;
+	cursor: default;
+	width: 8.2em;
+	position: absolute;
+	left: -1000em;
+}
+
+ul.MenuBarHorizontal ul.MenuBarSubmenuVisible{
+	left: auto;
+}
+
+ul.MenuBarHorizontal ul li{
+	width: 8.2em;
+}
+
+ul.MenuBarHorizontal ul ul{
+	position: absolute;
+	margin: -5% 0 0 95%;
+}
+
+ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible{
+	left: auto;
+	top: 0;
+}
+
+
+ul.MenuBarHorizontal ul{
+
+}
+
+ul.MenuBarHorizontal a{
+	display: block;
+	cursor: pointer;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#006699', endColorstr='#000000',gradientType='0');
+	padding: 0.75em;
+	color: #FFF;
+	text-decoration: none;
+}
+ul.MenuBarHorizontal a:hover, ul.MenuBarHorizontal a:focus{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#006699', endColorstr='#000000',gradientType='0');
+	color: #FFF;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemHover, ul.MenuBarHorizontal a.MenuBarItemSubmenuHover, ul.MenuBarHorizontal a.MenuBarSubmenuVisible
+{
+	color: #0FF;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #0FF;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenu{
+	background-image: url(../images/SpryMenuBarDown.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+
+ul.MenuBarHorizontal ul a.MenuBarItemSubmenu{
+	background-image: url(../images/SpryMenuBarRight.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenuHover
+{
+	background-image: url(../images/SpryMenuBarDownHover.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+
+ul.MenuBarHorizontal ul a.MenuBarItemSubmenuHover
+{
+	background-image: url(../images/SpryMenuBarRightHover.gif);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+}
+
+ul.MenuBarHorizontal iframe{
+	position: absolute;
+	z-index: 1010;
+	filter:alpha(opacity:0.1);
+}
+
+@media screen, projection
+{
+	ul.MenuBarHorizontal li.MenuBarItemIE
+	{
+		display: inline;
+		float: left;
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#006699', endColorstr='#000000',gradientType='0');
+	}
+}
+
+
+/* show_news.php 最新消息模組 */
+
+.show_news_table{
+	font-size: small;
+	color: #666;
+}
+
+.show_news_title{
+	color: #0077DD;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #09C;
+	font-size: medium;
+	font-weight: bold;
+}
+.show_news_content{
+	color: #FFFFFF;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0099CC', endColorstr='#0077DD',gradientType='0');
+	font-size: x-small;
+}
+
+.show_news_list{
+	background: #FFFFFF;
+	font-size: small;
+	color: #000;
+}
+
+/* news_list.php 最新消息列表模組 */
+
+.news_list_table{
+	font-size: small;
+	color: #666;
+}
+
+.news_list_title{
+	color: #0077DD;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #09C;
+	font-size: medium;
+	font-weight: bold;
+}
+.news_list_content{
+	color: #069;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	font-size: small;
+}
+
+.news_list{
+	background: #FFFFFF;
+	font-size: small;
+	color: #000;
+}
+
+/* news_content.php 最新消息明細內容 */
+
+.news_content_table{
+	width: 90%;
+	height: auto;
+	font-size: small;
+	color: #000;
+	border: 1px solid #0077DD;
+}
+
+.news_content_title{
+	font-size: medium;
+	height: 30px;
+	background: #0077DD;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0077DD', endColorstr='#5588BB',gradientType='0');
+	color: #FFFFFF;
+}
+
+.news_file{
+	background-color: #EEE;
+	width: 90%;
+}
+
+/* outside_link.php icon外部連結列模組 */
+
+.outside_link_icon{
+	width: 130px;
+	height: 50px;
+	font-size: small;
+	background-color: #FFF;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #CCC;
+	border-right-color: #666;
+	border-bottom-color: #666;
+	border-left-color: #CCC;
+}
+
+/* show_list.php 圖文顯示模組 */
+
+.show_list_table{
+	font-size: small;
+	background-color: #FFF;
+}
+
+.show_list_minitable{
+	height: 160px;
+	width: 30%;
+	font-size: small;
+	background-color: #EEE;
+}
+
+.show_list_img{
+	width: 130px;
+	height: 130px;
+	background-color: #FFF;
+	border: 1px solid #BACBF4;
+}
+
+.show_list_text{
+	width: 130px;
+	height: 25px;
+	color: #666;
+	font-size: small;
+	background-color: #EEE;
+}
+
+/* pages.php分頁模組 */
+.pages_link{
+	color: #999;
+}
+
+.pages_link a:link, .pages_link a:visited{
+	text-decoration: underline;
+	color: #F90;
+}
+.pages_link a:hover, .pages_link a:active{
+	color: #930;
+	text-decoration: underline;
+}
+
+div#wrapper {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+}
+
+div.pagination {
+    overflow: hidden;
+    font-size: 9pt;
+    padding: 10px 0;
+}
+
+div.pagination ul {
+    list-style: none;
+    padding: 2px 0;
+    line-height: 16px;
+}
+
+div.pagination li {
+    display: inline;
+}
+
+div.pagination.badoo {
+	background-color:#fff;
+	color:#48b9ef;
+	padding:10px 0 10px 0;
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	text-align:center;
+}
+
+div.pagination.badoo a {
+	color:#48b9ef;
+	padding:2px 5px;
+	margin:0 2px;
+	text-decoration:none;
+	border:2px solid #f0f0f0;
+}
+
+div.pagination.badoo a:hover, div.pagination.badoo a:active {
+	border:2px solid #ff5a00;
+	color:#ff5a00;
+}
+
+div.pagination.badoo span.current {
+	padding:2px 5px;
+	border:2px solid #ff5a00;
+	color:#fff;
+	font-weight:bold;
+	background-color:#ff6c16;
+}
+
+div.pagination.badoo span.disabled {
+	display:none;
+}
+
+/* news_list.php 資訊列表模組 */
+
+.catalog_list_table{
+	font-size: small;
+	color: #666;
+}
+
+.catalog_list_title{
+	color: #0077DD;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+}
+.catalog_list_content{
+	color: #000;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='1');
+	font-size: small;
+}
+
+.catalog_list{
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #0077DD;
+	font-size: small;
+	color: #666;
+}
+
+/* news_content.php 資訊明細內容 */
+
+.catalog_content_table{
+	width: 90%;
+	height: auto;
+	font-size: small;
+	color: #000;
+}
+
+.catalog_content_title{
+	font-weight: bold;
+	font-size: medium;
+	height: 30px;
+	background: #FFFFFF;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #0077DD;
+	color: #0077DD;
+}
+
+.catalog_content_img{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+
+.catalog_download{
+	background-color: #EEEEEE;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCC;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #CCC;
+}
+
+.catalog_like{
+	background-color: #FFF;
+}
+
+.catalog_like_img{
+	background-color: #EEEEEE;
+	border: 1px solid #06C;
+}
+
+.catalog_like_title1{
+	font-size: medium;
+	font-weight: bold;
+	color: #06C;
+}
+
+.catalog_like_title2{
+	color: #06C;
+}
+
+.catalog_like_ps{
+	color: #666;
+}
+
+
+/* search_list.php 搜尋結果列表模組 */
+
+.search_list_table{	
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');	
+	font-size: small;
+	color: #666;
+}
+
+.search_list_title{
+	color: #0077DD;
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='1');
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.search_list_content{
+	color: #000;
+	font-size: small;
+}
+
+.search_list{
+	font-size: small;
+	color: #666;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+
+/* discuss_list.php  討論區列表模組 */
+
+#postdiscuz {
+	z-index: 3;
+	position: absolute;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	left: 250px;
+	top: 80px;
+	float: left;
+	border: 5px solid #F90;
+}
+
+.discuss_list_table{
+	width:80%;
+	font-size: medium;
+	color: #069;
+	font-weight: bold;
+	background-color: #EEE;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.discuss_list_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	background-color: #07D;
+}
+
+.discuss_list_content{
+	font-size: small;
+	color: #666;
+	border: 1px solid #CCC;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');
+}
+
+.discuss_list{
+	font-size: small;
+	color: #000;
+	background-color: #FFF;
+}
+
+.manager_reply{
+	color: #06C;
+}
+
+.btnpost{
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#666666', endColorstr='#0066CC',gradientType='1');
+	color: #FFF;
+	border: 1px solid #FFF;
+	font-weight: bold;
+}
+
+/* massage_list.php  發文列表顯示模組 */
+.massage_list_table{
+	font-size: medium;
+	color: #000;
+	font-weight: bold;
+}
+
+.massage_list_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	background-color: #07D;
+}
+
+.massage_list_content{
+	font-size: small;
+	color: #666;
+	border: 1px solid #CCC;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');
+}
+
+.massage_list{
+	font-size: small;
+	color: #000;
+}
+
+.massage_list_white{
+	font-size: small;
+	color: #666;
+	background-color: #FFF;
+}
+
+/* massage_write.php 發文填寫模組 */
+.massage_write_table{
+	font-size: small;
+	color: #666;
+	border: 1px solid #09C;
+}
+
+.massage_write_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	background-color: #FFF;
+}
+
+.massage_repost_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+}
+
+.massage_write_content{
+	color: #000;
+	font-size: small;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#DADBDA', endColorstr='#EEEEEE',gradientType='1');
+}
+
+.massage_write_list{
+	font-size: small;
+	color: #FFF;
+	background-color: #36C;
+}
+
+.massage_write_textfield{
+}
+
+.massage_write_btn{
+}
+
+/* massage_reply.php 回文填寫模組 */
+.massage_reply_table{
+	font-size: small;
+	color: #666;
+	border: 1px solid #09C;
+}
+
+.massage_reply_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	background-color: #FFF;
+}
+
+.massage_reply_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+}
+
+.massage_reply_content{
+	color: #000;
+	font-size: small;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#AADDDD', endColorstr='#EEEEEE',gradientType='1');
+}
+
+.massage_reply_list{
+	font-size: small;
+	color: #FFF;
+	background-color: #39C;
+}
+
+.massage_reply_textfield{
+}
+
+.massage_reply_btn{
+}
+
+/* user_referpw.php 會員查詢密碼模組 */
+
+.user_referpw_table{
+	color: #000;
+	font-size: small;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#AADDDD', endColorstr='#CAD8FD',gradientType='1');
+}
+
+.user_referpw_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	background-color: #FFF;
+}
+
+.user_referpw_textfield{
+	color: #0FF;
+	background-color: #000;
+	border: 1px solid #0FF;
+}
+
+.user_referpw_btn{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#00FFFFF', endColorstr='#0077DD',gradientType='0');
+	color: #FFF;
+	background-color: #0077DD;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+/* user_register.php 會員註冊模組 */
+
+.user_register_table{
+	color: #000;
+	font-size: small;
+}
+
+.user_register_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+
+.user_rregister_content{
+}
+
+.user_register_list{
+	color: #0077DD;
+	font-size: medium;
+}
+
+.user_register_textfield{
+}
+
+.user_register_btn{
+}
+
+.user_title{
+	height: 50px;
+	font-size: medium;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #06C;	
+}
+
+.user_notice{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#DDDDDD',gradientType='0');
+}
+
+/* reply.php 查詢密碼成功回報模組 */
+
+.referpw_table{
+	border: 1px dashed #F00;
+	font-size: medium;
+	font-weight: bold;
+	color: #F00;
+	background-image: url(../images/reply_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+/* user_edit.php 修改會員資料模組 */
+
+.user_edit_table{
+	color: #000;
+	font-size: small;
+}
+
+.user_edit_title{
+	color: #0077DD;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #07D;
+}
+
+.user_edit_content{
+}
+
+.user_edit_list{
+	color: #0077DD;
+	font-size: medium;
+}
+
+.user_edit_textfield{
+}
+
+.user_edit_btn{
+}
+
+/* user.php 會員中心選單模組 */
+
+.welcome_table{
+	font-size: small;
+	color: #900;
+	background-color: #FFF;
+	border: 1px solid #CCC;
+}
+
+.user_table{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#00FFFF', endColorstr='#0077DD',gradientType='0');
+	color: #000;
+	font-size: small;
+}
+
+.user_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0077DD', endColorstr='#00FFFF',gradientType='0');
+}
+
+.user_content{
+}
+
+.user_list{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#CCCCCC',gradientType='1');
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+	font-size: medium;
+}
+
+/* form.php 表單頁面 */
+
+.form_bg{
+	background-color: #FFF;
+}
+
+.form_table{
+	background-color: #FFF;
+	border: 1px solid #07D;
+}
+
+.form_title{
+	font-size: x-large;
+	color: #000;
+	font-weight: bolder;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #000;
+}
+
+.form_content{
+	font-size: small;
+	color: #07D;
+}
+
+.form_textfield{
+	height: 16px;
+	background-color: #FFF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+	border-left-color: #666;
+}
+
+.form_btn{
+	font-size: small;
+	color: #06C;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	border: 1px solid #CCF;
+	height: 25px;
+	width: 80px;
+}
+
+.form_reply{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');
+	font-size: small;
+	color: #07D;
+}
+
+
+/* article_content.php 文章內容 */
+
+.article_content_table{
+	width: 90%;
+	height: auto;
+	font-size: small;
+	color: #000;
+}
+
+.article_content_title{
+	font-weight: bold;
+	font-size: medium;
+	height: 30px;
+	background: #FFFFFF;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #0077DD;
+	color: #0077DD;
+}
+
+/* 頁籤式樣板設定 */
+.TabbedPanels {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	clear: none;
+	width: 100%;
+}
+.TabbedPanelsTabGroup {
+	margin: 0px;
+	padding: 0px;
+}
+
+.TabbedPanelsTab {
+	color: #FFF;
+	position: relative;
+	top: 1px;
+	float: left;
+	padding: 4px 10px;
+	margin: 0px 1px 0px 0px;
+	background-color: #F90;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: small;
+}
+.TabbedPanelsTabHover {
+	background-color: #930;
+}
+
+.TabbedPanelsTabSelected {
+	background-color: #EEE;
+	color: #000;
+	font-weight: bold;
+}
+
+.TabbedPanelsTab a {
+	color: #000;
+	text-decoration: none;
+}
+
+.TabbedPanelsContentGroup {
+	clear: both;
+	background-color: #EEE;
+	color: #000;
+}
+
+.TabbedPanelsContent {
+	padding: 4px;
+}
+
+.TabbedPanelsContentVisible {
+}
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	background-color: #EEE;
+	position: relative;
+	border: 1px solid #AFA9A7;
+}
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	background-color: #EEE;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #AFA9A7;
+}
+
+.VTabbedPanels .TabbedPanelsContentGroup {
+	clear: none;
+	float: left;
+	padding: 0px;
+	width: 30em;
+	height: 20em;
+}

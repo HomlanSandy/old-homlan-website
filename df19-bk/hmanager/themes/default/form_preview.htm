@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表單預覽</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="top">
+<div id="logo">&nbsp;</div>
+<div id="hyshop_version">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>軒眾電腦股份有限公司–後台管理系統–version  1.0.0 pro</td>
+    </tr>
+</table>
+</div>
+</div>
+<form name="form1" method="post" action="{$form_action}">
+<div class="form_table">
+<div class="form_title" align="left">
+{$form_page_preview} <img src="../../ezportal/Hmanager/images/left_title_img.gif" width="20" height="25" border="0" align="absmiddle" /> {$form_page_title}
+</div>
+<br>
+<div class="form_ps" align="left"><br>
+{$form_page_text1}
+<br><br></div>
+{$form_table_list}
+<div class="form_ps" align="left"><br>
+{$form_page_text2}
+<br><br></div>
+<p align="center">
+	<input name="button2" type="submit" class="form_btn" id="button2" value="{$form_button}" />
+	<input name="button" type="reset" class="form_btn" id="button" value="重設" />
+ 
+</p>
+</div>
+{$temp_log}</body>
+</html>

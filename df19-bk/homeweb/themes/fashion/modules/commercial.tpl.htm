@@ -1,0 +1,19 @@
+<div align="left">
+{if $isShow gt 0}
+	<div class="commercial_table">
+	{section name=mm loop=$adsplay}
+	<div id="Tag_IE" name="Tag_FF" class="MsgHide">
+		{$adsplay[mm]}
+		<div class="commercial_text">&nbsp;{$adsText[mm]}</div>
+	</div>
+	{/section}
+	<div align="right" class="commercial_btn">
+		<img src="themes/{$themes_na}/images/Tab_Img10.gif" name="Tag_COMM" border="0" align="absmiddle" class="ImgTab" onclick="Pause_Msg()" onmouseover="Rot_Msg(1)" onmouseout="Rot_Msg()">
+		<img src="themes/{$themes_na}/images/Tab_Img20.gif" name="Tag_COMM" border="0" align="absmiddle" class="ImgTab" onclick="Pause_Msg()" onmouseover="Rot_Msg(2)" onmouseout="Rot_Msg()">
+		<img src="themes/{$themes_na}/images/Tab_Img30.gif" name="Tag_COMM" border="0" align="absmiddle" class="ImgTab" onclick="Pause_Msg()" onmouseover="Rot_Msg(3)" onmouseout="Rot_Msg()">
+		<img src="themes/{$themes_na}/images/Tab_Img40.gif" name="Tag_COMM" border="0" align="absmiddle" class="ImgTab" onclick="Pause_Msg()" onmouseover="Rot_Msg(4)" onmouseout="Rot_Msg()">
+	</div>
+	<!-- javascript -->{$jsp}
+	</div>
+{/if}
+</div>

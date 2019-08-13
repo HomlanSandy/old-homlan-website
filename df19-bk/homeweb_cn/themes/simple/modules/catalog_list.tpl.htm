@@ -1,0 +1,236 @@
+{if $infocat_show_reccord gt 0}
+
+<table width="100%" id="catalog_list_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <!--
+  <tr>
+    <td class="catalog_list_title" align="left" valign="middle">
+{if $infoscatlist gt 0}
+<a href="index.php">{$HomePage}</a>
+{section name=p loop=$umheaduserlink}
+{if $umheaduserlink[p].cats_na neq ''}
+<img src="themes/{$themes_na}/images/dash.gif" border="0" align="absmiddle" alt="dash" />
+{if $umheaduserlink[p].cats_url==''}{$umheaduserlink[p].cats_na}{else}<a href="{$umheaduserlink[p].cats_url}">{$umheaduserlink[p].cats_na}</a>{/if}
+{/if}
+{/section}
+{/if}
+    </td>
+  </tr>
+  -->
+	<tr>
+		<td align="left" valign="top">
+<!--	
+	2010-09-07 edit by 廷俊
+	----------------------------------------------------
+	a.售價顯示
+	b.顯示會員價=售價*會員折扣*商品折扣
+	c.顯示購物車(庫存>安全庫存and售價>0)
+	d.顯示需求單(售價=0)
+	e.到達需求標準(庫存<=安全庫存)時，顯示需求單or無庫存
+	f.更改商品明細的連結
+	----------------------------------------------------
+	2010-09-17 edit by 廷俊
+	----------------------------------------------------
+	資訊列表圖文顯示與列表顯示，重新排版，無資料者空白
+	----------------------------------------------------
+	2010-09-20 edit by 廷俊
+	----------------------------------------------------
+	判斷明細為資訊，則不顯示優惠價格與操作；明細為商品，則顯示優惠價格與操作
+	----------------------------------------------------
+	2010-12-02 edit by 廷俊
+	----------------------------------------------------
+	1.明細列表顯示方式，新增圖片顯示
+	2.調整版面
+	3.一列顯示三筆明細資料
+	4.更改CSS樣式，調整顯示明細的寬度設定
+	----------------------------------------------------
+	2010-12-16 edit by 廷俊
+	----------------------------------------------------
+	1.修正前台分類內頁的明細三種列表方式的版面配置
+	2.判斷資訊(商品)顯示設定：明細列表顯示設定->簡單說明，設定簡單說明的標題與內容
+	3.若明細列表顯示設定->圖片顯示方式時，則起用明細列表顯示設定->每列筆數
+	4.依圖片顯示方式的每列筆數，來設定明細的寬度
+	5.依圖片顯示方式的每列筆數，來設定明細每列的明細筆數，筆數超過即換列
+	6.判斷最後一列的剩餘明細筆數，來設定需要補齊多少空白欄位
+	----------------------------------------------------
+	2011-02-10 edit by 廷俊
+	------------------------------------------------------
+	1.顯示幣別
+	2.修正版面配置
+	------------------------------------------------------			
+	2011-07-26 edit by 玉玲
+	------------------------------------------------------
+	1.資訊商品明細列表的標題改為使用者自訂與判斷是否顯示
+	------------------------------------------------------			
+*/	-->  		
+			<table width="100%" align="center" border="0" cellpadding="2" cellspacing="2" class="catalog_list_content">
+
+			<!--圖片顯示-->
+			{if $infocat_show_type eq image}
+				<tr>	
+				{section name=x loop=$umCatInfoList}
+					{math equation="100/w" w=$PerPageRow assign="width"}				
+					<td align="center" valign="top" width="{$width}%">
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							<tr>
+								<td align="left" class="show_list_text">
+									<a href="{$umCatInfoList[x].href}" target="_self"><b>{$umCatInfoList[x].infos_na}</b></a>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">
+									<a href="{$umCatInfoList[x].href}" target="_self">{$umCatInfoList[x].smallpic}</a>
+								</td>
+							</tr>
+							{if $cats_type eq 1}
+								<tr>
+									<td align="right">
+										{$umCatInfoList[x].price_fix}
+										{$umCatInfoList[x].price_sale}
+										{$umCatInfoList[x].member_price}
+									</td>
+								</tr>
+								<tr>
+									<td align="right">
+										{$umCatInfoList[x].Shopping}
+									</td>
+								</tr>
+							{/if}
+							{if $infocat_show_simple eq 1}
+								<tr>
+									<td align="left">
+										<a href="{$umCatInfoList[x].href}" target="_self">{$umCatInfoList[x].infos_simple_text1}</a>
+									</td>
+								</tr>
+							{/if}
+						</table>	
+					</td>
+					{math equation="m%w" m=$smarty.section.x.rownum w=$PerPageRow assign="line"}
+					{if $line eq 0}</tr><tr>{/if}
+				{/section}
+					{math equation="w-l" w=$PerPageRow l=$line assign="nbsp"}
+					{if $line neq 0}<td colspan="{$nbsp}">&nbsp;</td>{/if}
+				</tr>
+
+			<!--圖文顯示-->
+			{elseif $infocat_show_type eq photo}
+				<tr>
+					<td align="center" class="catalog_list" width="15%">{$Pictures}</td>
+					<td align="center" class="catalog_list" width="">{$Title}</td>
+					{if $cats_type eq 1}
+						<td align="center" class="catalog_list" width="25%">{$Price}</td>
+						<td align="center" class="catalog_list" width="15%">{$Operation}</td>
+					{/if}
+					{if $infocat_show_simple eq 1}
+						<td align="center" class="catalog_list" width="">{$Briefly}</td>
+					{/if}
+				</tr>
+				{section name=x loop=$umCatInfoList}
+				<tr>
+					<td align="left" class="catalog_list">
+						<a href="{$umCatInfoList[x].href}" target="_self">{$umCatInfoList[x].smallpic}</a>
+					</td>
+					<td align="left" class="catalog_list">
+						<a href="{$umCatInfoList[x].href}" target="_self"><b>{$umCatInfoList[x].infos_na}</b></a><br>
+					</td>
+					{if $cats_type eq 1}
+						<td align="left" class="catalog_list">
+							{$umCatInfoList[x].price_fix}
+							{$umCatInfoList[x].price_sale}
+							{$umCatInfoList[x].member_price}
+						</td>
+						<td align="center" class="catalog_list">
+							{$umCatInfoList[x].Shopping}
+						</td>
+					{/if}
+					{if $infocat_show_simple eq 1}
+						<td align="left" class="catalog_list">
+							<a href="{$umCatInfoList[x].href}" target="_self">{$umCatInfoList[x].infos_simple_text1}</a>
+						</td>	
+					{/if}
+				</tr>
+				{/section}  
+			
+			<!--文字顯示-->
+			{elseif $infocat_show_type eq text}		
+				{if $title_type eq 0}
+				<tr>		
+					{if $title_used1 eq 1}<td align="center" class="catalog_list" width="30">{$No}</td>{/if}
+					{if $title_used2 eq 1}<td align="center" class="catalog_list" width="">{$Title}</td>{/if}
+					{if $cats_type eq 1}
+						{if $title_used4 eq 1}<td align="center" class="catalog_list" width="20%">{$Price}</td>{/if}
+						{if $title_used5 eq 1}<td align="center" class="catalog_list" width="15%">{$Operation}</td>{/if}
+					{/if}
+					{if $infocat_show_simple eq 1}
+						{if $title_used3 eq 1}<td align="center" class="catalog_list" width="">{$Briefly}</td>{/if}
+					{/if}
+				</tr> 
+				{else}
+				<tr>							
+					{if $title_used1 eq 1}<td align="center" class="catalog_list" width="30">{$title_list1}</td>{/if}
+					{if $title_used2 eq 1}<td align="center" class="catalog_list">{$title_list2}</td>{/if}
+					{if $cats_type eq 1}
+						{if $title_used4 eq 1}<td align="center" class="catalog_list" width="20%">{$title_list4}</td>{/if}
+						{if $title_used5 eq 1}<td align="center" class="catalog_list" width="15%">{$title_list5}</td>{/if}						
+					{/if}
+					{if $infocat_show_simple eq 1}
+						{if $title_used3 eq 1}<td align="center" class="catalog_list">{$title_list3}</td>{/if}
+					{/if}
+				</tr>
+				{/if}
+				{section name=x loop=$umCatInfoList}
+				<tr>
+					{if $title_used1 eq 1}
+					<td align="center" class="catalog_list" valign="middle">
+						{math equation="x" x=$smarty.section.x.rownum}
+					</td>
+					{/if}
+					{if $title_used2 eq 1}
+					<td align="left" class="catalog_list">
+						<a href="{$umCatInfoList[x].href}" target="_self">{$umCatInfoList[x].infos_na}</a><br>
+					</td>
+					{/if}
+					{if $cats_type eq 1}
+						{if $title_used4 eq 1}
+						<td align="left" class="catalog_list">
+							{$umCatInfoList[x].price_fix}
+							{$umCatInfoList[x].price_sale}
+							{$umCatInfoList[x].member_price}
+						</td>
+						{/if}
+						{if $title_used5 eq 1}
+						<td align="center" class="catalog_list">
+							{$umCatInfoList[x].Shopping}
+						</td>
+						{/if}
+					{/if}
+					{if $infocat_show_simple eq 1}
+						{if $title_used3 eq 1}
+						<td align="left" class="catalog_list">
+							<a href="{$umCatInfoList[x].href}" target="_self">{$umCatInfoList[x].infos_simple_text1}</a><br>
+						</td>
+						{/if}
+					{/if}
+				</tr>	
+				{/section}  
+			{/if}
+			</table>
+			
+			<!--分頁模組-->
+			{if $umPage eq 1}		
+			<div class="pagination badoo" align="center">
+				<ul>
+					{section name=y loop=$umInfoPage}
+						{if $umInfoPage[y].Page_No eq $infocat_page_now}
+							<li class="current">{$umInfoPage[y].Page_No}</li>
+						{else}
+							<li><a href="{$umInfoPage[y].Page_Link}">{$umInfoPage[y].Page_No}</a></li>
+						{/if}
+					{/section}
+				</ul>
+			</div>
+			{/if}				
+		</td>
+	</tr>
+</table>
+
+{/if}

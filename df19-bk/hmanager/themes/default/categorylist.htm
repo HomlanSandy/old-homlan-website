@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	categorylist.htm	資訊(商品)分類列表 的 htm檔
+	│	開發者		│	玉玲
+	│	版本		│	v1.0.0.0072701
+	├=======================================================================================┤
+	│	1.	v1.0.1.0072701	2010/07/27	廷俊	新增分類的屬性，資訊or商品	
+	│	2.	v1.0.1.0072801	2010/07/28	廷俊	刪除分類成功提示訊息
+	│	3.	v2.0.0.0111119	2010/11/19	娜娜	新增資訊狀態條件搜尋功能
+	└=======================================================================================┘
+-->
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_Add}" onclick="location.href='{$BtnAddCateUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-28 edit by 廷俊
+	----------------------------------------------------
+	刪除分類成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<form name="seachfrm" method="post" action="category.php?act=list">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">
+      {$CategoryNa}      
+      <input name="textfield" type="text" id="textfield" size="15" value="{$textfield}">
+	  {$InfoState}
+      {$infoSel}
+      <img src="images/search_1.gif" width="20" height="20">
+	   <input type="hidden" name="perpagenum" value="{$perpagenum_value}">
+      <input type="submit" name="button2" class="search_btn" id="button2" value="{$InfoSearch}"></td>
+    </tr>
+</table>
+</div>
+</form>
+
+<!--
+  	2010-07-27 edit by 廷俊
+	----------------------------------------------------
+	1.新增分類的屬性，資訊or商品
+	2.更改相關名稱
+	----------------------------------------------------  
+-->
+<div id="show_table4" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+      <td width="" height="25" align="center" valign="middle" class="table_td_01">{$CategoryNa}</td>
+      <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$CategoryType}</td>
+      <td width="110px" height="25" align="center" valign="middle" class="table_td_01">{$CategoryDisable}</td>
+      <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$CategoryOrder}</td>  
+	  <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$CategoryInfoSta}</td> 	  
+      <td width="90px" height="25" height="25" align="center" valign="middle" class="table_td_01">{$CategoryOperator}</td>
+    </tr>
+	{section name=i loop=$umCatslist}
+    <tr>          
+	   <td height="" valign="middle" class="table_td_02">{$umCatslist[i].cats_na}</td>	   
+	   <td height="" valign="middle" align="center" class="table_td_02">{$umCatslist[i].cats_type}</td>
+	   <td height="" valign="middle" align="center" class="table_td_02">{$umCatslist[i].cat_show}</td>
+	   <td height="" valign="middle" align="center" class="table_td_02">{$umCatslist[i].gds_order_no}</td>	   
+	   <td height="" valign="middle" align="center" class="table_td_02">{$umCatslist[i].info_state}</td>
+	   <td height="" valign="middle" align="center" class="table_td_02">
+			<a href="{$umCatslist[i].cate_url}">{$CategoryEdit}</a>&nbsp;|&nbsp;<a href="{$umCatslist[i].decat_url}" onclick="return confirm('{$cheDelete}?');">{$CategoryDelete}</a>
+	   </td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}&selcatid={$selcatid}&textfield={$textfield}&selcatid2={$selcatid2}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}&selcatid={$selcatid}&textfield={$textfield}&selcatid2={$selcatid2}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+	{$PerPageNme}
+	{$umSetPageList}
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

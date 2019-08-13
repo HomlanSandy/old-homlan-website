@@ -1,0 +1,31 @@
+<table width="100%" id="catalog_list_table" border="0" align="left" cellpadding="0" cellspacing="0">
+<!--
+  <tr>
+    <td class="catalog_list_title" align="left" valign="middle">
+{if $infoscatlist gt 0}
+<a href="index.php">{$HomePage}</a>
+{section name=p loop=$umheaduserlink}
+{if $umheaduserlink[p].cats_na neq ''}
+<img src="themes/{$themes_na}/images/dash.gif" border="0" align="absmiddle" alt="dash" />
+{if $umheaduserlink[p].cats_url==''}{$umheaduserlink[p].cats_na}{else}<a href="{$umheaduserlink[p].cats_url}">{$umheaduserlink[p].cats_na}</a>{/if}
+{/if}
+{/section}
+{/if}
+   </td>
+  </tr>
+  -->
+  <tr>
+    <td valign="top">
+    
+    <table width="100%" align="center" border="0" cellpadding="2" cellspacing="2" class="catalog_list_content">
+      {section name=p loop=$umNextCategoryList}
+	  <tr>
+        <td align="left" class="catalog_list">{math equation="p" p=$smarty.section.p.rownum} . <a href="catalog.php?infoscatid={$umNextCategoryList[p].cats_id}" target="_self">{$umNextCategoryList[p].cats_na}</a></td>
+      </tr>
+	  {/section}     
+    </table>
+    
+    </td>
+  </tr>
+</table>
+

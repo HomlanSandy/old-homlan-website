@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	userslist.htm		會員資料 的 HTM列表頁面
+	│	開發者		│	玉玲
+	│	版本		│	v1.0.0.0081001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0081101	2010/08/11	廷俊	新增、修改、刪除成功提示訊息
+	│	2.	v2.0.8.1022401	2011/02/24	廷俊	1.會員列表新增會員狀態欄位
+	│											2.調整會員列表版面配置
+	│	3.	v2.0.8.1022501	2011/02/25	廷俊	1.會員資料列表新增查詢條件區塊
+	│											2.新增會員名稱、會員帳號、會員狀態的查詢條件
+	│											3.輸入查詢條件值、下拉式選擇頁碼，都必須selected查詢條件的值
+	└=======================================================================================┘
+*/-->
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_Add}" onclick="location.href='{$BtnAddUserUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-11 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 					
+-->
+{$Message}
+<!--
+	2010-08-11 edit by 廷俊
+	----------------------------------------------------
+	會員資料列表新增查詢條件區塊
+	新增會員名稱、會員帳號、會員狀態的查詢條件
+	輸入查詢條件值、下拉式選擇頁碼，都必須selected查詢條件的值
+	---------------------------------------------------- 					
+-->
+<form name="seachfrm" method="post" action="userslist.php?act=list">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">
+	  {$UserNa}
+	  <input name="textfield" type="text" id="textfield" size="8" value="{$textfield}">
+	  {$UserLoginid}
+	  <input name="textfield2" type="text" id="textfield2" size="8" value="{$textfield2}">
+	  {$UserState}
+	  {$infoSel}
+      <img src="images/search_1.gif" width="20" height="20">
+	  <input type="hidden" name="perpagenum" value="{$perpagenum_value}">
+      <input name="button2" type="submit" class="search_btn" id="button2" value="{$UserSearch}"></td>
+    </tr>
+</table>
+</div>
+</form>
+<!-- /*
+	2011-02-24 edit by 廷俊
+	------------------------------------------------------
+	1.會員列表新增會員狀態欄位
+	2.調整會員列表版面配置
+	------------------------------------------------------		
+*/ -->
+<div id="show_table4" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+      <td width="30" height="25" align="center" valign="middle" class="table_td_01">{$UserNo}</td>
+      <td width="" height="25" align="center" valign="middle" class="table_td_01">{$UserNa}</td>
+      <td width="" height="25" align="center" valign="middle" class="table_td_01">{$UserLoginid}</td>
+	  <td width="95" align="center" valign="middle" class="table_td_01">{$UserCheck}</td>  
+	  <td width="95" align="center" valign="middle" class="table_td_01">{$UserCheckdate}</td>
+	  <td width="95" align="center" valign="middle" class="table_td_01">{$UserLogindate}</td>
+	  <td width="60" align="center" valign="middle" class="table_td_01">{$UserState}</td>
+      <td width="155" height="25" align="center" valign="middle" class="table_td_01">{$UserOperator}</td>
+    </tr>
+    {section name=i loop=$umUsers}
+    <tr>          
+	   <td height="25" valign="middle" align="center" class="table_td_02">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=$perpagenum_value}</td>
+	   <td height="25" valign="middle" align="left" class="table_td_02">{$umUsers[i].users_name}</td>
+	   <td height="25" valign="middle" align="left" class="table_td_02">{$umUsers[i].users_account}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].users_emailchk}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].users_register}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].users_logindate}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].info_state}</td>
+	   <td height="25" valign="middle" align="center" class="table_td_02">
+		<a href="{$umUsers[i].users_url}">{$UserEdit}</a>&nbsp;
+		|&nbsp;<a href="{$umUsers[i].pwd_url}">{$UserChePwd}</a>&nbsp;
+		{if $umUsers[i].users_account!="admin"}
+		|&nbsp;<a href="{$umUsers[i].deusers_url}" onclick="return confirm('{$cheDelete}?');">{$UserDelete}</a>
+		{/if}
+		</td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}&selcatid={$selcatid}&textfield={$textfield}&textfield2={$textfield2}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}&selcatid={$selcatid}&textfield={$textfield}&textfield2={$textfield2}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+	{$PerPageNme}
+	{$umSetPageList}
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

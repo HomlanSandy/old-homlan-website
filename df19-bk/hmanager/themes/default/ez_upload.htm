@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	ez_upload.htm	圖片上傳 的 htm檔
+	│	開發者		│	健嘉
+	│	版本		│	
+	├=======================================================================================┤
+	│	1.				2012/12/07	健嘉	圖片上傳的樣版	
+	└=======================================================================================┘
+-->
+
+
+<script>
+var warming_upload="{$warming_upload}";
+{literal}
+//存檔防呆
+	function chkpost(){
+		msg="";
+		if(document.getElementById("Pic_Small").value==''){
+			msg += warming_upload + "\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+</script>
+{/literal}
+
+<body>
+
+  
+<!--
+	2010-07-30 edit by 廷俊
+	----------------------------------------------------
+	刪除資訊明細成功提示訊息
+	---------------------------------------------------- 			
+	2010-11-10 edit by 娜娜
+	----------------------------------------------------
+	加入資訊狀態搜欄位
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" >
+    <tr>
+      <td width="72%" align="left">{$UploadTitle}</td>
+      <td width="12%" align="right">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="show_table3">
+	<form method="POST" action="ez_upload.php?act=save" enctype="multipart/form-data" onsubmit="return chkpost();">
+	<table border="0" cellpadding="1" cellspacing="1" align="center"  width="60%">
+		<tr>
+			<td>&nbsp;<td>
+		</tr>
+		
+		<tr align="left">
+			<td>
+			<input type="file" size="50" name="Pic_Small" id="Pic_Small">
+			</td>
+		</tr>
+		
+		<tr align="left">
+			<td>
+				<input type="submit" name="mode" value="{$upload_server}">
+				<span class="text_note">{$suggest}</span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>&nbsp;<td>
+		</tr>
+	</table>
+
+</div>
+{$temp_log}
+</body>
+</html>

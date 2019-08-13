@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	usersgroup.htm	閱讀權限 的 HTM編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.0.0081001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0081001	2010/08/10	廷俊	a.新增、修改、刪除成功提示訊息
+	│											b.驗證折扣等級名稱空白
+	└=======================================================================================┘
+*/ -->
+<script type="text/javascript">
+<!--
+/*
+	2010-08-11 edit by 廷俊
+	----------------------------------------------------
+	驗證折扣等級名稱空白
+	---------------------------------------------------- 			
+*/
+	var warming_na="{$warming_na}";
+	{literal}
+	function chkpost(){
+		msg="";
+		if(document.getElementById("groupNa").value==''){
+			msg += warming_na + "\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}	
+	{/literal}
+//-->
+</script>
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$UserGroupList}" onclick="location.href='{$BtnUserGroupUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-10 edit by 廷俊
+	----------------------------------------------------
+	a.新增、修改、刪除成功提示訊息
+	b.驗證群組權限名稱空白
+	---------------------------------------------------- 					
+-->
+{$Message}
+
+<div id="show_table3" class="main_link">
+  <form METHOD=POST ACTION="usersgroup.php?act=save" onsubmit="return chkpost();">
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;<INPUT TYPE="hidden" NAME="group_id" size="50" value="{$group_id}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$UserGroupNa}</th>
+				<td align="left"><INPUT TYPE="text" NAME="groupNa" id="groupNa" size="50" value="{$group_na}"><span style="color:red;">*</span></td>
+			</tr>
+			<tr>
+				<th align="right">{$UserGroupInfo}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="groupState" value="1" checked>{$GroupInfoYes}
+					<INPUT TYPE="radio" NAME="groupState" value="0" {if $info_state=='0'}checked{/if}>{$GroupInfoNo}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="Mode" value="{$Btn_Save}">
+					<input type="reset" value="{$Btn_Reset}">
+				</td>
+			</tr>
+		</table>
+    </td>
+    </tr>
+    </table>
+  </form>
+</div>
+
+{$temp_log}</body>
+</html>

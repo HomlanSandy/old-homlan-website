@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">商店設置</td>
+      <td width="12%" align="right">&nbsp;
+        
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="show_table">
+<!-- 頁籤起 -->
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">{$umTITLE1}</li>
+    <li class="TabbedPanelsTab" tabindex="0">{$umTITLE2}</li>
+	<li class="TabbedPanelsTab" tabindex="0">{$umTITLE3}</li>
+	<li class="TabbedPanelsTab" tabindex="0">{$umTITLE4}</li>
+	<li class="TabbedPanelsTab" tabindex="0">{$umTITLE5}</li>
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent">
+	<FORM METHOD=POST ACTION="">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="100%" height="100%">			
+			<tr>
+				<th align="right">{$umShopname}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopTitle}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopMemo}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopKeyword}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>			
+			<tr>
+				<th align="right">{$umShopCountry}</th>
+				<td align="left">
+				<SELECT NAME="">
+					<option VALUE="" SELECTED>選擇國家</option>
+					<option VALUE="">
+				</SELECT>
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopCity}</th>
+				<td align="left">
+				<SELECT NAME="">
+					<option VALUE="" SELECTED>選擇縣市</option>
+					<option VALUE="">
+				</SELECT>
+				</td>
+			</tr>								
+			<tr>
+				<th align="right">{$umShopAddress}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>			
+			<tr>
+				<th align="right">{$umShopEmail}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopTel}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopLogo}</th>
+				<td align="left"><INPUT TYPE="file" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopWebState}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y11" value="1" checked>{$umShopWebOpen}
+					<INPUT TYPE="radio" NAME="Y11" value="0">{$umShopWebClose}
+				</td>
+			</tr>
+			<tr>
+				<th align="right" valign="top">{$umShopWebReason}</th>
+				<td align="left"><textarea rows="5" cols="40"></textarea></td>
+			</tr>
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<INPUT TYPE="submit"><INPUT TYPE="reset">
+				</td>
+			</tr>
+		</table>
+		</FORM>
+
+	</div>
+
+    <div class="TabbedPanelsContent">	
+	<FORM METHOD=POST ACTION="">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="100%">		
+		<tr>
+				<th align="right">{$umShopNumber}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umShopNumberFile}</th>
+				<td align="left"><INPUT TYPE="file" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umStockOpen}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y21" size="1">{$umStockOpenYes}
+					<INPUT TYPE="radio" NAME="Y21" size="0" checked>{$umStockOpenNo}
+			</td>
+			</tr>
+			<tr>
+				<th align="right">{$umUsersCheck}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y22" size="1">{$umUsersCheckYes}
+					<INPUT TYPE="radio" NAME="Y22" size="0" checked>{$umUsersCheckNo}
+				</td>
+			</tr>			
+			<tr>
+				<th align="right">{$umGoodsDefaultImg}</th>
+				<td align="left"><INPUT TYPE="file" NAME="" size="50"></td>
+			</tr>		
+			<tr>
+				<th align="right">{$umFileUploadMax}</th>
+				<td align="left">
+					<select name="">
+						<option>64K</option>
+						<option>128K</option>
+						<option>256K</option>
+						<option>1M</option>
+						<option>2M</option>
+						<option>4K</option>
+						<option>8K</option>
+						<option>不限制</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$umAutoSmall}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y23" size="1" checked>{$umAutoSmallYes}
+					<INPUT TYPE="radio" NAME="Y23" size="0">{$umAutoSmallNo}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$umUsersEmailCheck}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y24" size="1">{$umUsersEmailCheckYes}
+					<INPUT TYPE="radio" NAME="Y24" size="0" checked>{$umUsersEmailCheckNo}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsForumOpen}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y25" size="1">{$umGoodsForumOpenYes}
+					<INPUT TYPE="radio" NAME="Y25" size="0" checked>{$umGoodsForumOpenNo}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$umUsersPostCheck}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y26" size="1">{$umUsersPostCheckYes}
+					<INPUT TYPE="radio" NAME="Y26" size="0" checked>{$umUsersPostCheckNo}
+				</td>
+			</tr>			
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<INPUT TYPE="submit"><INPUT TYPE="reset">
+				</td>
+			</tr>
+	</table>
+	</FORM>
+	
+	</div>
+
+	<div class="TabbedPanelsContent">
+	<FORM METHOD=POST ACTION="">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="100%">		
+		<tr>
+				<th align="right">{$umImgSmallWidth}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umImgSmallHeight}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsImgSmallWidth}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsImgSmallHeight}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umTopSellRecord}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umForumListRecord}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsForumListRecord}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsCatListRecord}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsCatListPageMethod}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y31" size="1">{$umOrderByPostTime}
+					<INPUT TYPE="radio" NAME="Y31" size="0" checked>{$umOrderByGoodsPrice}
+					<INPUT TYPE="radio" NAME="Y31" size="0" checked>{$umOrderByUpdateTime}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$umGoodsCatDisplay}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y32" size="1">{$umImageDisplay}
+					<INPUT TYPE="radio" NAME="Y32" size="0" checked>{$umListDisplay}
+				</td>
+			</tr>			
+			<tr>
+				<th align="right">{$umArticleCatListRecord}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>		
+			<tr>
+				<th align="right">{$umArticleTitleRang}</th>
+				<td align="left"><INPUT TYPE="text" NAME="" size="50"></td>
+			</tr>			
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<INPUT TYPE="submit"><INPUT TYPE="reset">
+				</td>
+			</tr>
+	</table>
+	</FORM>
+	</div>
+
+
+	<div class="TabbedPanelsContent">
+	<FORM METHOD=POST ACTION="">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="100%">		
+			<tr>
+				<th align="right">{$ShopCartLogin}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y41" value="1">{$ShopCartLoginYes}
+					<INPUT TYPE="radio" NAME="Y41" value="0">{$ShopCartLoginNo}
+				</td>
+			</tr>				
+			<tr>
+				<th align="right">{$OrderConfirm}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y42" value="1">{$OrderConfirmYes}
+					<INPUT TYPE="radio" NAME="Y42" value="0">{$OrderConfirmNo}
+				</td>
+			</tr>		
+			<tr>
+				<th align="right">{$OrderPayOK}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y45" value="1">{$OrderPayOKYes}
+					<INPUT TYPE="radio" NAME="Y45" value="0">{$OrderPayOKNo}
+				</td>
+			</tr>		
+			<tr>
+				<th align="right">{$GoodsPost}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y42" value="1">{$GoodsPostYes}
+					<INPUT TYPE="radio" NAME="Y42" value="0">{$GoodsPostNo}
+				</td>
+			</tr>		
+			<tr>
+				<th align="right">{$OrderCancle}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y43" value="1">{$OrderCancleYes}
+					<INPUT TYPE="radio" NAME="Y43" value="0">{$OrderCancleNo}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$OrderSetUnless}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y44" value="1">{$OrderSetUnlessYes}
+					<INPUT TYPE="radio" NAME="Y44" value="0">{$OrderSetUnlessNo}
+				</td>
+			</tr>									
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<INPUT TYPE="submit"><INPUT TYPE="reset">
+				</td>
+			</tr>
+	</table>
+	</FORM>
+	</div>
+
+
+	<div class="TabbedPanelsContent">
+	<FORM METHOD=POST ACTION="">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="100%">		
+			<tr>
+				<th align="right">{$GoodsNumberShow}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y51" value="1">{$GoodsNumberShowYes}
+					<INPUT TYPE="radio" NAME="Y51" value="0">{$GoodsNumberShowNo}
+				</td>
+			</tr>				
+			<tr>
+				<th align="right">{$GoodsBrandShow}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y52" value="1">{$GoodsBrandShowYes}
+					<INPUT TYPE="radio" NAME="Y52" value="0">{$GoodsBrandShowNo}
+				</td>
+			</tr>		
+			<tr>
+				<th align="right">{$GoodsWeightShow}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y53" value="1">{$GoodsWeightShowYes}
+					<INPUT TYPE="radio" NAME="Y53" value="0">{$GoodsWeightShowNo}
+				</td>
+			</tr>		
+			<tr>
+				<th align="right">{$GoodsStockShow}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y54" value="1">{$GoodsStockShowYes}
+					<INPUT TYPE="radio" NAME="Y54" value="0">{$GoodsStockShowNo}
+				</td>
+			</tr>	
+			<tr>
+				<th align="right">{$GoodsUpTimeShow}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y56" value="1">{$GoodsUpTimeShowYes}
+					<INPUT TYPE="radio" NAME="Y56" value="0">{$GoodsUpTimeShowNo}
+				</td>
+			</tr>
+			<tr>
+				<th align="right">{$GoodsmkPriceShow}</th>
+				<td align="left">
+					<INPUT TYPE="radio" NAME="Y55" value="1">{$GoodsmkPriceShowYes}
+					<INPUT TYPE="radio" NAME="Y55" value="0">{$GoodsmkPriceShowNo}
+				</td>
+			</tr>			
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left">
+					<INPUT TYPE="submit"><INPUT TYPE="reset">
+				</td>
+			</tr>
+	</table>
+	</FORM>
+	</div>
+
+  </div>
+</div>
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+//-->
+</script>
+<!-- 頁籤終 -->
+
+</div>
+
+{$temp_log}</body>
+</html>

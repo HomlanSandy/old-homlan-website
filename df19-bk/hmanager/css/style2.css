@@ -1,0 +1,493 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/* 右方捲軸 顏色設定 */
+html {
+    SCROLLBAR-ARROW-COLOR: #ffffff;
+    SCROLLBAR-FACE-COLOR: #333333;
+    SCROLLBAR-DARKSHADOW-COLOR: #333333;
+    SCROLLBAR-BASE-COLOR: #333333;
+    SCROLLBAR-HIGHLIGHT-COLOR: #666666;
+    SCROLLBAR-SHADOW-COLOR: #666666;
+    SCROLLBAR-TRACK-COLOR: #666666;
+    SCROLLBAR-3DLIGHT-COLOR: #000000;
+}
+
+/* 頁面屬性 */
+body {
+	margin-top: 0px;
+	margin-left: 0px;
+	background-color:#FFF;
+	font-family: Arial, "新細明體";
+}
+
+a:link {
+	color: #EEE;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #EEE;
+}
+a:hover {
+	text-decoration: underline;
+	color: #FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #FFF;
+}
+
+/* main頁框中的 連結顏色 設定 */
+
+.main_link a:link, .main_link a:visited{
+	color: #69C;
+}
+.main_link a:hover, .main_link a:active{
+	color: #966;
+}
+
+
+/* 頁首設定 */
+#top {
+	top: 0px;
+	left: 0px;
+	height: 50px;
+	background-color:#CCC;
+	width: 100%;
+	position: absolute;
+}
+
+/* HY-Shop Logo */
+#logo {
+	height: 50px;
+	top: 0px;
+	width: 180px;
+	left: 0px;
+	position: absolute;
+	background-color: #666;
+	color: #FFF;
+	font-size: small;
+}
+
+/* 上方 主要功能選單 樣式設定 */
+#top_menu {
+	height: 50px;
+	top: 50px;
+	width: 100%;
+	left: 0px;
+	position: absolute;
+	background-color: #666;
+}
+.menu_btn_style{
+	height: 23px;
+	width: 10%;
+	background-color: #000;
+	font-size: small;
+	color: #FFF;
+	background-image: url(../images/top_title_img.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999;
+	border-right-color: #666;
+	border-bottom-color: #666;
+	border-left-color: #999;
+}
+
+/* 左邊 功能目錄 樣式設定 */
+#left_menu{
+	font-size: small;
+	color: #FFF;
+	background-color: #666;
+	position: absolute;
+	width: 180px;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+}
+
+.menu_style_left{
+	height: 25px;
+	width: 20px;
+	background-color: #666;
+	font-size: small;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #000;
+	background-image: url(../images/left_title_img.gif);
+	background-repeat: repeat-y;
+	background-position: left center;
+}
+.menu_style_right{
+	height: 25px;
+	background-color: #666;
+	font-size: small;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #000;
+}
+
+#menu_url_title{
+	font-size: 11pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #666666;
+	background-image: url(../images/menu_url_title.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+.menu_url {
+	background-color: #FFFFFF;
+	list-style-image: url(../images/to_right.gif);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#333333', endColorstr='#666666',gradientType='0');
+}
+
+.menu_url_link a:link, .menu_url_link a:visited{
+	color: #DDDDDD;
+	font-size: x-small;
+	text-decoration: none;
+}
+
+.menu_url_link a:hover, .menu_url_link a:active{
+	font-weight: bold;
+	font-size: x-small;
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+/* 下方bottom框架設定 */
+#bottom_style{
+	background-color: #CCC;
+	position: absolute;
+	height: 25px;
+	width: 100%;
+	font-size: small;
+	color: #000;
+	left: 0px;
+	top: 0px;
+}
+
+.bottom_btn_style{
+	background-color: #999;
+	height: 23px;
+	font-size: small;
+	color: #FFF;
+	border: 1px solid #666;
+}
+
+/* 下方版權宣告 */
+.powered_by{
+	background-color: #666;
+	height: 25px;
+	font-size: small;
+	color: #CCC;
+}
+
+/* 公司名稱 及 版本資訊 */
+#hyshop_version{
+	height: 25px;
+	width: 500px;
+	left: 190px;
+	top: 10px;
+	position: absolute;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #000;
+	font-size: small;
+	color: #000;
+}
+
+/* 使用者登入訊息 及 登出區域 */
+#login_msg{
+	color: #000;
+	height: 40px;
+	width: 250px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: small;
+}
+.login_btn{
+	font-size: small;
+	color: #FFF;
+	background-color: #999;
+	border: 1px solid #CCC;
+	height: 25px;
+	width: 120px;
+}
+
+/* 各功能介面標題 */
+#use_title{
+	width: 98%;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	font-size: medium;
+	font-weight: bold;
+	color: #000;
+	height: 30px;
+	background-color: #CCC;
+	right: 10px;
+}
+.hyware_title{
+	font-size: small;
+	font-weight: bold;
+	color: #666;
+}
+
+/* 功能標題底下的 搜尋區塊 */
+#search_block{
+	width: 98%;
+	position: absolute;
+	left: 10px;
+	top: 40px;
+	font-size: small;
+	color: #FFF;
+	height: 50px;
+	background-color: #999;
+	right: 10px;
+}
+.search_btn{
+	font-size: small;
+	color: #FFF;
+	background-color: #666;
+	border: 1px solid #999;
+	height: 25px;
+	width: 60px;
+}
+.select_btn{
+	font-size: small;
+	color: #000;
+	width: 100px;
+}
+
+/* 搜尋列表設定 */
+#show_table{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 50px;
+}
+
+.table_td_01{
+	height: 25px;
+	border: 1px solid #000;
+	background-color: #666;
+	font-size: small;
+	color: #FFF;
+}
+
+.table_td_02{
+	height: 25px;
+	background-color: #FFF;
+	font-size: small;
+	color: #333;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #CCC;
+	border-left-color: #CCC;
+}
+
+/* 當上方無搜尋功能時的 搜尋列表設定 */
+#show_table2{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 50px;
+}
+
+.table_td_01_1{
+	height: 25px;
+	border: 1px solid #000;
+	background-color: #666;
+	font-size: small;
+	color: #FFF;
+}
+
+.table_td_02_1{
+	height: 25px;
+	background-color: #FFF;
+	font-size: small;
+	color: #333;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #CCC;
+	border-left-color: #CCC;
+}
+
+/* 空白列表區塊 */
+#show_table3{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 50px;
+	border: 1px solid #CCC;
+}
+
+/* 搜尋列表下方記錄區塊 */
+#note_table{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	bottom: 0px;
+}
+
+.table_td_03{
+	font-size: small;
+	color: #FFF;
+	background-color: #000;
+}
+
+
+/* 按鈕樣式 */
+.set_new_btn{
+	font-size: small;
+	color: #FFF;
+	background-color: #666;
+	border: 1px solid #CCC;
+	height: 25px;
+	width: 120px;
+}
+
+.confirm_btn{
+	font-size: small;
+	color: #FFF;
+	background-color: #333;
+	border: 1px solid #666;
+	height: 25px;
+	width: 60px;
+}
+
+
+/* 頁籤式樣板設定 */
+.TabbedPanels {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	clear: none;
+	width: 100%;
+}
+.TabbedPanelsTabGroup {
+	margin: 0px;
+	padding: 0px;
+}
+
+.TabbedPanelsTab {
+	color: #FFF;
+	position: relative;
+	top: 1px;
+	float: left;
+	padding: 4px 10px;
+	margin: 0px 1px 0px 0px;
+	background-color: #CCC;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: small;
+}
+.TabbedPanelsTabHover {
+	background-color: #999;
+}
+
+.TabbedPanelsTabSelected {
+	background-color: #EEE;
+	color: #000;
+	font-weight: bold;
+}
+
+.TabbedPanelsTab a {
+	color: #000;
+	text-decoration: none;
+}
+
+.TabbedPanelsContentGroup {
+	clear: both;
+	background-color: #EEE;
+	color: #000;
+}
+
+.TabbedPanelsContent {
+	padding: 4px;
+}
+
+.TabbedPanelsContentVisible {
+}
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	background-color: #EEE;
+	position: relative;
+	border-top: solid 1px #999;
+	border-right: solid 1px #999;
+	border-left: solid 1px #CCC;
+	border-bottom: solid 1px #CCC;
+}
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	background-color: #EEE;
+	border-bottom: solid 1px #999;
+}
+
+.VTabbedPanels .TabbedPanelsContentGroup {
+	clear: none;
+	float: left;
+	padding: 0px;
+	width: 30em;
+	height: 20em;
+}
+
+/* 當上方有搜尋功能時的 搜尋列表設定 */
+#show_table4{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 100px;
+}

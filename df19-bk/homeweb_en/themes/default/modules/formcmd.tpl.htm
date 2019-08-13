@@ -1,0 +1,17 @@
+{section name=ida loop=$formList}
+	{if $formList[ida].md_id==$page_left[a].md_id && $formList[ida].page_id==$page_left[a].page_id && $formList[ida].page_position==$page_left[a].page_position}
+		<div>{$formList[ida].form_content}</div>
+	{/if}
+{/section}
+
+{section name=idb loop=$formList}
+	{if $formList[idb].md_id==$page_center[b].md_id && $formList[idb].page_id==$page_center[b].page_id && $formList[idb].page_position==$page_center[b].page_position}
+		<div>{$formList[idb].form_content}</div>
+	{/if}
+{/section}
+
+{section name=idc loop=$formList}
+	{if $formList[idc].md_id==$page_right[c].md_id && $formList[idc].page_id==$page_right[c].page_id && $formList[idc].page_position==$page_right[c].page_position}
+		<div>{$formList[idc].form_content}</div>
+	{/if}
+{/section}

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	batch_listvisitors.htm	明細瀏覽排行 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.0.0110401
+	├=======================================================================================┤
+	│	1.	v2.0.0.0110401	2010/11/04	廷俊	a.新增明細瀏覽排行的php執行檔、語言檔、htm頁面檔
+	│											b.將明細列表，並加入checkbox選項、瀏覽人數、統計起始日期
+	│											c.全選的checkbox可觸發控制列表所有的checkbox
+	│											d.按下歸零統計的按鈕時，顯示確定訊息
+	│											e.將勾選的分類項目執行儲存，統計瀏覽人數歸零、並統計起始日期將從本日開始計算
+	│											f.顯示修改成功訊息
+	│											g.判斷是否搜尋過條件，並把搜尋條件設為預設值
+	│											h.設定儲存執行的連結，並且帶搜尋條件值
+	│											i.新增資訊狀態搜尋條件的下拉式選單，判斷是否搜尋過條件，並把搜尋條件設為預設值
+	│											j.列表預設排序為瀏覽人數
+	│											k.列表標題可反向排序內容，預設為由大到小排列
+	│											l.分類項目列表加入搜尋條件判斷
+	│											m.執行儲存後，轉址回瀏覽分類排行頁面，並帶搜尋條件值和顯示修改成功訊息
+	│											n.驗證是否有勾選欲將統計瀏覽人數歸零的分類項目
+	│											o.列表下方總計筆數記錄
+	│											p.更新統計分類瀏覽人數
+	│	2.	v2.0.0.0110501	2010/11/05	廷俊	新增所屬分類搜尋條件的下拉式選單，判斷是否搜尋過條件，並把搜尋條件設為預設值
+	└=======================================================================================┘
+*/-->
+<script language="JavaScript">
+<!--
+var Warming_checkbox="{$Warming_checkbox}"
+{literal}
+//全選的checkbox可觸發控制列表所有的checkbox
+function CheckAll(){
+	var ck = document.form.elements["box[]"]; 
+	var ckAll = document.form.allbox; 
+	//當沒有checkbox時 
+	if (!ck){ 
+		ckAll.checked = false; 
+	//當只有一個checkbox時	
+	}else if (!ck.length){  
+		ck.checked = ckAll.checked; 
+	//當有兩個以上的checkbox時 	
+	}else{ 
+		for (var i=0;i<ck.length;i++) 
+			ck[i].checked = ckAll.checked; 
+	} 
+}
+
+//驗證是否有勾選欲將統計瀏覽人數歸零的分類項目
+function chkpost(){
+	var msg = Warming_checkbox + "\r\n";
+	var ck = document.form.elements["box[]"]; 
+	//當沒有checkbox時 
+	if (!ck){
+	//當只有一個checkbox時	
+	}else if (!ck.length){ 
+		if(ck.checked == true){
+			msg = "";
+		}
+	//當有兩個以上的checkbox時	
+	}else{
+		for (var i=0;i<ck.length;i++){
+			if(ck[i].checked == true){
+				msg = "";
+			}
+		}
+	} 
+	if(msg==''){
+		return true;
+	}else{
+		alert(msg);
+		return false;
+	}
+}
+
+{/literal}
+-->	
+</script>
+
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right"></td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-28 edit by 廷俊
+	----------------------------------------------------
+	修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<form name="seachfrm" method="post" action="batch_listvisitors.php?act=list">
+	<div id="search_block">
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="left">
+					{$InfoType}{$catSel}
+					{$InfoNa}<input name="textfield" type="text" id="textfield" size="15" value="{$textfield}">
+					{$InfoInfoSta}{$infoSel}     
+					<img src="images/search_1.gif" width="20" height="20">
+					<input name="button2" type="submit" class="search_btn" id="button2" value="{$InfoSearch}">
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<div id="show_table4" class="main_link">
+<form name="form" method=post action="{$savefrm_act}" onsubmit="return confirm('{$Warming_SaveVisitors}');">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>     
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<input type="checkbox" name="allbox" onclick="CheckAll()">{$SelectAll}
+			</td>
+			<td width="180" align="center" valign="middle" class="table_td_01">
+				<a href="{$href1}">{$InfoNa}</a>
+			</td>
+			<td width="" align="center" valign="middle" class="table_td_01">
+				<a href="{$href2}">{$SimpleText}</a>
+			</td>
+			<td width="90" align="center" valign="middle" class="table_td_01">
+				<a href="{$href3}">{$InfoInfoSta}</a>
+			</td> 	  
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<a href="{$href4}">{$Visitors}</a>
+			</td>
+			<td width="120" align="center" valign="middle" class="table_td_01">
+				<a href="{$href5}">{$Visitors_StrtDate}</a>
+			</td>
+		</tr>
+	{section name=i loop=$umInfoslist}
+		<tr>          
+			<td valign="middle" align="center" class="table_td_02"><input type="checkbox" name="box[]" value="{$umInfoslist[i].infos_id}"></td>   
+			<td valign="middle" class="table_td_02">{$umInfoslist[i].infos_na}</td>	   
+			<td valign="middle" class="table_td_02">{$umInfoslist[i].infos_simple_text1}</td>   
+			<td valign="middle" align="center" class="table_td_02">{$umInfoslist[i].infos_state}</td>
+			<td valign="middle" align="center" class="table_td_02">{$umInfoslist[i].visitors}</td>
+			<td valign="middle" align="center" class="table_td_02">{$umInfoslist[i].visitors_date}</td>
+		</tr>
+	{/section}
+	</table>
+	<table border="0" cellpadding="0" cellspacing="0" align="center"  width="98%">		
+		<tr>		
+			<td align="center" class="table_td_03">&nbsp;</td>
+		</tr>
+		<tr>		
+			<td align="left" class="table_td_03">{$records_str}</td>
+		</tr>
+		<tr>		
+			<td align="center" class="table_td_03">&nbsp;</td>
+		</tr>
+		<tr>		
+			<td align="center" class="table_td_03">
+				<INPUT TYPE="submit" value="{$Btn_Save}" onclick="return chkpost();">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+		<tr>		
+			<td align="center" class="table_td_03">&nbsp;</td>
+		</tr>
+	</table>
+</form>	
+</div>
+{$temp_log}</body>
+</html>

@@ -1,0 +1,224 @@
+﻿<!--標題-->
+<table width="100%" border="0" align="center" cellpadding="5" cellspacing="5">
+  <tr>
+    <td class="catalog_content_title" align="left" valign="middle"><p><img src="themes/{$themes_na}/images/catalog.gif" align="absmiddle">{$infos_na}</p></td>
+  </tr>
+</table>
+<!-- 
+	2011-05-26 edit by 玉玲
+	------------------------------------------------------
+	1.table的width=90% 改為 width=100%，align=center 改為 align=left
+	------------------------------------------------------		
+*/	-->  
+<!--內容STAR-->
+<table width="100%" border="0" align="left" cellpadding="5" cellspacing="5" class="catalog_content_table">
+
+	<!--資訊-->
+	{if $type eq 0}
+		<!--圖置上-->
+		{if $infodetail_display_type eq 'imageup'}
+			{if $infos_pic_big neq ''}
+			<tr>
+				<td align="center" valign="middle" class="catalog_content_img"><br>{$infos_pic_big}<br><br></td>
+			</tr>
+			{/if}
+			<tr>
+				<td valign="middle">{$infos_detail_text}</td>
+			</tr>
+		  
+		<!--文繞圖：圖置左-->  
+		{ elseif $infodetail_display_type eq 'imageleft' }  
+		  <tr>
+			<td valign="middle" rowspan="2">
+				<table border="0">
+				<tr>
+					<td>				
+						{$infos_pic_big}{$infos_detail_text}
+					</td>
+				</tr>
+				</table>
+			</td>
+		  </tr>
+		  
+		<!--文繞圖：圖置右-->
+		{ elseif $infodetail_display_type eq 'imageright' }   
+		  <tr>
+			<td valign="middle">
+				<table border="0">
+				<tr>
+					<td>				
+						{$infos_pic_big}{$infos_detail_text}
+					</td>
+				</tr>
+				</table>
+			</td>
+		  </tr>
+		{/if}
+		
+	<!--商品-->	
+	{else}
+<!-- 
+	2010-09-07 edit by 廷俊
+	----------------------------------------------------
+	a.售價顯示
+	b.顯示會員價=售價*會員折扣*商品折扣
+	c.顯示購物車(庫存>安全庫存and售價>0)
+	d.顯示需求單(售價=0)
+	e.到達需求標準(庫存<=安全庫存)時，顯示需求單or無庫存	
+	----------------------------------------------------
+	2010-09-17 edit by 廷俊
+	----------------------------------------------------
+	1.售價、會員價二擇一出現
+	2.會員價=0 or 售價=0，則不顯示售價以及會員價
+	3.明細大圖框架靠左，標題、價錢、簡單介紹的框架靠右
+	4.所有框架要有標題且明確
+	5.資訊分頁不顯示大圖，商品分頁則顯示大圖與價錢
+	6.分頁頁碼往上移
+	----------------------------------------------------
+	2010-12-02 edit by 廷俊
+	----------------------------------------------------
+	若商品定價=0，則前台不顯示定價
+	----------------------------------------------------
+	2010-12-10 edit by 廷俊
+	----------------------------------------------------
+	修正中間欄位區域的table標籤少了tr、td，造成右欄區域跑版的問題
+	----------------------------------------------------
+	2011-02-10 edit by 廷俊
+	------------------------------------------------------
+	顯示幣別
+	------------------------------------------------------		
+*/	-->
+	<tr>
+		<td valign="middle">
+		<table width="100%" border="0" align="center" cellpadding="5" cellspacing="5">
+			<tr>
+				<!--商品大圖-->	
+				<td align="center" valign="middle" width="50%">
+					{$infos_pic_big}
+				</td>
+				<td valign="bottom" class="product_price_title" width="50%">
+					<!--標題-->	
+					<font size="4"><img src="themes/{$themes_na}/images/sale_title.gif" width="15px" height="15px">&nbsp;&nbsp;{$infos_na}</font><br><br>
+					<div align=right>
+					<!--定價-->	
+					{if $price_fix neq 0}
+							<div id="aaa"></div>
+							<img src="themes/{$themes_na}/images/sale_left.png" width="8px" height="8px">
+							{$Selling_fix}
+							<img src="themes/{$themes_na}/images/sale_right.png" width="8px" height="8px">
+							{$currency}{$price_fix}{$Dollar}
+					{/if}
+					<!--售價-->	
+					{if $price_sale neq ''}
+							<div id="aaa"></div>
+							<img src="themes/{$themes_na}/images/sale_left.png" width="8px" height="8px">
+							{$Selling_price}
+							<img src="themes/{$themes_na}/images/sale_right.png" width="8px" height="8px">
+							{$currency}{$price_sale}{$Dollar}
+					{/if}
+					<!--會員價-->	
+					{if $member_price neq ''}
+							<div id="aaa"></div>
+							<img src="themes/{$themes_na}/images/sale_left.png" width="8px" height="8px">
+							{$Member_price}
+							<img src="themes/{$themes_na}/images/sale_right.png" width="8px" height="8px"> 
+							{$currency}<font color="red">{$member_price}</font>{$Dollar}
+					{/if}
+					<!--購物車or需求單-->
+					<div id="aaa"></div>
+					<br>{$Shopping}<br>
+					</div>
+					<div id="aaa"></div>
+					<!--簡單說明-->
+					{$infos_simple_text}
+					<div id="aaa"></div>
+				</td>
+			</tr>
+		</table>
+		<br><br>
+		<!--詳細說明-->
+		<table width="100%" border="0" align="left" cellpadding="5" cellspacing="5" class="catalog_detail_content_table">
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td>{$infos_detail_text}</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	{/if}
+</table>
+
+<!--資訊分頁-->
+<table width="100%" border="0" align="center" cellpadding="5" cellspacing="5" class="catalog_content_table">
+{if $infospages eq 1}
+	<div class="pagination badoo" align="center">
+	<ul>
+	{section name=p loop=$uminfospages}
+		{if $nowPage eq $uminfospages[p].page_id}
+			<li class="current">{$uminfospages[p].page_na}</li>
+		{else}
+			<li><a href="?{$PageUrl}&ifpg={$uminfospages[p].page_id}">{$uminfospages[p].page_na}</a></li>
+		{/if}
+	{/section}
+	</ul>
+	</div>
+{/if}
+</table>
+
+<!--檔案下載-->
+<table width="100%" border="0" align="left" cellpadding="5" cellspacing="5" class="catalog_content_table">
+	{if $filedownload eq 1}
+		<tr>
+		<td valign="middle">
+		<p class="catalog_like_title1">
+		<img src="themes/{$themes_na}/images/download.gif" border="0" align="absmiddle" /></p>
+			<table width="60%" border="0" align="left" cellpadding="5" cellspacing="5">
+			<tr><td colspan="3"></td></tr>
+			{section name=p loop=$uminfosfiles}
+				<tr class="catalog_download">
+					<th height="30" align="center" valign="middle">{$uminfosfiles[p].files_na}</th>
+					<td height="30" align="center" valign="middle">{$uminfosfiles[p].files_text}</td>
+					<td height="30" align="center" valign="middle"><a href="{$uminfosfiles[p].files_url}">{$infos_file_download}</a></td>
+				</tr>
+			{/section}
+			</table>
+		  </td>
+	  </tr>
+	{/if}
+</table>
+
+<!--相關資訊-->
+<table width="100%" border="0" align="left" cellpadding="5" cellspacing="5" class="catalog_content_table">
+	{if $infosother eq 1}
+	  <tr>
+		<td valign="middle">
+		<br>
+		<p class="catalog_like_title1">
+		<img src="themes/{$themes_na}/images/catalog_like.gif" border="0" align="absmiddle" /></p>
+		  {section name=k loop=$uminfosother}
+		  <table width="50%" border="0" align="left" cellpadding="5" cellspacing="5" class="catalog_like">
+			<tr>
+			  <td rowspan="2" align="center" valign="middle" class="catalog_like_img">
+				<a href="{$uminfosother[k].href}">{$uminfosother[k].infos_pic_small}</a>
+			  </td>
+			  <td align="left" class="catalog_like_title2">
+				<a href="{$uminfosother[k].href}">{$uminfosother[k].infos_na}</a>
+			  </td>
+			</tr>
+			<tr>
+			  <td align="left" class="catalog_like_ps">
+				<a href="{$uminfosother[k].href}">{$uminfosother[k].infos_simple_text1}</a>
+			  </td>
+			</tr>
+		  </table>
+		  {/section}      
+		</td>
+	  </tr>
+	{/if}
+</table>
+<!--內容END-->
+
+<p>&nbsp;</p>
+

@@ -1,0 +1,17 @@
+{section name=k loop=$cmdmodList}
+	{if $cmdmodList[k].md_id==$page_left[a].md_id && $cmdmodList[k].page_id==$page_left[a].page_id && $cmdmodList[k].page_position==$page_left[a].page_position}
+		<div>{$cmdmodList[k].commend_content}</div>
+	{/if}
+{/section}
+
+{section name=i loop=$cmdmodList}
+	{if $cmdmodList[i].md_id==$page_center[b].md_id && $cmdmodList[i].page_id==$page_center[b].page_id && $cmdmodList[i].page_position==$page_center[b].page_position}
+		<div>{$cmdmodList[i].commend_content}</div>
+	{/if}
+{/section}
+
+{section name=j loop=$cmdmodList}
+	{if $cmdmodList[j].md_id==$page_right[c].md_id && $cmdmodList[j].page_id==$page_right[c].page_id && $cmdmodList[j].page_position==$page_right[c].page_position}
+		<div>{$cmdmodList[j].commend_content}</div>
+	{/if}
+{/section}

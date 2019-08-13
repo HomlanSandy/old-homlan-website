@@ -1,0 +1,1546 @@
+@charset "utf-8";
+/* css/simple/ */
+
+/* 頁面背景設定 */
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif,"新細明體";
+	font-size: small;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	background-color: #316AC5;
+	background-image: url(../images/top_bg.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+a:link {
+	color: #0CF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #0CF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #0CF;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #0CF;
+	text-decoration: underline;
+}
+
+/* 頁面置中及寬度設定 */
+
+#container {
+	position: relative;
+	margin: 0px auto;
+	height: 100%;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+/* 頁頭位置設定 */
+#header {
+	position: relative;
+	width: 100%;
+	float: none;
+	height: auto;
+}
+
+.header_search {
+	color: #FFF;
+}
+.header_search_textfield {
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #09F;
+}
+
+.header_userlink {
+	color: #033;	
+	position: relative;
+}
+
+.search_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+/* 頁身 左方 區域位置設定 */
+#left {
+	position: relative;
+	float: none;
+	height: auto;
+	background-color: #333;
+	z-index: 5;
+	background-image: url(../images/left_bg.png);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	padding-bottom: 10px;
+}
+
+/* 頁身 中間 主要區域位置設定 */
+#main {
+	position: relative;
+	float: none;
+	height: auto;
+	background-color: #333;
+}
+
+/* 頁身 右方 區域位置設定 */
+#right {
+	position: relative;
+	float: none;
+	height: auto;
+	background-color: #333;
+	background-image: url(../images/right_bg.png);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	padding-bottom: 10px;
+}
+
+/* 頁尾位置設定 */
+#footer {
+	position: relative;
+	width: 100%;
+	height: auto;
+	float: none;
+	font-size: small;
+	color: #FFF;
+	padding-bottom: 15px;
+}
+
+.footer a:link, .footer a:visited{
+	text-decoration: none;
+	color: #FFF;
+}
+.footer a:hover, .footer a:active{
+	color: #FFF;
+	text-decoration: underline;
+}
+
+/* 廣告輪播模組 */
+
+.commercial_table{
+	width: 100%;
+	height:auto;
+	background-color:#000;
+}
+
+.commercial_text{
+	color: #FFF;
+}
+
+.commercial_btn{
+
+}
+	
+.ImgTab{
+	cursor:hand;
+}
+
+.MsgHide{
+	display:none;
+}
+
+/* 會員登入模組 */
+.user_login_table{
+	width: 100%;
+	height: 80px;
+	padding-bottom: 8px;
+	color: #FFF;
+	background-color: #000;
+}
+.user_login_title{
+	height: 30px;
+	color: #FFF;
+}
+
+.user_login_title a:link, .user_login_title a:visited{
+	color: #0CF;
+	text-decoration: none;
+}
+.user_login_title a:hover, .user_login_title a:active{
+	color: #0CF;
+	text-decoration: underline;
+}
+
+.user_login_content{
+}
+
+.user_login_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #06C;
+}
+
+.user_login_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+/* 資訊分類選單 (右拉式選單) */
+div.menu {
+	position: relative;
+	width: 100%;
+	/*margin: 0.5em;*/
+	text-align:left;
+	font-size: 11pt;
+	background-color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #09F;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #09F;	
+	margin-top: -15px;
+}
+div.menu a {
+	display: block;
+	cursor: pointer;
+	padding: 0.5em;
+	color: #09F;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #09F;
+	border-left-color: #09F;
+	background-image: url(../images/menu_right.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+div.menu a:hover {
+	display: block;
+	cursor: pointer;
+	padding: 0.5em;
+	color: #0CF;
+	text-decoration: underline;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #09F;
+	border-left-color: #09F;
+	background-image: url(../images/MenuBarRight.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+/*階層選單---以下語法IE6.0不支援*/
+div.menu div.open > div {
+	display: none;
+}
+div.menu div.open:hover > div {
+	display: block;
+	float: left;
+	position: absolute;
+	left: 100%;
+	width: 100%;
+	/* margin: 0.5em; */
+	font-size: 11pt;
+	background-color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #09F;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #09F;
+}
+div.menu div.open:hover > div a {
+	display: block;
+	cursor: pointer;
+	/* padding: 0.5em; */
+	color: #09F;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #09F;
+	border-left-color: #09F;
+	background-image: url(../images/menu_right.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+div.menu div.open:hover > div a:hover {
+	display: block;
+	cursor: pointer;
+	/* padding: 0.5em; */
+	color: #0CF;
+	text-decoration: underline;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #09F;
+	border-left-color: #09F;
+	background-image: url(../images/MenuBarRight.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+/* 頁首連結選單 (下拉式選單) */
+
+#top_menu{
+	width: 100%;
+	height: 32px;
+	z-index: 10;
+}
+
+.top_menu_table{
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #000;
+}
+
+ul.MenuBarHorizontal{
+	list-style-type: none;
+	font-size: 100%;
+	cursor: default;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+ul.MenuBarActive{
+	z-index: 1000;
+}
+
+ul.MenuBarHorizontal li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	position: relative;
+	text-align: left;
+	cursor: pointer;
+	width: 140px;
+	float: left;
+}
+
+ul.MenuBarHorizontal ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	z-index: 1020;
+	cursor: default;
+	width: 140px;
+	position: absolute;
+	left: -1000em;
+}
+
+ul.MenuBarHorizontal ul.MenuBarSubmenuVisible{
+	left: auto;
+}
+
+ul.MenuBarHorizontal ul li{
+	width: 140px;
+}
+
+ul.MenuBarHorizontal ul ul{
+	position: absolute;
+	margin: -5% 0 0 95%;
+}
+
+ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible{
+	left: auto;
+	top: 0;
+}
+
+
+ul.MenuBarHorizontal ul{
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #09F;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #09F;
+}
+
+ul.MenuBarHorizontal a{
+	display: block;
+	cursor: pointer;
+	padding: 0.5em 0.75em;
+	color: #FFF;
+	text-decoration: none;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #09F;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #09F;
+	background-image: url(../images/top_menu.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+ul.MenuBarHorizontal a:hover, ul.MenuBarHorizontal a:focus{
+	color: #FFF;
+	text-decoration: underline;
+	background-image: url(../images/top_menu_c.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemHover, ul.MenuBarHorizontal a.MenuBarItemSubmenuHover, ul.MenuBarHorizontal a.MenuBarSubmenuVisible
+{
+
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenu{
+	background-image: url(../images/top_menu_c.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+ul.MenuBarHorizontal ul a.MenuBarItemSubmenu{
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenuHover
+{
+	background-image: url(../images/top_menu_c.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+ul.MenuBarHorizontal ul a.MenuBarItemSubmenuHover
+{
+}
+
+ul.MenuBarHorizontal iframe{
+	position: absolute;
+	z-index: 1010;
+	filter:alpha(opacity:0.1);
+}
+
+@media screen, projection
+{
+	ul.MenuBarHorizontal li.MenuBarItemIE
+	{
+		display: inline;
+		float: left;
+	}
+}
+
+
+/* 推薦分類頁面 */
+
+.show_news_table{
+	font-size: small;
+	color: #666;
+}
+
+.show_news_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.show_news_content{
+	color: #FFF;
+	font-size: x-small;
+}
+
+.show_news_list{
+	background: #000;
+	font-size: small;
+	color: #FFF;
+}
+
+.show_news_date{
+	color: #09F;
+	font-size: 7pt;
+}
+
+/* 推薦模組 */
+
+.news_list_table{
+	width: 100%;
+	font-size: small;
+	color: #FFF;
+}
+
+.news_list_content{
+	color: #09F;
+	font-size: small;
+	background-color: #000;
+}
+
+.news_list{
+	background: #333;
+	font-size: small;
+	color: #FFF;
+	padding-left: 8px;
+}
+
+/* 最新消息頁籤式樣板設定 */
+.TabbedPanels {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	clear: none;
+	width: 100%;
+}
+.TabbedPanelsTabGroup {
+	margin: 0px;
+	padding: 0px;
+}
+
+.TabbedPanelsTab {
+	color: #06F;
+	position: relative;
+	top: 0px;
+	float: left;
+	padding: 4px 10px;
+	margin: 0px 0px 0px 0px;
+	background-color: #333;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: small;
+}
+.TabbedPanelsTabHover {
+	background-color: #222;
+	color: #09F;
+	text-decoration: underline;
+}
+
+.TabbedPanelsTabSelected {
+	background-color: #000;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.TabbedPanelsTab a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.TabbedPanelsContentGroup {
+	clear: both;
+	background-color: #000;
+	color: #FFF;
+}
+
+.TabbedPanelsContent {
+	padding: 4px;
+}
+
+.TabbedPanelsContentVisible {
+}
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	background-color: #EEE;
+	position: relative;
+	border: 1px solid #AFA9A7;
+}
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	background-color: #EEE;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #AFA9A7;
+}
+
+.VTabbedPanels .TabbedPanelsContentGroup {
+	clear: none;
+	float: left;
+	padding: 0px;
+	width: 30em;
+	height: 20em;
+}
+
+/* 外部連結列模組 */
+
+.outside_link_icon{
+}
+
+/* 推薦獨立模組 */
+.cmd_table{
+	width: 100%;
+	color: #FFF;
+	background-color: #000;
+	font-size: small;
+}
+
+.cmd_content{
+	color: #FFF;
+	font-size: small;
+	text-align:left;
+}
+
+.cmd_title{
+	color: #FFF;
+	font-size: 12pt;
+	padding: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #0CF;
+}
+
+.cmd_list{
+	color: #FFF;
+	font-size: small;
+	padding:5px;
+	background-color: #333;
+}
+
+/* 圖文顯示模組 */
+
+.show_list_table{
+	width: 100%;
+	font-size: small;
+	background-color: #000;
+	color:#a9e0f8;
+}
+
+.show_list_minitable{
+	height: 160px;
+	width: 30%;
+	font-size: small;
+}
+
+.show_list_img{
+/* 	width: 120px;
+	height: 120px; */
+	padding: 5px;
+	background-color: #316AC5;
+	border: 1px solid #FFFFFF;
+}
+
+.show_list_text{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#464646', endColorstr='#000000',gradientType='0');
+	width: 180px;
+	height: 25px;
+	color: #FFF;
+	font-size: small;
+}
+
+/* 分頁跳頁連結模組 */
+.pages_link{
+	color: #FFF;
+}
+
+.pages_link a:link, .pages_link a:visited{
+	text-decoration: none;
+	color: #FFF;
+}
+.pages_link a:hover, .pages_link a:active{
+	color: #FFF;
+	text-decoration: underline;
+}
+
+div#wrapper {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+}
+
+div.pagination {
+    overflow: hidden;
+    font-size: 9pt;
+    padding: 10px 0;
+}
+
+div.pagination ul {
+    list-style: none;
+    padding: 2px 0;
+    line-height: 16px;
+}
+
+div.pagination li {
+    display: inline;
+}
+
+div.pagination.badoo {
+	color:#FFF;
+	padding:10px 0 10px 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	text-align:center;
+}
+
+div.pagination.badoo a {
+	color:#FFF;
+	padding:2px 5px;
+	margin:0 2px;
+	text-decoration:none;
+	border:1px solid #09F;
+}
+
+div.pagination.badoo a:hover, div.pagination.badoo a:active {
+	border:1px solid #09F;
+	color:#FFF;
+}
+
+div.pagination.badoo span.current {
+	padding:2px 5px;
+	border:1px solid #0CF;
+	color:#FFF;
+	font-weight:bold;
+	background-color:#06F;
+}
+
+div.pagination.badoo span.disabled {
+	display:none;
+}
+
+/* 資訊列表模組 */
+
+.catalog_list_table{
+	font-size: small;
+	color: #FFF;
+}
+
+.catalog_list_title{
+	height: 30px;
+	padding-left: 10px;
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+.catalog_list_content{
+	color: #FFF;
+	background-color:#000;
+	font-size: small;
+}
+
+.catalog_list{
+	font-size: small;
+	color: #FFF;
+}
+
+.catalog_list_img{
+	width: 120px;
+	height: 120px;
+	padding: 5px;
+	background-color: #316AC5;
+	border: 1px solid #FFFFFF;
+}
+
+/* 資訊明細內容 */
+
+.catalog_content_table{
+	width: 100%;
+	height: auto;
+	font-size: small;
+	color: #FFF;
+	background-color:#000;
+}
+
+.catalog_content_title{
+	font-weight: bold;
+	font-size: medium;
+	height: 30px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #06C;
+	color: #FFF;
+}
+
+.catalog_content_img{
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #06C;
+}
+
+.catalog_download{
+	background-color: #333;
+}
+
+.catalog_like{
+	background-color: #333;
+}
+
+.catalog_like_img{
+	background-color: #333;
+	border: 1px solid #06C;
+}
+
+.catalog_like_title1{
+	font-size: medium;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.catalog_like_title2{
+	color: #FFF;
+}
+
+.catalog_like_ps{
+	color: #FFF;
+}
+
+/* 搜尋結果列表模組 */
+
+.search_list_table{		
+	font-size: small;
+	color: #FFF;
+}
+
+.search_list_title{
+	height: 30px;
+	padding-left: 10px;
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+.search_list_content{
+	color: #FFF;
+	background-color:#000;
+	font-size: small;
+}
+
+.search_list_subjust{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#c8e6fb', endColorstr='#3aa5e4',gradientType='0');
+	font-size: small;
+	color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+
+.search_list{
+	font-size: small;
+	color: #FFF;
+}
+
+/* 討論區列表模組 */
+
+#postdiscuz {
+	width: 100%;
+	z-index: 3;
+	color:#FFF;
+	background-color: #000;
+	border: 5px solid #316AC5;
+	margin: 10px;
+}
+
+.post_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+.post_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #06C;
+}
+
+.discuss_list_table{
+	width: 100%;
+	font-size: medium;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.discuss_list_title{
+	height:30px;
+	color: #FFF;
+}
+
+.discuss_list_content{
+	font-size: small;
+	color: #FFF;
+	border: 1px solid #09F;
+}
+
+.discuss_list{
+	padding:5px;
+	font-size: small;
+	color: #09F;
+	background-color: #000;
+}
+
+.manager_reply{
+	color: #FFF;
+}
+
+.btnpost{
+	color: #FFF;
+	border: 0;
+	padding:2px;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+	margin: 5px;
+}
+
+/* 討論串發文列表模組 */
+.massage_list_table{
+	font-size: small;
+	color: #FFF;
+}
+
+.massage_list_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.massage_list_content{
+	font-size: small;
+	color: #FFF;
+	border: 1px solid #06C;
+	background-color: #000;
+}
+
+.massage_list{
+	font-size: small;
+	color: #09F;
+}
+
+.massage_list_white{
+	font-size: small;
+	color: #FFF;
+}
+
+/* 回文填寫模組 */
+.massage_write_table{
+	font-size: small;
+	color: #FFF;
+}
+
+.massage_write_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.massage_repost_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.massage_write_content{
+	color: #FFF;
+	font-size: small;
+	border: 5px solid #316AC5;
+}
+
+.massage_write_list{
+	font-size: small;
+	color: #FFF;
+	background-color: #000;
+}
+
+.massage_write_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #06C;
+}
+
+.massage_write_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+/* 會員查詢密碼模組 */
+
+.user_referpw_table{
+	width: 400px;
+	color: #FFF;
+	font-size: small;
+	background-color: #000;
+}
+
+.user_referpw_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.user_referpw_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #06C;
+}
+
+.user_referpw_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+/* 會員註冊模組 */
+
+.user_register_table{
+	color: #FFF;
+	font-size: small;
+}
+
+.user_register_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.user_register_content{
+	background-color:#000;
+}
+
+.user_register_list{
+	color: #09F;
+	font-size: medium;
+}
+
+.user_register_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #06C;
+}
+
+.user_register_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+.user_register{
+	font-size: medium;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #000;
+}
+
+.user_notice{
+	background-color: #000;
+	border: 1px solid #09F;
+}
+
+/* 查詢密碼成功回報模組 */
+
+.referpw_table{
+	border: 1px dashed #09F;
+	font-size: medium;
+	font-weight: bold;
+	color: #FFF;
+	background-color:#000;
+}
+
+/* 會員中心選單模組 */
+
+.welcome_table{
+	font-size: small;
+	color: #FFF;
+
+}
+
+.user_table{
+	background-color: #000;
+	color: #FFF;
+	font-size: small;
+}
+
+.user_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #06C;
+}
+
+.user_content{
+	border: 1px solid #09F;
+}
+
+.user_list{
+	background-color: #333;
+}
+
+/* 表單頁面 */
+
+.form_bg{
+	background-color: #000;
+}
+
+.form_table{
+	border: 1px solid #09F;
+}
+
+.form_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #06C;
+}
+
+.form_content{
+	font-size: small;
+	color: #0CF;
+}
+
+.form_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #06C;
+}
+
+.form_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+.form_reply{
+	background-color: #000;
+	font-size: small;
+	color: #FFF;
+}
+
+.form_list{
+	color:#FFF;
+	background-color: #333;
+}
+
+/* 計數器樣式 */
+.counter_title{
+	color: #09F;
+}
+
+/* 投票模組樣式 */
+#vote_table{
+	width: 100%;
+}
+
+.vote_top{
+	height: 35px;
+	background-image: url(../images/vote_title.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-color:#000;
+}
+
+.vote{
+	color:#FFF;
+	font-size: 8pt;
+	padding: 5px;
+	background-color:#000;
+}
+
+.vote_down{
+	height: 35px;
+	background-image: url(../images/vote_title_bg.png);
+	background-color:#000;
+}
+
+.vote_part{
+	width: 100%;
+	color: #09F;
+	font-size: 10pt;
+}
+
+.vote_btn{
+	color: #FFF;
+	border: 0;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+/* 投票結果樣式 */
+.vote_title{
+	width: 100%;
+	height: 30px;
+	font-size: medium;
+	color: #09F;
+	background-image: url(../images/vote_title_bg.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+}
+
+.vote_result{
+	color:#FFF;
+	padding-left: 10px;
+	background-color:#333;
+}
+
+.vote_result_img{
+	background-color:#333;
+}
+
+.vote_result_list{
+	height: 40px;
+	color: #09F;
+	font-size: 11pt;
+}
+
+
+/*平行虛線*/
+#aaa {
+	border-top:1px dashed #464646;
+	overflow:hidden;
+	height: 1px;
+	width:100%;
+	text-align:right;
+	margin: 0 auto;
+}
+
+/* 商品明細內頁(有價錢、詳細說明等) */
+.catalog_detail_content_table{
+	width: 100%;
+	height: 50px;
+	font-size: small;
+	background-image: url(../images/catalog_detail_content.gif);
+	background-repeat: no-repeat;
+	color: #000;
+	border: 3px;
+	
+}
+
+
+/* 商品明細內容 */
+.product_content_table{
+	width: 100%;
+	height: 50px;
+	font-size: small;
+	color: #fff;
+	border-width:2;
+	border:green;
+	border-style:none;
+}
+.product_price_title{
+	/*background-color:#eeeeee;*/
+	height: auto;
+	font-size: 16px;
+	font-weight: bold;
+	color: #a2ffff;
+}
+.product_peice_sell{
+	height: auto;
+	font-size: 16px;
+	color: #fff;
+}
+.product_peice_member{
+	height: auto;
+	font-size: 20px;
+	color: #ff0000;
+}
+
+/* 購物車模組 */
+
+.car_list_table{		
+	font-size: small;
+	color: #fff;
+}
+
+.car_list_head{
+
+	color: #fff;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.car_list_title{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#bee1fc', endColorstr='#0594f9',gradientType='0');
+	color:#333333;
+	font-size: small;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.car_list_content{
+	color: #60e6f4;
+	font-size: small;
+}
+
+.car_list{
+	font-size: small;
+	color: #cbf7fc;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #e8e8ff;
+}
+.car_btn{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#e4e4e4', endColorstr='#8c8c8c',gradientType='0');
+	color: #000;
+	height:25px;
+	background-color: #000;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+.car_continue_btn{
+	height:30px;
+	width:80px;
+	text-align:center;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#93ccf9',gradientType='0');
+	color: #000;
+	font-size: 13px;
+	font-weight: bold;
+	background-color: #FFF;
+	border:0px;
+}
+.car_start_btn{
+	height:30px;
+	width:120px;
+	text-align:center;	
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#b0dcff', endColorstr='#0077DD',gradientType='0');
+	color: #000;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #FFF;
+	border:0px;
+}
+.car_cancel_btn{
+	height:20px;
+	width:60px;
+	text-align:center;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#e4e4e4',gradientType='0');
+	color: #000000;
+	font-size: 10px;
+	background-color: #0077DD;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+/* 結帳資料模組 */
+
+.pay_list_table{	
+  	font-size: small;
+	color: #fff;
+}
+.pay_list_title{
+	color: #fff;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.pay_list_head{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#bee1fc', endColorstr='#0594f9',gradientType='0');
+	color: #333333;
+	font-size: 15px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.pay_list_content{
+	color: #fff;
+	font-size: small;
+	
+}
+.pay_list_subject{
+	/*filter: alpha(opacity=50);*/
+	background-color: #404040;
+	font-size: small;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #e8e8ff;
+}
+.pay_list{
+	font-size: small;
+	color: #fff;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #e8e8ff;
+}
+.pay_btn{
+	height:25px;
+	width:100px;
+	text-align:center;	
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0077DD', endColorstr='#092e4d',gradientType='0');
+	color: #FFF;
+	font-size: 13px;
+	font-weight: bold;
+	background-color: #FFF;
+	border:0px;
+}
+
+/* 確認訂單模組 */
+
+.order_list_table{	
+	font-size: small;
+	color: #000;
+}
+.order_list_title{
+	color: #fff;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.order_list_head{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#bee1fc', endColorstr='#0594f9',gradientType='0');
+	color: #333333;
+	font-size: 15px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.order_list_head2{
+filter: alpha(opacity=90,style=1)progid:DXImageTransform.Microsoft.Gradient(startColorstr='#9ddbf3', endColorstr='#FFFFFF',gradientType='1');
+	color: #1941a5;
+	font-size: 15px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.order_list_content{
+	color: #fff;
+	font-size: small;
+	
+}
+.order_list_subject{
+	font-size: small;
+	background-color: #404040;
+	color: #fff;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+}
+.order_list{
+	font-size: small;
+	color: #fff;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #999;
+}
+.order_list2{
+	font-size: small;
+	color: #00ccff;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #999;
+}
+.order_btn{
+	height:30px;
+	width:130px;
+	text-align:center;	
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#0077DD', endColorstr='#092e4d',gradientType='0');
+	color: #FFF;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #FFF;
+	border:0px;
+}
+.order_list_total{	
+	font-size: small;
+	color: #00ccff;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e0e0e0;
+}
+.order_list_fare{	
+	font-size: small;
+	color: #00ccff;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e0e0e0;
+}
+/* 需求單模組 */
+
+.demand_list_table{	
+	font-size: small;
+	color: #000;
+}
+.demand_list_title{
+	color: #fff;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.demand_list_head{
+	font-size: small;
+	color: #fff;
+	background-color: #404040;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+
+.demand_list{
+	font-size: small;
+	color: #00ccff;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+.demand_btn{
+	width:80px;
+	height:25px;
+	color: #FFF;
+	border: 0;
+	font-size:13px;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+

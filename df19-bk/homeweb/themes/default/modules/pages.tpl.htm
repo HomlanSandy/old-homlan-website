@@ -1,0 +1,37 @@
+{if $recordcount gt 0}
+<div class="pagination badoo">
+<ul>
+{if $nowPage eq 1}
+<li class="disabled">{$firstpage}</li>
+{else}
+<li><a href="?{$PageUrl}&page=1">{$firstpage}</a></li>
+{/if}
+
+{if $prePage neq 0}
+<li><a href="?{$PageUrl}&page={$prePage}">{$upperpage}</a></li>
+{else}
+<li class="disabled">{$upperpage}</li>
+{/if}
+
+{foreach  item=i from=$pagesList}
+{if $nowPage eq $i}
+<li class="current">{$i}</li>
+{else}
+<li><a href="?{$PageUrl}&page={$i}">{$i}</a></li>
+{/if}
+{/foreach}
+
+{if $nextPage neq 0}
+<li><a href="?{$PageUrl}&page={$nextPage}">{$nextpage}</a></li>
+{else}
+<li class="disabled">{$nextpage}</li>
+{/if}
+
+{if $nowPage eq $PagesCount}
+<li class="disabled">{$lastpage}</li>
+{else}
+<li><a href="?{$PageUrl}&page={$PagesCount}">{$lastpage}</a></li>
+{/if}
+</ul>
+</div>
+{/if}

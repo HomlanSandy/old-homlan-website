@@ -1,0 +1,1566 @@
+@charset "utf-8";
+/* css/red/ */
+
+/* 頁面背景設定 */
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif,"新細明體";
+	font-size: small;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	background-color: #000;
+}
+
+a:link {
+	color: #900;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #900;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #F00;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #F00;
+	text-decoration: none;
+}
+
+/* 頁面置中及寬度設定 */
+
+#container {
+	position: relative;
+	margin: 0px auto;
+	height: 100%;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: #000;
+	background-image: url(../images/bg.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+}
+
+/* 頁頭位置設定 */
+#header {
+	position: relative;
+	width: 100%;
+	float: none;
+	height: auto;
+	left: 0px;
+}
+
+.header_search {
+	color: #033;
+}
+
+.header_userlink {
+	color: #033;
+	position: relative;
+}
+
+.search_btn{
+	color: #FFF;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	border: 1px none #CCC;
+}
+
+/* 頁身 左方 區域位置設定 */
+#left {
+	position: relative;
+	float: none;
+	height: auto;
+	background-color: #666;
+	z-index: 5;
+}
+
+/* 頁身 中間 主要區域位置設定 */
+#main {
+	position: relative;
+	float: none;
+	height: auto;
+	background-color: #FFF;
+}
+
+/* 頁身 右方 區域位置設定 */
+#right {
+	position: relative;
+	float: none;
+	height: auto;
+	background-color: #630;
+}
+
+/* 頁尾位置設定 */
+#footer {
+	position: relative;
+	width: 100%;
+	height: auto;
+	float: none;
+	font-size: small;
+	color: #999;
+	background-color: #333;
+	padding-bottom: 15px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#333333', endColorstr='#000000',gradientType='0');
+}
+
+.footer a:link, .footer a:visited{
+	text-decoration: none;
+	color: #FFF;
+}
+.footer a:hover, .footer a:active{
+	color: #FFF;
+	text-decoration: underline;
+}
+
+/* 廣告輪播模組 */
+
+.commercial_table{
+	width: 100%;
+	margin: 0;
+	height:auto;
+	background-color: #FFC;
+	border: 2px solid #FFC;
+}
+
+.commercial_text{
+	color: #F00;
+}
+
+.commercial_btn{
+
+}
+	
+.ImgTab{
+	cursor:hand;
+}
+
+.MsgHide{
+	display:none;
+}
+
+/* 會員登入模組 */
+.user_login_table{
+	width: 100%;
+	height: 80px;
+	color: #FFF;
+	background-color: #000;
+	top: 0px;
+	right: 0px;	
+}
+.user_login_title{
+	height: 30px;
+	color: #FFF;
+}
+
+.user_login_title a:link, .user_login_title a:visited{
+	color: #900;
+	text-decoration: underline;
+}
+.user_login_title a:hover, .user_login_title a:active{
+	color: #F00;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.user_login_content{
+}
+
+.user_login_textfield{
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #666;
+}
+
+.user_login_btn{
+	color: #FFF;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	border: 1px none #CCC;
+}
+
+/* 資訊分類選單 (右拉式選單) */
+div.menu {
+	margin-top: -15px;
+	position: relative;
+	width: 180px;
+	text-align:left;
+	font-size: 11pt;
+}
+div.menu a {
+	display: block;
+	cursor: pointer;
+	padding-left: 1.5em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	color: #FFF;
+	text-decoration: none;
+	background-color: #666;
+	background-image: url(../images/left_menu.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+div.menu a:hover {
+	background-image: url(../images/left_menu_c.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-color: #666;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #FFF;
+}
+/*階層選單---以下語法IE6.0不支援*/
+div.menu div.open > div {
+	display: none;
+}
+div.menu div.open:hover > div {
+	display: block;
+	float: left;
+	position: absolute;
+	left: 180px;
+	width: 180px;
+	border: 1px solid #FFF;
+	font-size: 11pt;
+}
+div.menu div.open:hover > div a {
+	display: block;
+	cursor: pointer;
+	padding-left: 1.5em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	color: #FFF;
+	text-decoration: none;
+	background-color: #666;
+	background-image: url(../images/left_menu.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+div.menu div.open:hover > div a:hover {
+	background-image: url(../images/left_menu_c.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-color: #666;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #FFF;
+}
+
+/* 頁首連結選單 (下拉式選單) */
+
+#top_menu{
+	width: 100%;
+	height: 40px;
+	z-index: 10;
+}
+
+.top_menu_table{
+	background-color: #000;
+	background-image: url(../images/top_menu.gif);
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+ul.MenuBarHorizontal{
+	list-style-type: none;
+	font-size: 100%;
+	cursor: default;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+ul.MenuBarActive{
+	z-index: 1000;
+}
+
+ul.MenuBarHorizontal li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	position: relative;
+	text-align: left;
+	cursor: pointer;
+	width: 8em;
+	float: left;
+}
+
+ul.MenuBarHorizontal ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	z-index: 1020;
+	cursor: default;
+	width: 8.2em;
+	position: absolute;
+	left: -1000em;
+}
+
+ul.MenuBarHorizontal ul.MenuBarSubmenuVisible{
+	left: auto;
+}
+
+ul.MenuBarHorizontal ul li{
+	width: 8.2em;
+}
+
+ul.MenuBarHorizontal ul ul{
+	position: absolute;
+	margin: -5% 0 0 95%;
+}
+
+ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible{
+	left: auto;
+	top: 0;
+}
+
+
+ul.MenuBarHorizontal ul{
+
+}
+
+ul.MenuBarHorizontal a{
+	height: 30px;
+	display: block;
+	cursor: pointer;
+	color: #FFF;
+	text-decoration: none;
+	text-align:center;
+	padding-top: 10px;
+	background-color: #000;
+	background-image: url(../images/top_menu.gif);
+	background-repeat: repeat;
+	background-position: center center;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #000;
+}
+ul.MenuBarHorizontal a:hover, ul.MenuBarHorizontal a:focus{
+	color: #9CC;
+	background-color: #066;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemHover, ul.MenuBarHorizontal a.MenuBarItemSubmenuHover, ul.MenuBarHorizontal a.MenuBarSubmenuVisible
+{
+	background-color: #000;
+	background-image: url(../images/top_menu_c.gif);
+	background-repeat: repeat;
+	color: #FFF;
+	background-position: center center;	
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenu{
+	background-color: #000;
+	background-image: url(../images/top_menu.gif);
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+ul.MenuBarHorizontal ul a.MenuBarItemSubmenu{
+	background-color: #000;
+	background-image: url(../images/top_menu.gif);
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenuHover
+{
+	background-color: #000;
+	background-image: url(../images/top_menu_c.gif);
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+ul.MenuBarHorizontal ul a.MenuBarItemSubmenuHover
+{
+	background-color: #000;
+	background-image: url(../images/top_menu.gif);
+	background-repeat: repeat;
+	background-position: center center;
+}
+
+ul.MenuBarHorizontal iframe{
+	position: absolute;
+	z-index: 1010;
+	filter:alpha(opacity:0.1);
+}
+
+@media screen, projection
+{
+	ul.MenuBarHorizontal li.MenuBarItemIE
+	{
+		display: inline;
+		float: left;
+		background-image: url(../images/top_menu_c.gif);
+	    background-repeat: repeat;
+		background-position: center center;
+	}
+}
+
+
+/* 推薦分類頁面 */
+
+.show_news_table{
+	font-size: small;
+	color: #666;
+}
+
+.show_news_title{
+	color: #F00;
+	font-size: medium;
+	font-weight: bold;
+}
+.show_news_content{
+	color: #000;
+	font-size: small;
+	background-color: #FFF;
+}
+
+.show_news_list{
+	background-color: #EEE;
+	font-size: small;
+	color: #000;
+}
+
+.show_news_date{
+	color: #666666;
+	font-size: 7pt;
+}
+
+/* 推薦模組 */
+
+.news_list_table{
+	width: 100%;
+	font-size: small;
+	color: #666;
+}
+
+.news_list_title{
+	color: #0077DD;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #09C;
+	font-size: medium;
+	font-weight: bold;
+}
+.news_list_content{
+	color: #666666;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	font-size: small;
+	background-color: #EEE;
+}
+
+.news_list{
+	background: #FFFFFF;
+	font-size: small;
+	color: #000;
+}
+
+/* 推薦模組頁籤式樣板設定 */
+.TabbedPanels {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	clear: none;
+	width: 100%;
+}
+.TabbedPanelsTabGroup {
+	margin: 0px;
+	padding: 0px;
+}
+
+.TabbedPanelsTab {
+	color: #FFF;
+	position: relative;
+	top: 1px;
+	float: left;
+	padding: 4px 10px;
+	margin: 0px 1px 0px 0px;
+	background-color: #666;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: small;
+}
+.TabbedPanelsTabHover {
+	background-color: #900;
+}
+
+.TabbedPanelsTabSelected {
+	background-color: #EEE;
+	color: #000;
+	font-weight: bold;
+}
+
+.TabbedPanelsTab a {
+	color: #000;
+	text-decoration: none;
+}
+
+.TabbedPanelsContentGroup {
+	clear: both;
+	background-color: #EEE;
+	color: #000;
+}
+
+.TabbedPanelsContent {
+	padding: 4px;
+}
+
+.TabbedPanelsContentVisible {
+}
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	background-color: #EEE;
+	position: relative;
+	border: 1px solid #AFA9A7;
+}
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	background-color: #EEE;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #AFA9A7;
+}
+
+.VTabbedPanels .TabbedPanelsContentGroup {
+	clear: none;
+	float: left;
+	padding: 0px;
+	width: 30em;
+	height: 20em;
+}
+
+/* 推薦獨立模組 */
+.cmd_table{
+	width: 100%;
+	color: #069;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	background-color: #EEE;
+	font-size: small;
+	border: 1px dotted #ADD;
+}
+
+.cmd_content{
+	color: #069;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	background-color: #EEE;
+	font-size: small;
+}
+
+.cmd_title{
+	color: #000;
+	background-color: #FFF;
+	font-size: 12pt;
+	padding: 10px;
+}
+
+.cmd_list{
+	color: #069;
+	font-size: small;
+	border: 1px dotted #ADD;
+	padding:5px;
+}
+
+/* 圖文顯示模組 */
+
+.show_list_table{
+	font-size: small;
+	background-color: #FFF;
+}
+
+.show_list_minitable{
+	height: 160px;
+	width: 30%;
+	font-size: small;
+}
+
+.show_list_img{
+/* 	width: 130px;
+	height: 130px; */
+	background-color: #FFF;
+}
+
+.show_list_text{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='0');
+	width: 180px;
+	height: 25px;
+	color: #666;
+	font-size: small;
+}
+
+/* 分頁跳頁連結模組 */
+.pages_link{
+	color: #900;
+}
+
+.pages_link a:link, .pages_link a:visited{
+	text-decoration: underline;
+	color: #F00;
+}
+.pages_link a:hover, .pages_link a:active{
+	color: #900;
+	text-decoration: underline;
+}
+
+div#wrapper {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+}
+
+div.pagination {
+    overflow: hidden;
+    font-size: 9pt;
+    padding: 10px 0;
+}
+
+div.pagination ul {
+    list-style: none;
+    padding: 2px 0;
+    line-height: 16px;
+}
+
+div.pagination li {
+    display: inline;
+}
+
+div.pagination.badoo {
+	background-color:#fff;
+	color:#000;
+	padding:10px 0 10px 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	text-align:center;
+}
+
+div.pagination.badoo a {
+	color:#F00;
+	padding:2px 5px;
+	margin:0 2px;
+	text-decoration:none;
+}
+
+div.pagination.badoo a:hover, div.pagination.badoo a:active {
+	background-color:#EEE;
+	color:#F00;
+}
+
+div.pagination.badoo span.current {
+	padding:2px 5px;
+	background-color:#EEE;
+	color:#fff;
+	font-weight:bold;
+	background-color:#900;
+}
+
+div.pagination.badoo span.disabled {
+	display:none;
+}
+
+/* 資訊列表模組 */
+
+.catalog_list_table{
+	font-size: small;
+	color: #666;
+}
+
+.catalog_list_title{
+	color: #900;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+	font-size: medium;
+	font-weight: bold;
+}
+.catalog_list_content{
+	color: #000;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');
+	font-size: small;
+}
+
+.catalog_list{
+	font-size: small;
+	color: #666;
+}
+
+/* 資訊明細內容 */
+
+.catalog_content_table{
+	width: 90%;
+	height: auto;
+	font-size: small;
+	color: #000;
+}
+
+.catalog_content_title{
+	font-weight: bold;
+	font-size: medium;
+	height: 30px;
+	background: #FFFFFF;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+	color: #900;
+}
+
+.catalog_content_img{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+
+.catalog_download{
+	background-color: #EEEEEE;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCC;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #CCC;
+}
+
+.catalog_like{
+	background-color: #FFF;
+}
+
+.catalog_like_img{
+	background-color: #EEEEEE;
+	border: 0px solid #06C;
+}
+
+.catalog_like_title1{
+	font-size: medium;
+	font-weight: bold;
+	color: #900;
+}
+
+.catalog_like_title2{
+	color: #900;
+}
+
+.catalog_like_ps{
+	color: #666;
+}
+
+/* 搜尋結果列表模組 */
+
+.search_list_table{	
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');	
+	font-size: small;
+	color: #666;
+}
+
+.search_list_title{
+	color: #900;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+	background-color: #FFF;
+}
+.search_list_content{
+	color: #000;
+	font-size: small;
+}
+
+.search_list_subjust{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#640000', endColorstr='#1e0000',gradientType='0');
+	font-size: small;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+
+.search_list{
+	font-size: small;
+	color: #666;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #000;
+}
+
+/* 討論區列表模組 */
+
+#postdiscuz {
+	width: 100%;
+	z-index: 3;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE',gradientType='0');
+	background-color: #FFF;
+	border: 5px solid #900;
+}
+
+.discuss_list_table{
+	width:100%;
+	font-size: medium;
+	color: #900;
+	font-weight: bold;
+	background-color: #EEE;
+
+}
+
+.discuss_list_title{
+	color: #666;
+	font-size: medium;
+	font-weight: bold;
+	background-color: #FFF;
+}
+
+.discuss_list_content{
+	font-size: small;
+	color: #666;
+	border: 1px solid #CCC;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');
+	background-color: #EEE;
+}
+
+.discuss_list{
+	font-size: small;
+	color: #000;
+	background-color: #FFF;
+}
+
+.manager_reply{
+	color: #900;
+}
+
+.btnpost{
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	background-color: #900;
+	color: #FFF;
+	border: 1px none #CCC;
+	font-weight: bold;
+}
+
+/* 討論串發文列表模組 */
+.massage_list_table{
+	font-size: medium;
+	color: #000;
+	font-weight: bold;
+}
+
+.massage_list_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	background-color: #900;
+}
+
+.massage_list_content{
+	font-size: small;
+	color: #666;
+	border: 1px solid #CCC;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1'); 
+	background-color: #EEE;
+}
+
+.massage_list{
+	font-size: small;
+	color: #000;
+}
+
+.massage_list_white{
+	font-size: small;
+	color: #666;
+	background-color: #FFF;
+}
+
+/* 回文填寫模組 */
+.massage_write_table{
+	font-size: small;
+	color: #666;
+}
+
+.massage_write_title{
+	color: #900;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	background-color: #FFF;
+}
+
+.massage_repost_title{
+	color: #900;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+}
+
+.massage_write_content{
+	color: #000;
+	font-size: small;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#EEEEEE',gradientType='1');
+	background-color: #EEEEEE;
+}
+
+.massage_write_list{
+	font-size: small;
+	color: #FFF;
+	background-color: #900;
+}
+
+.massage_write_textfield{
+}
+
+.massage_write_btn{
+}
+
+/* 會員查詢密碼模組 */
+
+.user_referpw_table{
+	width: 300px;
+	color: #000;
+	font-size: small;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#CCCCCC', endColorstr='#FFFFFF',gradientType='1');
+	background-color: #CCC;
+}
+
+.user_referpw_title{
+	color: #900;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+	background-color: #FFF;
+}
+
+.user_referpw_textfield{
+	color: #960;
+	background-color: #FFF;
+	border: 1px solid #900;
+}
+
+.user_referpw_btn{
+	color: #FFF;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	border: 1px none #CCC;
+}
+
+/* 會員註冊模組 */
+
+.user_register_table{
+	color: #000;
+	font-size: small;
+}
+
+.user_register_title{
+	color: #900;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+
+.user_register_content{
+}
+
+.user_register_list{
+	color: #900;
+	font-size: medium;
+}
+
+.user_register_textfield{
+}
+
+.user_register_btn{
+	color: #FFF;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	border: 1px none #CCC;
+}
+
+.user_register{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#DDDDDD',gradientType='0');
+	font-size: medium;
+	font-weight: bold;
+	color: #900;
+	background-color: #EEE;
+}
+
+.user_notice{
+	background-color: #FFF;
+	border: thin inset #000;
+}
+
+/* 查詢密碼成功回報模組 */
+
+.referpw_table{
+	border: 1px dashed #F00;
+	font-size: medium;
+	font-weight: bold;
+	color: #F00;
+	background-image: url(../images/reply_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+/* 會員中心選單模組 */
+
+.welcome_table{
+	font-size: small;
+	color: #000;
+	background-color: #FFF;
+	border: 1px solid #CCC;
+}
+
+.user_table{
+	background-color: #FFF;
+	color: #000;
+	font-size: small;
+}
+
+.user_title{
+	color: #FFF;
+	font-size: medium;
+	font-weight: bold;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	background-color: #990;
+}
+
+.user_content{
+}
+
+.user_list{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#CCCCCC',gradientType='1');
+	background-color: #EEE;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+	font-size: medium;
+}
+
+/* 表單模組 */
+
+.form_bg{
+	background-color: #FFF;
+}
+
+.form_table{
+	background-color: #FFF;
+	border: 1px solid #333;
+}
+
+.form_title{
+	font-size: x-large;
+	color: #000;
+	font-weight: bolder;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #000;
+}
+
+.form_content{
+	font-size: small;
+	color: #900;
+}
+
+.form_textfield{
+	height: 16px;
+	background-color: #FFF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+	border-left-color: #666;
+}
+
+.form_btn{
+	font-size: small;
+	color: #900;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#CCCCCC',gradientType='0');
+	background-color: #FFF;
+	border: 1px solid #CCF;
+	height: 25px;
+	width: 80px;
+}
+
+.form_reply{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');
+	background-color: #EEE;
+	font-size: small;
+	color: #900;
+}
+
+.form_list{
+
+}
+
+/* 計數器樣式 */
+.counter_title{
+	color: #CCC;
+}
+
+/* 投票模組樣式 */
+#vote_table{
+	width: 100%;
+}
+
+.vote_top{
+	height: 35px;
+	background-image: url(../images/vote_title.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+}
+
+.vote{
+	color:#666;
+	font-size: 8pt;
+	padding-left: 25px;
+    background-image: url(../images/vote.gif);
+	background-repeat: repeat-y;
+	background-position: center;
+}
+
+.vote_down{
+	height: 35px;
+	background-image: url(../images/vote_title_bg.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+.vote_part{
+	width: 100%;	
+	color: #360;
+	font-size: 10pt;
+}
+
+.vote_btn{
+	font-size: small;
+	color: #900;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#CCCCCC',gradientType='0');
+	background-color: #FFF;
+	border: 1px solid #CCF;
+}
+
+/* 投票結果樣式 */
+.vote_title{
+	width: 100%;
+	height: 30px;
+	padding-top: 10px;
+	font-size: medium;
+	color: #FFF;
+	background-color: #900;
+}
+
+.vote_result{
+	padding-left: 10px;
+	background-color:#EEE;
+}
+
+.vote_result_img{
+	background-color:#CCC;
+}
+
+.vote_result_list{
+	height: 40px;
+	color: #360;
+	font-size: 11pt;
+}
+
+
+/*平行虛線*/
+#aaa {
+	border-top:1px dashed #c0c0c0;
+	overflow:hidden;
+	height: 1px;
+	width:100%;
+	text-align:right;
+	margin: 0 auto;
+}
+
+/* 商品明細內頁(有價錢、詳細說明等) */
+.catalog_detail_content_table{
+	width: 100%;
+	height: 50px;
+	font-size: small;
+	background-image: url(../images/catalog_detail_content.gif);
+	background-repeat: no-repeat;
+	color: #000;
+	border: 3px;
+	
+}
+
+/* 商品明細內容 */
+.product_content_table{
+	width: 100%;
+	height: 50px;
+	font-size: small;
+	color: #000;
+	border-width:2;
+	border:green;
+	border-style:none;
+}
+.product_price_title{
+	/*background-color:#eeeeee;*/
+	height: auto;
+	font-size: 16px;
+	font-weight: bold;
+	color: #000;
+}
+.product_peice_sell{
+	height: auto;
+	font-size: 16px;
+	color: #000;
+}
+.product_peice_member{
+	height: auto;
+	font-size: 20px;
+	color: #ff0000;
+}
+
+/* 購物車模組 */
+
+.car_list_table{		
+	background-color: #FFF;
+	font-size: small;
+	color: #666;
+}
+
+.car_list_head{
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #400000;
+}
+.car_list_title{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #000000;
+}
+.car_list_content{
+	color: #000;
+	font-size: small;
+}
+
+.car_list{
+	font-size: small;
+	color: #666;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+.car_btn{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#e4e4e4', endColorstr='#8c8c8c',gradientType='0');
+	color: #000;
+	height:25px;
+	background-color: #0077DD;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+.car_continue_btn{
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	background-color: #900;
+	color: #FFF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+	font-weight: bold;
+}
+.car_start_btn{
+	width:120px;
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#ff0000', endColorstr='#333333',gradientType='0');
+	background-color: #900;
+	color: #FFF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+	font-weight: bold;
+	font-size: 16px;
+}
+.car_cancel_btn{
+	height:20px;
+	width:60px;
+	text-align:center;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFFFFF', endColorstr='#e4e4e4',gradientType='0');
+	color: #000000;
+	font-size: 10px;
+	background-color: #0077DD;
+	border-top-width: 1px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #FFF;
+}
+
+/* 結帳資料模組 */
+
+.pay_list_table{	
+   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');	
+	background-color: #FFF;
+	font-size: small;
+	color: #000;
+}
+.pay_list_title{
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #400000;
+}
+.pay_list_head{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #400000;
+}
+.pay_list_content{
+	color: #000;
+	font-size: small;
+	
+}
+.pay_list_subject{
+	font-size: small;
+	background-color: #fbeaec;
+	color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+.pay_list{
+	font-size: small;
+	color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+.pay_btn{
+	height: 30px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	background-color: #900;
+	color: #FFF;
+	border: 1px none #CCC;
+	font-weight: bold;
+}
+
+/* 確認訂單模組 */
+
+.order_list_table{	
+   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');	
+	background-color: #FFF;
+	font-size: small;
+	color: #000;
+}
+.order_list_title{
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #400000;
+}
+.order_list_head{
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #400000;
+}
+.order_list_content{
+	color: #000;
+	font-size: small;
+	
+}
+.order_list_subject{
+	font-size: small;
+	background-color: #fbeaec;
+	color: #000;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: inset;
+	border-bottom-color: #000;
+}
+.order_list{
+	font-size: small;
+	color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+.order_btn{
+	height:35px;
+	width:130px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#990000', endColorstr='#333333',gradientType='0');
+	background-color: #900;
+	color: #FFF;
+	border: 1px none #CCC;
+	font-weight: bold;
+	font-size: 15px;
+
+}
+.order_list_total{	
+	background-color: #F8F8FF;
+	font-size: small;
+	color: #000;
+}
+.order_list_fare{	
+	background-color: #F5F5F5;
+	font-size: small;
+	color: #000;
+}
+/* 需求單模組 */
+
+.demand_list_table{	
+   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF',gradientType='1');	
+	background-color: #FFF;
+	font-size: small;
+	color: #000;
+}
+.demand_list_title{
+	color: #000;
+	font-size: medium;
+	font-weight: bold;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #400000;
+}
+.demand_list_head{
+	font-size: small;
+	background-color: #f5d3d6;
+	color: #000;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #000;
+}
+
+.demand_list{
+	font-size: small;
+	color: #000;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #000;
+}
+.demand_btn{
+	height:30px;
+	width:90px;
+	text-align:center;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#e1e1e1', endColorstr='#e8e8ff',gradientType='0');
+	color: #000000;
+	font-size: 13px;
+	font-weight:bold;
+	background-color: #FFF;
+	border-top-width: 1px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #5b5b5b;
+	border-bottom-color: #5b5b5b;
+	border-left-color: #FFF;
+}
+

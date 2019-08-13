@@ -1,0 +1,72 @@
+<script>
+{literal}
+function edit_quantity(ifid,quantity){
+	document.location="cart.php?act=edit&ifid="+ifid+"&quantity="+quantity;
+}
+{/literal}
+</script>
+<table width="100%" class="car_list_table" align="left" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="car_list_head" align="left" valign="middle"><img src="themes/{$themes_na}/images/basket.gif" border="0" align="absmiddle" />{$Shopping_Cart}</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+<!-- 
+	2011-02-10 edit by 廷俊
+	------------------------------------------------------
+	1.顯示幣別
+	2.修正版面配置
+	------------------------------------------------------		
+*/	-->   
+    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2" class="car_list_content"　border="0">
+{if $Empty eq ""}
+	<tr>
+			<td align="center" class="car_list_title" width="">{$Product_details}</td>
+			<td align="center" class="car_list_title" width="150">{$Price}</td>
+			<td align="center" class="car_list_title" width="60">{$Quantity}</td>
+			<td align="center" class="car_list_title" width="90">{$Subtotal}</td>
+			<td align="center" class="car_list_title" width="60">{$Change_Details}</td>
+		</tr>
+	{section name=i loop=$umCartList}
+		<tr>
+			<td align="left" class="car_list">
+				<a href="{$umCartList[i].href}" target="_self">{$umCartList[i].smallpic}</a>
+				<a href="{$umCartList[i].href}" target="_self">{$umCartList[i].cart_na}</a><br>	
+			</td>
+			<td align="left" class="car_list">
+				<del>{$Selling_price}{$currency}{$umCartList[i].price_sale}{$Dollar}</del><br>
+				{$Member_price}{$currency}<font color="red"><b>{$umCartList[i].member_price}</b></font>{$Dollar}				
+			</td>
+			<td align="center" class="car_list">
+				{$umCartList[i].stock_list}<br>
+			</td>
+			<td align="center" class="car_list">
+				{$currency}{$umCartList[i].subtotal}{$Dollar}
+			</td>
+			<td align="center" class="car_list">
+				<input type="button" value="{$btn_cancle}" class="car_cancel_btn" onClick="JavaScript:document.location='cart.php?act=edit&ifid={$umCartList[i].cart_id}&quantity=0';"/>
+			</td>
+		</tr>
+	{/section} 
+		<tr>
+			<td align="center" class="car_list" colspan="4">
+				<input type="button" value="{$Continue_shopping}" class="car_continue_btn" onClick="history.go(-1);"/>
+				<input type="submit" value="{$Start_Checkout}" class="car_start_btn" onClick="JavaScript:document.location='payment.php';"/>
+			</td>
+			<td align="center" class="car_list" colspan="1">
+				<input type="button" value="{$Clear_Cart}" class="car_btn" onClick="JavaScript:document.location='cart.php?act=delete';"/>
+			</td>
+		</tr>
+{else}
+	  <tr>
+		<td align="center" class="car_list">
+			{$Empty}<br><br>
+			<input type="button" value="{$Continue_shopping}" class="car_btn" onClick="JavaScript:document.location='../';"/>
+		</td>
+      </tr>
+{/if}	  
+    </table>
+    
+    </td>
+  </tr>
+</table>

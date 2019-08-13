@@ -1,0 +1,9 @@
+{if $infoscatlist gt 0}
+<a href="index.php">{$HomePage}</a>
+{section name=p loop=$umheaduserlink}
+	{if $umheaduserlink[p].cats_na neq ''}
+		<img src="themes/{$themes_na}/images/dash.gif" border="0" align="absmiddle" alt="dash" />
+		{if $umheaduserlink[p].cats_url==''}{$umheaduserlink[p].cats_na}{else}<a href="{$umheaduserlink[p].cats_url}">{$umheaduserlink[p].cats_na}</a>{/if}
+	{/if}
+{/section}
+{/if}

@@ -1,0 +1,25 @@
+<!-- 
+	2012-01-09 edit by 玉玲
+	----------------------------------------------------
+	訂單功能清單模組需判斷此頁面是否登入，否則不顯示
+	---------------------------------------------------- 
+ -->
+{if $orderslogemail}
+<table width="100%" border="0" class="user_table" align="left" cellpadding="0" cellspacing="0">
+	<tr>
+		<td height="50" align="center" class="user_title">{$ordersquerycenter}</td>
+	</tr>
+	<tr>
+		<td height="100" align="center" valign="middle" class="welcome_table">{$ordersmsg_welcome}</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<table width="100%" class="user_content" align="center" border="0" cellpadding="2" cellspacing="2">				
+				<tr>
+					<td align="center" class="user_list"><a href="orders_query.php?act=logout" target="_self">{$btn_logout}</a></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+{/if}

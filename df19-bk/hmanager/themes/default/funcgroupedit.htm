@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+
+<script>
+var group_na_error="{$group_na_error}!";
+var input_char_error="{$input_char_error}";
+{literal}
+<!--
+	function save_chk(){
+		var msg="";
+		var inputchar=/^\w+$/;
+		if (document.all("group_na").value==""){
+			msg+=group_na_error+"\r\n";
+		} else {
+			if (!inputchar.test(document.all("group_na").value)){
+				msg+=input_char_error+"\r\n";
+			}
+		}
+		if (msg!=""){
+			alert(msg);	return false;
+		} else {
+			return true;
+		}
+	}
+-->
+{/literal}
+</script>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_List}" onclick="location.href='{$BtnListUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+
+<div id="show_table3">
+	<form name="savefrm" method="post" action="{$frm_act}" onsubmit="return save_chk();">
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+
+		<table border="0" cellpadding="1" cellspacing="1" align="center"  width="80%" height="100%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left"><INPUT TYPE="hidden" NAME="group_id" value="{$group_id_value}"></td>
+			</tr>
+			<tr>
+				<th align="right">{$Group_Na}</th>
+				<td align="left"><INPUT TYPE="text" NAME="group_na" id="group_na" size="50" value="{$group_na_value}"></td>
+			</tr>	
+			<tr>
+				<th align="right"></th>
+				<td align="left">{$input_type_text}</td>
+			</tr>				
+			<tr>
+				<th align="right">{$FlistInfo}</th>
+				<td align="left"><INPUT TYPE="radio" NAME="info_state" value="1" {$checkedyes}>{$FlistInfoYes}<INPUT TYPE="radio"  NAME="info_state" value="0" {$checkedno}>{$FlistInfoNo}</td>
+			</tr>			
+			<tr>
+				<td colspan="2" align="center"><INPUT TYPE="submit" value="{$Btn_Save}"><INPUT TYPE="reset" value="重新設定"></td>
+			</tr>					
+		</table>
+    </td>
+    </tr>
+    </table>
+	</form>
+</div>
+
+{$temp_log}</body>
+</html>

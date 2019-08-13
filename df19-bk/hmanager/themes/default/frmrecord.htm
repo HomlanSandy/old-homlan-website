@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http//www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head> 
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	frmrecord.htm	後台"表單記錄查詢"編輯的HTML頁面
+	│	開發者		│	廷俊
+	│	版本		│	v03.00.02.1040801
+	├=======================================================================================┤
+	│	1.	v03.00.02.1040801	2011/04/26	廷俊	1.表單記錄編輯頁面
+	│												2.返回表單記錄列表頁面，需帶表單名稱搜尋條件值
+	│												3.新增、修改成功提示訊息
+	│												4.搜尋表單的資料表
+	│												5.取得表單欄位名稱
+	│												6.利用表單欄位名稱，取得表單欄位資料
+	│												7.修改表單記錄成功提示訊息
+	└=======================================================================================┘
+*/-->
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_ListRecord}" onclick="location.href='{$BtnUnfoListUrl}';" />
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-30 edit by 廷俊
+	----------------------------------------------------
+	新增、修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<div id="show_table3">
+<FORM METHOD=POST enctype="multipart/form-data" ACTION="frmrecordlist.php?act=save">
+	<table border="0" cellpadding="2" cellspacing="2" align="center" width="80%" height="100%">
+		<tr>
+			<th align="right" valign="top">&nbsp;</th>
+			<td align="left">
+				<INPUT TYPE="hidden" NAME="frmlist_id" id="frmlist_id" value="{$frmlist_id}">
+				<INPUT TYPE="hidden" NAME="frm_create_date" id="frm_create_date" value="{$frm_create_date}">
+			</td>
+		</tr>
+	{section name=i loop=$umListTitle}
+		<tr>
+			<th align="right" valign="top">{$umListTitle[i].list_title}</th>
+			<td align="left">{$umListRecord[i]}</td>
+		</tr>
+	{/section}
+	{if $alter_date!=""}
+		<tr>
+			<th align="right" valign="top">{$AlterDate}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="alter_date" id="alter_date" value="{$alter_date}" disabled>
+			</td>
+		</tr>	
+		<tr>
+			<th align="right" valign="top">{$AlterUser}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="alter_user" id="alter_user" value="{$alter_user}" disabled>
+			</td>
+		</tr>	
+	{/if}
+		<tr>
+			<td align="center" colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">&nbsp;</td>
+		</tr>
+	</table>
+</FORM>
+</div>
+{$temp_log}</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http//www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head> 
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	order.htm		後台訂單管理編輯 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0082501
+	├=======================================================================================┤
+	│	1.	v1.0.1.0082501	2010/08/25	廷俊	建立訂單管理
+	│	2.	v1.0.1.0082601	2010/08/26	廷俊	a.訂貨人的資料從會員資料撈
+	│											b.訂單不可編輯訂貨人的資料、和特定的訂單內容
+	│	3.	v1.0.1.0082701	2010/08/27	廷俊	a.新增建立訂單建立日期、建立者、建立IP、修改日期、修改者、修改IP
+	│											b.訂單編輯頁面顯示修改日期、修改者
+	│											c.修改者從帳號管理資料撈
+	│											d.訂單編輯儲存時，修改者用SESSION管理者編號存
+	│											e.訂貨人無聯絡電話，則顯示”此訂貨人的會員資料中，無輸入任何連絡電話。”
+	│	4.	v1.0.1.0091001	2010/09/10	廷俊	a.更改配送時間的顯示格式
+	│											b.顯示購物資料
+	│	5.	v03.00.04.1050701	2011/05/10	廷俊	修正訂單的付款狀態，未確認=X(預設)、未付款=U(離線式)、付款失敗=F(即時式)、已付款=S
+	│	6.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+<!--
+
+var warming_ReceiveNa="{$warming_ReceiveNa}";
+var warming_ReceiveMail="{$warming_ReceiveMail}";
+var warming_ReceiveTel="{$warming_ReceiveTel}";
+var warming_ReceiveAddress="{$warming_ReceiveAddress}";
+
+{literal}
+
+	//存檔防呆
+	function chkpost(){
+		var msg='';
+		var reg_email=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; 
+		var receive_na=document.getElementById("receive_na").value;
+		var receive_mail=document.getElementById("receive_mail").value;
+		var receive_tel=document.getElementById("receive_tel").value;
+		var receive_address=document.getElementById("receive_address").value;
+		if (receive_na =="")
+		{
+			msg += warming_ReceiveNa + "\r\n";	
+		}
+		if (receive_mail !="" && !reg_email.test(receive_mail))
+		{
+			msg += warming_ReceiveMail + "\r\n";	
+		}
+		if (receive_tel =="")
+		{
+			msg += warming_ReceiveTel + "\r\n";	
+		}
+		if (receive_address =="")
+		{
+			msg += warming_ReceiveAddress + "\r\n";	
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+
+{/literal}
+//-->
+</script>
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_ListOrder}" onclick="location.href='{$BtnUnfoListUrl}';" />
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-30 edit by 廷俊
+	----------------------------------------------------
+	新增、修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<!--
+ 	2010-09-10 edit by 廷俊
+	----------------------------------------------------
+	顯示購物資料
+	----------------------------------------------------  
+	2010-08-27 edit by 廷俊
+	----------------------------------------------------
+	訂貨人無聯絡電話，則顯示”此訂貨人的會員資料中，無輸入任何連絡電話。”
+	---------------------------------------------------- 
+	2010-09-10 edit by 廷俊
+	----------------------------------------------------
+	更改配送時間的顯示格式
+	---------------------------------------------------- 
+ 	2011-05-10 edit by 廷俊
+	----------------------------------------------------
+	修正訂單的付款狀態，未確認=X(預設)、未付款=U(離線式)、付款失敗=F(即時式)、已付款=S
+	----------------------------------------------------  		
+-->
+<div id="show_table3">
+<FORM METHOD=POST enctype="multipart/form-data" ACTION="orderlist.php?act=save"	onsubmit="return chkpost();" >
+	<table border="0" cellpadding="2" cellspacing="2" align="center" width="80%" height="100%">
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<th align="right">{$OrderId}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_id" value="{$order_id}" disabled>
+				<INPUT TYPE="hidden" NAME="order_id" id="order_id" value="{$order_id}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$OrderDate}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_date" id="order_date" value="{$order_date}" disabled>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$OrderTotal}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_total" id="order_total" value="{$order_total}" disabled>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$OrderPrice}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_price" id="order_price" value="{$order_price}" disabled>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$OrderData}</th>
+			<td align="left">
+				<TEXTAREA NAME="order_data" id="order_data" ROWS="5" COLS="40" readonly style='color: gray'>{$order_data}</TEXTAREA>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$OrderNa}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_na" id="order_na" value="{$order_na}" size="50" disabled>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$OrderMail}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="order_mail" id="order_mail" value="{$order_mail}" size="50" disabled>
+			</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$OrderTel}</th>
+			<td align="left">{$order_tel}</td>
+		</tr>
+		<tr>
+			<th align="right">{$ReceiveNa}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_na" id="receive_na" value="{$receive_na}" size="50">
+				<span class="text_note">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$ReceiveMail}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_mail" id="receive_mail" value="{$receive_mail}" size="50">
+				<span class="text_note">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$ReceiveTel}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_tel" id="receive_tel" value="{$receive_tel}" size="50">
+				<span class="text_note">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$ReceiveAddress}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="receive_address" id="receive_address" value="{$receive_address}" size="50">
+				<span class="text_note">*</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$ReceiveDate}</th>
+			<td align="left">
+				<input type="radio" name="receive_date" value="X" id="receive_date" checked>{$Unlimited}
+				<input type="radio" name="receive_date" value="A" id="receive_date" {if $receive_date eq "A"}checked{/if}>{$Morning}
+				<input type="radio" name="receive_date" value="P" id="receive_date" {if $receive_date eq "P"}checked{/if}>{$Afternoon}
+				<input type="radio" name="receive_date" value="N" id="receive_date" {if $receive_date eq "N"}checked{/if}>{$Night}
+			</td>
+		</tr>	
+		<tr>
+			<th align="right">{$OrderState}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="order_state" value="1" {if $order_state=='1'}checked{/if}>{$OrderStateY}
+				<INPUT TYPE="radio" NAME="order_state" value="0" {if $order_state=='0'}checked{/if}>{$OrderStateN}
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$PaymentMode}</th>
+			<td align="left">{$payment_set}</td>
+		</tr>	
+		<tr>
+			<th align="right">{$PaymentState}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="payment_state" value="X" {if $payment_state=='X'}checked{/if}>{$PaymentStateX}
+				<INPUT TYPE="radio" NAME="payment_state" value="U" {if $payment_state=='U'}checked{/if}>{$PaymentStateU}
+				<INPUT TYPE="radio" NAME="payment_state" value="F" {if $payment_state=='F'}checked{/if}>{$PaymentStateF}
+				<INPUT TYPE="radio" NAME="payment_state" value="S" {if $payment_state=='S'}checked{/if}>{$PaymentStateS}
+			</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$PaymentText}</th>
+			<td align="left">
+				<TEXTAREA NAME="payment_text" id="payment_text" ROWS="5" COLS="40">{$payment_text}</TEXTAREA>
+			</td>
+		</tr>	
+		<tr>
+			<th align="right">{$ShipMode}</th>
+			<td align="left">{$ship_set}</td>
+		</tr>
+		<tr>
+			<th align="right">{$ShipState}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="ship_state" value="0" {if $ship_state=='0'}checked{/if}>{$ShipStateN}
+				<INPUT TYPE="radio" NAME="ship_state" value="1" {if $ship_state=='1'}checked{/if}>{$ShipStateY}
+				<INPUT TYPE="radio" NAME="ship_state" value="2" {if $ship_state=='2'}checked{/if}>{$ShipStateArrival}
+			</td>
+		</tr>	
+		<tr>
+			<th align="right" valign="top">{$ShipText}</th>
+			<td align="left">
+				<TEXTAREA NAME="ship_text" id="ship_text" ROWS="5" COLS="40">{$ship_text}</TEXTAREA>
+			</td>
+		</tr>
+<!--
+	2010-08-27 edit by 廷俊
+	----------------------------------------------------
+	a.新增建立訂單建立日期、建立者、建立IP、修改日期、修改者、修改IP
+	b.訂單編輯頁面顯示修改日期、修改者
+	c.修改者從帳號管理資料撈
+	d.訂單編輯儲存時，修改者用SESSION管理者編號存
+	---------------------------------------------------- 			
+-->		
+		{if $alter_date!=""}
+		<tr>
+			<th align="right" valign="top">{$AlterDate}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="alter_date" id="alter_date" value="{$alter_date}" disabled>
+			</td>
+		</tr>	
+		<tr>
+			<th align="right" valign="top">{$AlterUser}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="alter_user" id="alter_user" value="{$alter_user}" disabled>
+			</td>
+		</tr>	
+		{/if}
+		<tr>
+			<td align="center" colspan="2">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+	</table>
+</FORM>
+</div>
+{$temp_log}</body>
+</html>

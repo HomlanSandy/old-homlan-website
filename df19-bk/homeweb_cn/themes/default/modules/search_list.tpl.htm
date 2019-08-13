@@ -1,0 +1,62 @@
+<table width="100%" class="search_list_table" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="search_list_title" align="left" valign="middle"><img src="themes/{$themes_na}/images/searching.gif" border="0" align="absmiddle" />{$search_result}</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+ <!--   /*	
+	2010-09-07 edit by 廷俊
+	----------------------------------------------------
+	a.售價顯示
+	b.顯示會員價=售價*會員折扣*商品折扣
+	c.顯示購物車(庫存>安全庫存and售價>0)
+	d.顯示需求單(售價=0)
+	e.到達需求標準(庫存<=安全庫存)時，顯示需求單or無庫存
+	f.更改商品明細的連結
+	----------------------------------------------------
+	2010-09-17 edit by 廷俊
+	----------------------------------------------------
+	搜尋資訊列表顯示時，重新排版，無資料者空白
+	----------------------------------------------------
+	2010-09-20 edit by 廷俊
+	----------------------------------------------------
+	判斷明細為資訊，則不顯示優惠價格與操作；明細為商品，則顯示優惠價格與操作
+	----------------------------------------------------
+	2011-02-10 edit by 廷俊
+	------------------------------------------------------
+	1.顯示幣別
+	2.修正版面配置
+	------------------------------------------------------		
+*/	-->	     
+    <table width="100%" border="0" align="left" cellpadding="2" cellspacing="2" class="search_list_content"　border="0">
+	  <tr>		
+		<td align="center" class="search_list_subjust" width="10%">{$No}</td>
+		<td align="center" class="search_list_subjust" width="55%">{$Title}</td>
+		<td align="center" class="search_list_subjust" width="20%">{$Price}</td>
+		<td align="center" class="search_list_subjust" width="15%">{$Operation}</td>
+	  </tr>
+	{section name=i loop=$umSeachInfoList}
+	  <tr height="50">
+        <td align="center" class="search_list" valign="middle">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$nowPage z=$PerPageList}&nbsp;</td>
+        <td align="left" class="search_list">
+			<a href="{$umSeachInfoList[i].Search_href}" target="_self">{$umSeachInfoList[i].Search_infos_na}</a>
+		</td>
+		{if $umSeachInfoList[i].infos_type eq 1}
+		<td align="left" class="search_list">
+			{$umSeachInfoList[i].price_fix}
+			{$umSeachInfoList[i].price_sale}
+			{$umSeachInfoList[i].member_price}&nbsp;
+		</td>
+		<td align="left" class="search_list">
+			{$umSeachInfoList[i].Shopping}&nbsp;
+		</td>
+		{else}
+		<td align="center" class="search_list">X</td>
+		<td align="center" class="search_list">X</td>
+		{/if}
+      </tr>
+	 {/section}     
+    </table>    
+    </td>
+  </tr>
+</table>

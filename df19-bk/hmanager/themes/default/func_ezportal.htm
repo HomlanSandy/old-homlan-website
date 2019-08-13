@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	func_ezportal.htm		後台經銷商專區 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v03.00.01.1031801
+	├=======================================================================================┤
+	│	1.	v03.00.01.1031801	2011/03/29	廷俊	1.撈經銷商專區的資料
+	│												2.顯示語言別設定
+	│												3.驗證修改密碼的表單，防空值、新密碼=確認密碼
+	│												4.驗證語言別設定的表單，至少勾選一種以上的語言別設定
+	│												5.驗證密碼欄位，請輸入英文字母及數字
+	│												6.修改密碼、語言別設定標籤，分隔儲存表單
+	│	2.	v03.00.01.1031801	2011/03/30	廷俊	1.修正語言別頁籤顯示設定
+	│												2.修正驗證語言別設定的表單，至少勾選一種以上有效的語言別頁籤顯示設定
+	│	3.	v03.00.01.1031801	2011/03/31	廷俊	1.若經銷商帳號ezportal，為有效且未修改預設密碼qwer，則顯示帳號有效期限
+	│												2.驗證修改密碼不可為系統預設密碼qwer
+	│	4.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。	
+	└=======================================================================================┘
+-->
+
+<script>
+var old_passwd="{$old_passwd}";
+var new_passwd="{$new_passwd}";
+var chknew_passwd="{$chknew_passwd}";
+var null_error="{$null_error}";
+var pwd_chk_error="{$pwd_chk_error}";
+var input_char_error="{$input_char_error}";
+var lang_set_error="{$lang_set_error}";
+var new_passwd_error="{$new_passwd_error}";
+{literal}
+<!--
+
+	//驗證修改密碼的表單，防空值、新密碼=確認密碼
+	function save_pwd_chk(){
+		var msg="";				
+		if (document.all("old_passwd").value==""){
+			msg+=old_passwd+null_error+"\r\n";
+		} 
+		if (document.all("new_passwd").value==""){
+			msg+=new_passwd+null_error+"\r\n";
+		}
+		if (document.all("chknew_passwd").value==""){
+			msg+=chknew_passwd+null_error+"\r\n";
+		}		
+		if (document.all("new_passwd").value!="" && document.all("chknew_passwd").value!="") {
+			if (document.all("new_passwd").value!=document.all("chknew_passwd").value) {
+				msg+=pwd_chk_error+"\r\n";
+			}
+		}
+		if(document.all("new_passwd").value=="qwer"){
+			msg+=new_passwd_error+"\r\n";
+		}
+		if (msg!=""){
+			alert(msg);
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+/* 
+	2011-03-30 edit by 廷俊
+	--------------------------------------------------------------
+	修正驗證語言別設定的表單，至少勾選一種以上有效的語言別頁籤顯示設定
+	--------------------------------------------------------------
+*/	
+	//驗證語言別設定的表單，至少勾選一種以上有效的語言別頁籤顯示設定
+	function save_lang_chk(){
+		var msg="";				
+		var lang_chk=false;
+		var lang_state=document.getElementsByName("lang_state[]");
+		var languages=document.getElementsByName("languages[]");
+		for (var i=0;i<lang_state.length;i++){
+			//
+			if(lang_state[i].checked && languages[i].value==1){
+				lang_chk=true;
+			}
+		}
+
+		if(lang_chk==false){
+			msg+=lang_set_error+"\r\n";
+		}
+		if (msg!=""){
+			alert(msg);
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	//驗證密碼欄位，請輸入英文字母及數字
+	function input_value_chk(obj){
+		var reg=/^[a-zA-Z0-9_]+$/;		
+		if ((obj.value!="") && (!reg.test(obj.value))){
+			alert(input_char_error);
+			obj.value="";
+			obj.focus();
+		}
+	}
+	
+	
+	function show_ezpost(num){
+		var ezpost_on=document.getElementById("ezpost_on");
+		if(num==0)//不啟用 簡易上架 隱藏
+		{
+			ezpost_on.style.display='none';
+		}else//啟用 簡易上架 則顯示
+		{
+			ezpost_on.style.display='inline';
+		}
+	}
+	
+	//新增選項
+	function addSelect(p_type){
+		if (p_type==1){
+			var source=eval(document.getElementById('selcatid'));
+			var dest=eval(document.getElementById('selcatid2'));
+		}
+		
+		for(var i=0;i<=source.length-1;i++){
+			if (source.options[i].selected){
+				var new_option=new Option(source.options[i].text,source.options[i].value);				  
+				dest.options.add(new_option);
+				if (source.selectedIndex!=-1){
+					source.remove(i);
+				}
+			}
+		}
+		//寫入隱藏欄位
+		insertdestvalue(p_type);
+	}
+	
+	//移除選項
+	function rmSelect(p_type){
+		if (p_type==1){
+			var source=eval(document.getElementById('selcatid'));
+			var dest=eval(document.getElementById('selcatid2'));
+		}
+		
+		for(var i=0;i<=dest.length-1;i++){
+			if (dest.options[i].selected){				
+				var new_option=new Option(dest.options[i].text,dest.options[i].value);				  
+				source.options.add(new_option);
+				if (dest.selectedIndex!=-1){
+					dest.remove(i);
+				}
+			}
+		}
+		//寫入隱藏欄位
+		insertdestvalue(p_type);
+	}
+	
+	//寫入隱藏值
+	function insertdestvalue(p_type){		
+		var selidlist="";
+		if (p_type==1){			
+			var dest=eval(document.getElementById('selcatid2'));
+		}
+		for(var j=0;j<=dest.length-1;j++){			
+			selidlist+=dest.options[j].value+',';
+		}
+		selidlist=selidlist.substring(0,selidlist.length-1);		
+		if (p_type==1){document.getElementById('selcatidlist').value=selidlist;}	
+	}
+	
+	//排除重複的名稱
+	function repeatchk(p_type){
+		if (p_type==1){
+			var source=eval(document.getElementById('selcatid'));
+			var dest=eval(document.getElementById('selcatid2'));
+		}
+/*		
+	2012-12-13 edit by 健嘉
+	------------------------------------------------------
+	1.修改 排除重複的方法 原始的會因為刪除 所以沒有再比對該位置之值
+	------------------------------------------------------		
+*/
+		var s_len=source.length;
+		var d_len=dest.length;
+		var i=0;
+		while(i<source.length)
+		{
+			var k="Y";
+			var j=0;
+			while(j<d_len)
+			{	
+				if(source.length!=""){
+					if (source.options[i].value==dest.options[j].value){
+						source.remove(i);
+						k="N";
+					}
+				}
+				j++;
+			}
+			if(k=="N"){
+				i=0;
+			}else{
+				i++;
+			}
+		}				
+		//寫入隱藏欄位
+		insertdestvalue(p_type);	
+	}
+	
+-->
+{/literal}
+</script>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="show_table2">
+<!-- 頁籤起 -->
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">{$umTITLE1}</li>
+    <li class="TabbedPanelsTab" tabindex="0">{$umTITLE2}</li> 
+	{if $lang_db==''}
+	<li class="TabbedPanelsTab" tabindex="0">{$umTITLE3}</li>
+	{/if}
+	<li class="TabbedPanelsTab" tabindex="0">{$umTITLE4}</li>
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+<!-- 
+	2011-03-31 edit by 廷俊
+	--------------------------------------------------------------
+	1.驗證修改密碼不可為系統預設密碼qwer
+	2.若經銷商帳號ezportal，為有效且未修改預設密碼qwer，則顯示帳號有效期限
+	--------------------------------------------------------------
+ -->
+    <!-- 修改密碼 -->
+	<div class="TabbedPanelsContent">
+	  <form name="savefrm" method="post" action="{$frm_act1}" onsubmit="return save_pwd_chk();">
+		<table border="0" cellpadding="2" cellspacing="2" width="75%" align="center">
+			<tr>
+				<td align="left" colspan="2"><span class="text_note">{$Passwd_text}</span></td>
+			</tr>
+			<tr>
+				<th align="right">{$Login_ID}</th>
+				<td align="left"><INPUT TYPE="text" size="18" value="{$login_id}" disabled></td>
+			</tr>	
+			<tr>
+				<th align="right">{$Manager_Name}</th>
+				<td align="left"><INPUT TYPE="text" NAME="manager_na" size="18" value="{$manager_na}"></td>
+			</tr>	
+			<tr>
+				<th align="right">{$old_passwd}</th>
+				<td align="left"><INPUT TYPE="password" NAME="old_passwd" id="old_passwd" size="20" value="" onblur="javascript:input_value_chk(this);">{$input_type_text}</td>
+			</tr>	
+			<tr>
+				<th align="right">{$new_passwd}</th>
+				<td align="left"><INPUT TYPE="password" NAME="new_passwd" id="new_passwd" size="20" value="" onblur="javascript:input_value_chk(this);">{$input_type_text}</td>
+			</tr>	
+			<tr>
+				<th align="right">{$chknew_passwd}</th>
+				<td align="left"><INPUT TYPE="password" NAME="chknew_passwd" id="chknew_passwd" size="20" value="" onblur="javascript:input_value_chk(this);">{$input_type_text}</td>
+			</tr>					
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>					
+			<tr>
+				<td colspan="2" align="center">
+					<INPUT TYPE="submit" value="{$Btn_Save_Pwd}">
+					<INPUT TYPE="reset" value="{$Btn_Reset}">
+				</td>
+			</tr>					
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>	
+		</table>
+	  </form>
+	</div>
+<!-- /* 
+	2011-03-30 edit by 廷俊
+	--------------------------------------------------------------
+	修正語言別頁籤顯示設定
+	--------------------------------------------------------------
+*/ -->
+	<!-- 語言別設定 -->
+	<div class="TabbedPanelsContent">
+	  <form name="savefrm" method="post" action="{$frm_act2}" onsubmit="return save_lang_chk();">
+		<table border="0" cellpadding="2" cellspacing="2" width="75%" align="center">
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>			
+			<tr>
+				<th align="right">{$Lang_Set}</th>
+				<td align="left">{$lang_set}</td>
+			</tr>					
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>	
+			<tr>
+				<td colspan="2" align="center">
+					<INPUT TYPE="submit" value="{$Btn_Save_Lang}">
+					<INPUT TYPE="reset" value="{$Btn_Reset}">
+				</td>
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>	
+			</tr>					
+		</table>
+	  </form>
+	</div>
+	{if $lang_db==''}
+<!-- /* 
+	2011-11-07 edit by 健嘉
+	--------------------------------------------------------------
+	新增會員模式設定
+	--------------------------------------------------------------
+*/ -->
+	<!-- 會員模式設定 -->
+	<div class="TabbedPanelsContent">
+	  <form name="savefrm" method="post" action="{$frm_act3}" >
+		<table border="0" cellpadding="2" cellspacing="2" width="75%" align="center">
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>			
+			<tr>
+				<th align="right">{$umTITLE3}</th>
+				<td align="left">{$manager_mode}</td>
+			</tr>					
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>	
+			<tr>
+				<td colspan="2" align="center">
+					<INPUT TYPE="submit" value="{$Btn_Save_Mode}">
+					<INPUT TYPE="reset" value="{$Btn_Reset}">
+				</td>
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>	
+			</tr>					
+		</table>
+	  </form>
+	</div>
+	{/if}
+<!-- /* 
+	2011-12-03 edit by 健嘉
+	--------------------------------------------------------------
+	新增 圖文上架設定
+	--------------------------------------------------------------
+*/ -->
+	<!-- 圖文上架設定 -->
+	<div class="TabbedPanelsContent">
+	  <form name="savefrm" method="post" action="{$frm_act4}" >
+		<table border="0" cellpadding="2" cellspacing="2" width="75%" align="center">
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<th align="right">{$Lan_Upload}</th>
+				<td align="left">{$Pic_upload_set}<span style="color:red;">{$Lan_Upload_memo}</span></td>
+			</tr>				
+			<tr>
+				<th align="right">{$Lan_Ezpost}</th>
+				<td align="left">{$Ezpost_set}</td>
+			</tr>					
+			
+			<span id="ezpost_on"{$check_ezpost}>
+				<td align="center"colspan="2">
+				<table border=0 cellpadding=0 cellspacing=0>
+					<tr>
+						<td align="center" bgcolor="#96C3F0">{$allinfocatslist1}</td>
+						<td>&nbsp;</td>
+						<td align="center" bgcolor="#96C3F0">{$allinfocatslist2}</td>
+					</tr>
+					<tr>
+						<td>{$infocatsel}</td>
+						<td align="center">
+							<input type="button" value="{$BtnAdd}=&gt;" class="button" onclick="addSelect(1);"><br>
+							<input type="button" value="&lt;={$BtnOut}" class="button" onclick="rmSelect(1);"><br>
+						</td>
+						<td>{$infocatSelected}<input type="hidden" name="selcatidlist" id="selcatidlist" value="{$selcatidlist_value}"></td>
+					</tr>
+				</table>
+				</td>
+			</span>
+			
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>	
+			
+			<tr>
+				<td colspan="2" align="center">
+					<INPUT TYPE="submit" value="{$Btn_Save_Lang}">
+					<INPUT TYPE="reset" value="{$Btn_Reset}">
+				</td>
+			</tr>
+				
+			<tr>
+				<td colspan="2" align="center">&nbsp;</td>
+			</tr>					
+		</table>
+	  </form>
+	</div>
+	<script>repeatchk(1);</script>
+	</div>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+//-->
+</script>
+<!-- 頁籤終 -->
+{$temp_log}</body>
+</html>

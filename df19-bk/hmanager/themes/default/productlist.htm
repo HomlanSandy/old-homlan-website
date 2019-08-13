@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	productlist.htm		商品明細列表 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.0.0073001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0073001	2010/07/30	廷俊	刪除商品明細成功提示訊息
+	│	2.	v1.0.1.0080501	2010/08/05	廷俊	商品明細列表：顯示商品編號、定價、售價、庫存量
+	│	3.	v1.0.1.0080601	2010/08/06	廷俊	輸入查詢條件後 與 下拉式選擇頁碼，都必須selected查詢條件的值
+	│	4.	v2.0.0.0111101	2010/11/11	娜娜	將資訊狀態加入列表搜尋條件
+	└=======================================================================================┘
+-->
+<body>
+  <div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+		<input type="hidden" name="perpagenum" value="{$perpagenum_value}">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_AddInfos}" onclick="location.href='{$BtnAddInfoUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-30 edit by 廷俊
+	----------------------------------------------------
+	刪除商品明細成功提示訊息
+	---------------------------------------------------- 			
+	2010-08-05 edit by 廷俊
+	--------------------------------------------------------------
+	商品明細列表：顯示商品編號、定價、售價、庫存量
+	-------------------------------------------------------------- 
+-->
+{$Message}
+<form name="seachfrm" method="post" action="productlist.php?act=list&qlist=1">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">{$Category}{$catSel}     
+      {$InfoNa}      
+      <input name="textfield" type="text" id="textfield" size="15" value="{$textfield}">
+	  {$InfoState}
+      {$infoSel}
+      <img src="images/search_1.gif" width="20" height="20">
+	  <input type="hidden" name="perpagenum" value="{$perpagenum_value}">
+      <input name="button2" type="submit" class="search_btn" id="button2" value="{$InfoSearch}"></td>
+    </tr>
+</table>
+</div>
+</form>
+
+<div id="show_table4" class="main_link">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$InfoId}</td>
+	  <td width="" height="25" align="center" valign="middle" class="table_td_01">{$InfoNa}</td>
+	  <!-- <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$ProductId}</td> -->
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$PriceFix}</td>
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$PriceSale}</td>
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$Stocks}</td>
+	   <!-- <td width="" height="25" align="center" valign="middle" class="table_td_01">{$SimpleText}</td> -->
+      <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$InfoState}</td>	
+	   <td width="100px" height="25" align="center" valign="middle" class="table_td_01">{$AlterDate}</td>
+      <td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$InfoOperator}</td>
+    </tr>
+    {section name=i loop=$umInfos}
+    <tr>     
+	  <td height="25" align="center" valign="middle" class="table_td_02">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=$perpagenum_value}</td>
+	  <td height="25" align="left" valign="middle" class="table_td_02">{$umInfos[i].infos_na}</td>
+	   <!-- <td height="25" align="left" valign="middle" class="table_td_02">{$umInfos[i].product_id}</td> -->
+	  <td height="25" align="right" valign="middle" class="table_td_02">{$umInfos[i].price_fix}</td>
+	  <td height="25" align="right" valign="middle" class="table_td_02">{$umInfos[i].price_sale}</td>
+	  <td height="25" align="right" valign="middle" class="table_td_02">{$umInfos[i].stock}</td>
+	  <!--  <td height="25" align="left" valign="middle" class="table_td_02">{$umInfos[i].infos_simple_text1}</td> -->
+      <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].infos_state}</td>	
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].alter_date}</td>
+      <td height="25" valign="middle" align="center" class="table_td_02"><a href="{$umInfos[i].infos_url}">{$InfoEdit}</a>&nbsp;|&nbsp;<a href="{$umInfos[i].delinfos_url}" onclick="return confirm('{$cheDelete}?');">{$InfoDelete}</a></td>
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+<!--
+	2010-08-06 edit by 廷俊
+	----------------------------------------------------
+	輸入查詢條件後 與 下拉式選擇頁碼，都必須selected查詢條件的值
+	---------------------------------------------------- 	
+	2010-11-11 edit by 娜娜
+	----------------------------------------------------
+	輸入查詢條件加入資訊狀態，加入selected值
+	---------------------------------------------------- 		
+	2011-08-23 edit by 玉玲
+	----------------------------------------------------
+	加入每頁顯示筆數設定的值
+	---------------------------------------------------- 	
+-->
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?qlist=1&perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}&selcatid={$selcatid}&selcatid2={$selcatid2}&textfield={$textfield}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?qlist=1&perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}&selcatid={$selcatid}&selcatid2={$selcatid2}&textfield={$textfield}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+	{$PerPageNme}
+	{$umSetPageList}
+   </td>
+  </tr> 
+</table>
+</div>
+{$temp_log}</body>
+</html>

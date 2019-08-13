@@ -1,0 +1,17 @@
+{section name=k loop=$cmdList}
+	{if $cmdList[k].md_id==$page_left[a].md_id && $cmdList[k].page_id==$page_left[a].page_id && $cmdList[k].page_position==$page_left[a].page_position}
+		{$cmdList[k].selfcmd_content}
+	{/if}
+{/section}
+
+{section name=i loop=$cmdList}
+	{if $cmdList[i].md_id==$page_center[b].md_id && $cmdList[i].page_id==$page_center[b].page_id && $cmdList[i].page_position==$page_center[b].page_position}
+		{$cmdList[i].selfcmd_content}
+	{/if}
+{/section}
+
+{section name=j loop=$cmdList}
+	{if $cmdList[j].md_id==$page_right[c].md_id && $cmdList[j].page_id==$page_right[c].page_id && $cmdList[j].page_position==$page_right[c].page_position}
+		{$cmdList[j].selfcmd_content}
+	{/if}
+{/section}

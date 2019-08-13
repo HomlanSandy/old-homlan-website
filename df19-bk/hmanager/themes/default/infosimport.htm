@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	infosimport.htm		後台批次匯入明細 的 HTML編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.5.0122301
+	├=======================================================================================┤
+	│	1.	v2.0.5.0122301	2010/12/23	廷俊	新增批次匯入明細的功能頁面
+	│	2.	v03.00.03.1050301	2011/05/05	廷俊	1.驗證是否有上傳檔案
+	│												2.若有上傳檔案，則驗證副檔名
+	│												3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	│												4.取得副檔名
+	│												5.將副檔名轉換為小寫
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+/*
+	2010-10-22 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否上傳檔案
+	2.驗證上傳檔案格式
+	---------------------------------------------------- 			
+	2011-05-05 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否有上傳檔案
+	2.若有上傳檔案，則驗證副檔名
+	3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	4.取得副檔名
+	5.將副檔名轉換為小寫
+	---------------------------------------------------- 	
+*/
+var upload_select="{$upload_select}";
+var upload_format="{$upload_format}";
+{literal}
+	function chkpost(){
+		var fileName=document.getElementById('upfile').value;
+		//驗證是否有上傳檔案
+		if (fileName==""){
+			alert(upload_select);
+			return false;
+		//若有上傳檔案，則驗證副檔名
+		} else {
+			//取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+			extIndex = fileName.lastIndexOf('.');
+			//取得副檔名
+			fileType = fileName.substr(extIndex+1, fileName.length); 
+			//將副檔名轉換為小寫
+			fileType = fileType.toLowerCase();	
+			if (fileType!='csv'){
+				alert(upload_format);
+				return false;
+			}
+		}		
+	}
+{/literal}
+</script>
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle_infosimport}</td>
+      <td width="12%" align="right">&nbsp;
+       
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	儲存成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<div id="show_table3">
+ <form method=post action="{$savefrm_url}" enctype="multipart/form-data" onsubmit="return chkpost();">
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+		<table border="0" cellpadding="2" cellspacing="2" align="center" width="85%">
+			<tr>
+				<td align="right" width="150">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+			<tr>
+				<th align="right">{$infosdownload}</th>
+				<td align="left"><a href="{$download_url}">{$downloaded}</a><a href="{$download_url}"><img src="images/excel.png" border="0"></a></td>
+			</tr>	
+			<tr>
+				<th align="right">{$infosUpload}</th>
+				<td align="left"><INPUT TYPE="file" name="upfile" id="upfile" size="50"></td>
+			</tr>		
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left"><INPUT TYPE="submit" value="{$Btn_Save}"></td>
+			</tr>			
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td align="left"><font color=red>{$ps}</font></td>
+			</tr>
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+		</table>
+    </td>
+    </tr>
+    </table>
+</form>
+</div>
+{$temp_log}</body>
+</html>

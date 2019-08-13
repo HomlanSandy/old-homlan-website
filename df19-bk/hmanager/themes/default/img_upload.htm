@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<script language="Javascript">
+var pic_null_error="{$image_file_null_error}";
+var pic_type_error="{$image_file_type_error}";
+{literal}
+	function chengSelect(t_value){	
+		if (t_value=="image"){
+			document.all('span_image').style.display='';
+			document.all('span_vedio').style.display='none';
+		} else {
+			document.all('span_image').style.display='none';
+			document.all('span_vedio').style.display='';
+		}
+	}
+{/literal}
+</script>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle_Image}</td>
+      <td width="12%" align="right">&nbsp;
+       
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div id="show_table3">
+ <form method=post action="{$savefrm_url}" enctype="multipart/form-data" >
+    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%">
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+			<tr>
+				<th align="right">{$imageUpload}</th>
+				<td align="left"><INPUT TYPE="file" name="upfile" size="50"></td>
+			</tr>
+			<tr>
+				<th align="right">{$imageType}</th>
+				<td align="left">
+					<input type="radio" name="img_type" value="image" checked onclick="chengSelect('image');">{$type_image}
+					<input type="radio" name="img_type" value="flash" onclick="chengSelect('vedio');">{$type_vedio}
+				</td>
+			</tr>			
+			<tr>
+				<th align="right">{$imageCatalog}</th>
+				<td align="left">
+				<span id="span_image">
+					<select name="dir_image">
+					{section name=i loop=$umImg}
+						<option value="{$umImg[i].DirName}">{$umImg[i].DirName}</option>
+					{/section}
+					</select>
+				</span>
+				<span id="span_vedio" style="display:none;">
+					<select name="dir_flash">
+					{section name=j loop=$umVedio}
+						<option value="{$umVedio[j].DirName}">{$umVedio[j].DirName}</option>
+					{/section}
+					</select>
+				</span>
+				</td>
+			</tr>						
+		
+			<tr>
+				<th align="right">&nbsp;</th>
+				<td align="left"><INPUT TYPE="submit" value="{$Btn_Save}"></td>
+			</tr>	
+			<tr>
+				<td width="25%" align="right">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>			
+		</table>
+    </td>
+    </tr>
+    </table>
+</form>
+	 
+</div>
+
+{$temp_log}</body>
+</html>

@@ -1,0 +1,697 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 右方捲軸 顏色設定 */
+
+html {
+ SCROLLBAR-ARROW-COLOR: #22556C;
+ SCROLLBAR-FACE-COLOR: #EEEEEE;
+ SCROLLBAR-DARKSHADOW-COLOR: #CCCCCC;
+ SCROLLBAR-BASE-COLOR: #CCCCCC;
+ SCROLLBAR-HIGHLIGHT-COLOR: #EEEEEE;
+ SCROLLBAR-SHADOW-COLOR: #EEEEEE;
+ SCROLLBAR-TRACK-COLOR: #CCCCCC;
+ SCROLLBAR-3DLIGHT-COLOR: #CCCCCC;
+}
+
+
+/* 頁面屬性 */
+body {
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif,"新細明體";
+	font-size: small;
+	background-color: #FFF;
+	background-attachment: fixed;
+	background-image: url(../images/bg.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+a:link {
+	color: #36C;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #36C;
+}
+a:hover {
+	text-decoration: underline;
+	color: #933;
+}
+a:active {
+	text-decoration: none;
+	color: #933;
+}
+
+/* main頁框中的 連結顏色 設定 */
+
+.main_link a:link, .main_link a:visited{
+	color: #36C;
+}
+.main_link a:hover, .main_link a:active{
+	color: #933;
+}
+
+
+/* login畫面設定 */
+#login_bg{
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	color: #06C;
+	background-image: url(../images/bg.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+	background-color: #FFF;
+}
+
+.login_table{
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: #000;
+	font-size: small;
+}
+
+.login_vision{
+	font-size: small;
+	color: #666;
+	padding-left: 5px;
+}
+
+.login_textfield{
+	height: 18px;
+	line-height: 18px;
+	color: #069;
+	background-image: url(../images/textarea.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-left: 4px;
+	border-top-width: 1px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+}
+
+/* 頁首設定 */
+#top {
+	top: 0px;
+	left: 0px;
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	background-color: #FFF;
+	background-image: url(../images/top_bg.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+/* HY-Shop Logo */
+#logo {
+	height: 50px;
+	top: 0px;
+	width: 180px;
+	left: 0px;
+	color: #FFF;
+	font-size: small;
+}
+
+/* 上方 主要功能選單 樣式設定 */
+#top_menu {
+	height: 50px;
+	top: 50px;
+	width: 100%;
+	left: 0px;
+	position: absolute;
+	background-color: #669;
+}
+.menu_btn_style{
+	height: 23px;
+	width: 10%;
+	background-color: #000;
+	font-size: small;
+	color: #FFF;
+	background-image: url(../images/top_title_img.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #99C;
+	border-right-color: #669;
+	border-bottom-color: #669;
+	border-left-color: #99C;
+}
+
+/* 左邊 功能目錄 樣式設定 */
+#left_menu{
+	font-size: small;
+	color: #FFF;
+	background-color: #FFF;
+	position: absolute;
+	width: 180px;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	background-image: url(../images/left_bg.gif);
+	background-repeat: repeat-y;
+	background-position: right center;
+}
+
+.menu_style_left{
+	height: 25px;
+	width: 20px;
+	background-color: #FFF;
+	font-size: small;
+	color: #666;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #FFF;
+	background-image: url(../images/left_title_img.gif);
+	background-repeat: repeat-y;
+	background-position: left center;
+}
+.menu_style_right{
+	height: 25px;
+	background-color: #FFF;
+	font-size: small;
+	color: #666;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #FFF;
+}
+
+#menu_url_title{
+	font-size: 11pt;
+	color: #069;
+	background-color: #FFF;
+	background-image: url(../images/menu_url_title.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+.menu_url {
+	list-style-image: url(../images/to_right.gif);
+	background-image: url(../images/lefturl_bg.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+.menu_url_link a:link, .menu_url_link a:visited{
+	color: #000;
+	text-decoration: none;
+	font-size: 11pt;
+}
+
+.menu_url_link a:hover, .menu_url_link a:active{
+	color: #F60;
+	text-decoration: underline;
+	font-size: 11pt;
+}
+
+/* 下方bottom框架設定 */
+#bottom_style{
+	position: relative;
+	height: 25px;
+	width: 100%;
+	font-size: small;
+	color: #000;
+	left: 0px;
+	bottom: 0px;
+	background-color: #FFF;
+}
+
+.bottom_btn_style{
+	font-size: small;
+	color: #10445A;
+	font-size: small;
+	height: 23px;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+/* 下方版權宣告 */
+.powered_by{
+	width: 180px;
+	height: 25px;
+	font-size: small;
+	color: #FFF;
+	background-color: #F90;
+}
+
+/* 公司名稱 及 版本資訊 */
+#hyshop_version{
+	height: 25px;
+	width: 400px;
+	left: 210px;
+	top: 3px;
+	position: absolute;
+	font-size: 12pt;
+	color: #F90;
+	font-family: Arial,"新細明體";
+}
+.dateline{
+	font-size: small;
+	color: #666;
+}
+
+/* 使用者登入訊息 及 登出區域 */
+#login_msg{
+	color: #000;
+	height: 40px;
+	width: 350px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: small;
+}
+.login_btn{
+	font-size: small;
+	color: #C60;
+	height: 30px;
+	width: 80px;
+	border: 1px solid #FFF;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+/* 各功能介面標題 */
+#use_title{
+	width: 98%;
+	position: absolute;
+	left: 11px;
+	top: 15px;
+	font-size: medium;
+	font-weight: bold;
+	color: #000;
+	height: 30px;
+	right: 10px;
+}
+.hyware_title{
+	font-size: small;
+	font-weight: bold;
+	color: #036;
+}
+
+/* 功能標題底下的 搜尋區塊 */
+#search_block{
+	width: 95%;
+	position: absolute;
+	left: 10px;
+	top: 40px;
+	padding-left: 20px;
+	font-size: small;
+	color: #069;
+	height: 40px;
+	right: 10px;
+	background-image: url(../images/search_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.search_btn{
+	font-size: small;
+	color: #069;
+	height: 25px;
+	width: 60px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFF;
+	border-right-color: #69F;
+	border-bottom-color: #69F;
+	border-left-color: #FFF;
+	background-image: url(../images/btn2.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+.select_btn{
+	color: #069;
+	font-size: small;
+	border: 1px solid #F90;
+}
+
+/* 搜尋列表設定 */
+#show_table{
+	font-size: small;
+	color: #22566C;
+	position: absolute;
+	height: 350px;
+	width: 98%;
+	left: 10px;
+	top: 100px;
+	background-color: #FEF9E8;
+}
+
+.table_td_01{
+	height: 25px;
+	border: 1px solid #AFA9A7;
+	background-color: #FFF;
+	font-size: small;
+	color: #069;
+	text-align: center;
+	background-image: url(../images/table_td_01.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+
+.table_td_02{
+	height: 25px;
+	background-color: #FFF;
+	font-size: small;
+	color: #333;
+	padding: 7px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #AFA9A7;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #AFA9A7;
+	border-left-color: #AFA9A7;
+}
+
+/* 當上方無搜尋功能時的 搜尋列表設定 */
+#show_table2{
+	font-size: small;
+	color: #22566C;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 50px;
+	background-color: #FEF9E8;
+}
+
+.table_td_01_1{
+	height: 25px;
+	border: 1px solid #000;
+	background-color: #22566C;
+	font-size: small;
+	color: #FFF;
+}
+
+.table_td_02_1{
+	height: 25px;
+	background-color: #FFF;
+	font-size: small;
+	color: #333;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #AFA9A7;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #AFA9A7;
+	border-left-color: #AFA9A7;
+}
+
+/* 空白列表區塊 */
+#show_table3{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 50px;
+	border: 1px solid #22566C;
+	background-color: #FEF9E8;
+}
+
+/* 搜尋列表下方記錄區塊 */
+#note_table{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	bottom: 0px;
+}
+
+.table_td_03{
+	font-size: small;
+	color: #666;
+	padding-left: 10px;
+}
+
+
+/* 按鈕樣式 */
+.set_new_btn{
+	font-size: small;
+	color: #069;
+	height: 30px;
+	width: 120px;
+	top: 15px;
+	background-image: url(../images/btn2.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+	border: 1px solid #06C;
+	font-weight: bold;
+}
+
+.confirm_btn{
+	font-size: small;
+	color: #C30;
+	height: 40px;
+	width: 120px;
+	background-image: url(../images/btn.gif);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+	border: 3px outset #C60;
+}
+
+
+/* 頁籤式樣板設定 */
+.TabbedPanels {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	clear: none;
+	width: 100%;
+}
+.TabbedPanelsTabGroup {
+	margin: 0px;
+	padding: 0px;
+}
+
+.TabbedPanelsTab {
+	color: #22566C;
+	position: relative;
+	top: 1px;
+	float: left;
+	padding: 4px 10px;
+	margin: 0px 1px 0px 0px;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: small;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #CCC;
+	border-right-color: #CCC;
+	border-bottom-color: #F90;
+	border-left-color: #CCC;
+}
+.TabbedPanelsTabHover {
+	border: 1px solid #F90;
+}
+
+.TabbedPanelsTabSelected {
+	color: #C60;
+	border: 1px solid #F90;
+	font-weight: bold;
+}
+
+.TabbedPanelsTab a {
+	color: #000;
+	text-decoration: none;
+}
+
+.TabbedPanelsContentGroup {
+	clear: both;
+	color: #000;
+	border: 1px solid #F90;
+}
+
+.TabbedPanelsContent {
+	padding: 4px;
+	background-color: #FEF9E8;
+}
+
+.TabbedPanelsContentVisible {
+}
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	position: relative;
+	border: 1px solid #CCC;
+}
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+}
+
+.VTabbedPanels .TabbedPanelsContentGroup {
+	clear: none;
+	float: left;
+	padding: 0px;
+	width: 30em;
+	height: 20em;
+}
+
+/* 當上方有搜尋功能時的 搜尋列表設定 */
+#show_table4{
+	font-size: small;
+	color: #000;
+	position: absolute;
+	height: auto;
+	width: 98%;
+	left: 10px;
+	top: 100px;
+	background-color: #FEF9E8;
+}
+
+/* 表單樣式 */
+.form_table{
+	top: 70px;
+	position: absolute;
+	height: auto;
+	width: 100%;
+	left: 0px;
+}
+
+.form_bg{
+	background-color: #F90;
+}
+
+.form_list{
+	background-color: #22566C;
+	color: #FFF;
+}
+
+.form_td{
+	background-color: #EEE;
+}
+
+.form_textfield{
+	background-color: #FFF;
+	border: 1px solid #EEE;
+}
+
+.form_title{
+	color: #22566C;
+	font-size: medium;
+	font-weight: bold;
+}
+
+/* 首頁版本訊息 */
+#home_version{
+	position:absolute;
+	height:400px; width:600px;
+	margin:-200px 0px 0px -300px;
+	top: 50%;left: 50%;
+	text-align: left;
+}
+.home_version_title{
+	padding-left: 10px;
+	color: #06C;
+}
+.home_version_date{
+	padding-right: 10px;
+	color: #999;	
+}
+.update_date{
+	color: #F60;
+}
+.update_version{
+	color: #36f;
+}
+.config_total{
+	padding-left: 50px;
+	color: #36f;
+}
+.config_total_rlt{
+	padding-left: 10px;
+	color: #F00;
+}
+
+/* 新增刪除修改訊息條 */
+#msg_block{
+	font-size: small;
+	text-align:center;
+	font-weight: bold;
+	color: #000a79;
+	position: absolute;
+	height: auto;
+	width: 100%;
+	padding-left: 0px;
+	/*background-color: #abd9ff;*/
+	background-image: url(../images/msgbar.gif);
+	filter:alpha(Opacity=100, Finishopacity=50, style=3, StartY=50,finishY=100);
+	/*FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType='0',startColorstr='#FFFFFF',endColorstr='#abd9ff')
+	filter:alpha(Opacity=80, Finishopacity=0, style=3);
+	opacity: 0.8; 
+	*/
+}
+
+/*
+	2011-06-30 玉玲
+	新增項目說明text_note與項目註解text_explain的css樣式。
+*/
+
+.text_note{
+	color: #C30000;
+}
+.text_explain{
+	color: #874B00;	
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>資訊批次維護</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	infosbatch.htm	資訊批次維護 的 htm檔
+	│	開發者		│	玉玲
+	│	版本		│	v03.00.20
+	├=======================================================================================┤
+	│	
+	└=======================================================================================┘
+-->
+<script>
+var warming_infocatadd="{$warming_infocatadd}";
+var warming_infocatremove="{$warming_infocatremove}";
+var warming_commandmodadd="{$warming_commandmodadd}";
+var warming_commandmodremove="{$warming_commandmodremove}";
+var warming_infosdel="{$warming_infosdel}";
+var warming_infosstateyes="{$warming_infosstateyes}";
+var warming_infosstateno="{$warming_infosstateno}";
+var warming_infoscatsel1="{$warming_infoscatsel1}";
+var warming_infoscatsel2="{$warming_infoscatsel2}";
+var warming_commandmodsel1="{$warming_commandmodsel1}";
+var warming_commandmodsel2="{$warming_commandmodsel2}";
+var confirm_infocatadd="{$confirm_infocatadd}";
+var confirm_infocatremove="{$confirm_infocatremove}";
+var confirm_commandmodadd="{$confirm_commandmodadd}";
+var confirm_commandmodremove="{$confirm_commandmodremove}";
+var confirm_infosdel="{$confirm_infosdel}";
+var confirm_infosstateyes="{$confirm_infosstateyes}";
+var confirm_infosstateno="{$confirm_infosstateno}";
+var warming_showlistyes="{$warming_showlistyes}";
+var warming_showlistno="{$warming_showlistno}";
+var confirm_showlistyes="{$confirm_showlistyes}";
+var confirm_showlistno="{$confirm_showlistno}";
+{literal}
+function CheckAll(){
+	var ck = document.savefrm.elements["chkbox[]"]; 
+	var ckAll = document.savefrm.allbox; 
+	//當沒有checkbox時 
+	if (!ck){ 
+		ckAll.checked = false; 
+	//當只有一個checkbox時	
+	}else if (!ck.length){  
+		ck.checked = ckAll.checked; 
+	//當有兩個以上的checkbox時 	
+	}else{ 
+		for (var i=0;i<ck.length;i++) 
+			ck[i].checked = ckAll.checked; 
+	} 
+}
+
+function chkpost(p_type){
+   var chk = 0;
+   for(var i=0;i<document.savefrm.elements.length;i++)  {
+		obj = document.savefrm.elements[i];
+		if(obj.name=='chkbox[]') {
+			if(obj.checked) {
+				chk = 1;
+				break;
+			}
+		}
+	}
+	if(!chk) {
+		if(p_type=='1'){
+			alert(warming_infocatadd);
+		}			
+		else if(p_type=='2'){
+			alert(warming_infocatremove);
+		}		   
+		else if(p_type=='3'){
+			alert(warming_commandmodadd);
+		}		   
+		else if(p_type=='4'){
+			alert(warming_commandmodremove);
+		}			
+		else if(p_type=='5'){
+			alert(warming_infosdel);
+		}		
+		else if(p_type=='6'){
+			alert(warming_infosstateyes);
+		}		
+		else if(p_type=='7'){
+			alert(warming_infosstateno);
+		}	
+		else if(p_type=='8'){
+			alert(warming_showlistyes);
+		}		
+		else if(p_type=='9'){
+			alert(warming_showlistno);
+		}			
+		return false;
+	}	
+		
+	if ((p_type=='1' || p_type=='2') && document.getElementById("selcatid2").options[document.getElementById("selcatid2").selectedIndex].value=='0'){
+		if (p_type=='1'){
+			alert(warming_infoscatsel1);
+		} else if (p_type=='2'){
+			alert(warming_infoscatsel2);
+		}		
+		return false;
+	}
+	
+	if ((p_type=='3' || p_type=='4') && document.getElementById("selcmdid").options[document.getElementById("selcmdid").selectedIndex].value=='0'){
+		if (p_type=='3'){
+			alert(warming_commandmodsel1);
+		} else if (p_type=='4'){
+			alert(warming_commandmodsel2);
+		}	
+		return false;
+	}
+	document.getElementById('p_type').value=p_type;
+	if (p_type=='1'){
+		return confirm(confirm_infocatadd);
+	}
+	else if (p_type=='2'){
+		return confirm(confirm_infocatremove);
+	}
+	else if (p_type=='3'){
+		return confirm(confirm_commandmodadd);
+	}
+	else if (p_type=='4'){
+		return confirm(confirm_commandmodremove);
+	}
+	else if (p_type=='5'){
+		return confirm(confirm_infosdel);
+	}
+	else if (p_type=='6'){
+		return confirm(confirm_infosstateyes);
+	}
+	else if (p_type=='7'){
+		return confirm(confirm_infosstateno);
+	}
+	else if (p_type=='8'){
+		return confirm(confirm_showlistyes);
+	}
+	else if (p_type=='9'){
+		return confirm(confirm_showlistno);
+	}
+}
+{/literal}
+</script>
+<body>
+  <div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+{$Message}
+<form name="seachfrm" method="post" action="infosbatch.php?act=list&qlist=1">
+<div id="search_block">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="left">{$Category}{$catSel}   
+      {$InfoNa}      
+      <input name="textfield" type="text" id="textfield" size="15" value="{$textfield}">
+	  {$InfoState}
+      {$infoSel}
+      <img src="images/search_1.gif" width="20" height="20">
+	  <input type="hidden" name="perpagenum" value="{$perpagenum_value}">
+      <input name="button2" type="submit" class="search_btn" id="button2" value="{$InfoSearch}">
+	  <input name="button3" type="reset" class="search_btn" id="button3" value="{$Btn_Reset}">
+	 </td>
+    </tr>
+	<tr>
+		<td>
+		{$DateStart}<input type="text" name="DateStartFrom" id="f_date_a" size="8" value="{$DateStartFrom_value}" > ~ <input type="text" name="DateStartTo" id="f_date_b" size="8" value="{$DateStartTo_value}" >
+		{$DateStop}<input type="text" name="DateStopFrom" id="f_date_c" size="8" value="{$DateStopFrom_value}" > ~ <input type="text" name="DateStopTo" id="f_date_d" size="8" value="{$DateStopTo_value}" >
+		{$AlterDate}<input type="text" name="AlterDateFrom" id="f_date_e" size="8" value="{$AlterDateFrom_value}" > ~ <input type="text" name="AlterDateTo" id="f_date_f" size="8" value="{$AlterDateTo_value}" >
+		</td>
+	</tr>	
+	
+</table>
+</div>
+</form>
+
+<div id="show_table4" class="main_link">
+{if $qlist==1}
+<form name="savefrm" method="post" action="infosbatch.php?act=save">
+<!--
+<B>{$Category}</B>{$catSel2}<input name="savemod" type="submit" id="button4" value="{$InfosCatAdd}" onClick="return chkpost(1);"><input name="savemod" type="submit" id="button4" value="{$InfosCatRemove}" onClick="return chkpost(2);"><BR>
+<B>{$CommandMod}</B>{$commandmodsel}<input name="savemod" type="submit" id="button7" value="{$CommandModAdd}" onClick="return chkpost(3);"><input name="savemod" type="submit" id="button8" value="{$CommandModRemove}" onClick="return chkpost(4);"><BR>
+-->
+<input name="savemod" type="submit" id="button4" value="{$InfosDel}" onClick="return chkpost(5);">&nbsp;
+<input name="savemod" type="submit" id="button9" value="{$InfosStateYes}" onClick="return chkpost(6);">&nbsp;
+<input name="savemod" type="submit" id="button10" value="{$InfosStateNo}" onClick="return chkpost(7);">&nbsp;
+<input name="savemod" type="submit" id="button10" value="{$ShowListYes}" onClick="return chkpost(8);">&nbsp;
+<input name="savemod" type="submit" id="button10" value="{$ShowListNo}" onClick="return chkpost(9);">&nbsp;
+<input name="p_type" type="hidden" id="p_type" value="">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>     
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01"><input type="checkbox" name="allbox" onclick="CheckAll()">{$InfoChk}</td>
+	  <td width="" height="25" align="center" valign="middle" class="table_td_01">{$InfoNa}</td> 
+	  <td width="100px" height="25" align="center" valign="middle" class="table_td_01">{$DateStart}</td>
+	  <td width="100px" height="25" align="center" valign="middle" class="table_td_01">{$DateStop}</td> 
+	  <td width="100px" height="25" align="center" valign="middle" class="table_td_01">{$AlterDate}</td>
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$InfoState}</td>
+	  <td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$homewebstate}</td>	  
+    </tr>
+    {section name=i loop=$umInfos}
+    <tr>     
+	  <td height="25" align="center" valign="middle" class="table_td_02">		
+		<input type="checkbox" name="chkbox[]" id="chk_{$umInfos[i].idx}" value="{$umInfos[i].infos_id}">
+	  </td>
+	  <td height="25" align="left" valign="middle" class="table_td_02">{$umInfos[i].infos_na}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].datestart}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].datestop}</td>	  
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].alter_date}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].infos_state}</td>
+	  <td height="25" align="center" valign="middle" class="table_td_02">{$umInfos[i].homeweb}</td>	  
+    </tr>
+	{/section}
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">  
+</table>
+{/if}
+</form>
+</div>
+{$temp_log}</body>
+</html>
+<script type="text/javascript">
+<!--
+{literal}	
+	today = new Date();
+	
+	function catcalc(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date1 = new Date(time);       
+		document.getElementById("f_date_a").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_a",   	// id of the input field
+    ifFormat       :    "%Y-%m-%d",       	// format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc
+    });
+	
+	function catcald(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date2 = new Date(time);      
+		document.getElementById("f_date_b").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_b",   	// id of the input field
+    ifFormat       :    "%Y-%m-%d",       	// format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald
+    });	
+	
+	function catcalc2(cal2) {
+        var date = cal2.date;
+        var time = date.getTime()
+        var date1 = new Date(time);       
+		document.getElementById("f_date_c").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_c",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc2
+    });
+	
+	function catcald2(cal2) {
+        var date = cal2.date;
+        var time = date.getTime()
+        var date2 = new Date(time);      
+		document.getElementById("f_date_d").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_d",   		// id of the input field
+    ifFormat       :    "%Y-%m-%d",     // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald2
+    });	
+	
+	function catcalc3(cal3) {
+        var date = cal3.date;
+        var time = date.getTime()
+        var date1 = new Date(time);       
+		document.getElementById("f_date_e").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_e",   		// id of the input field
+    ifFormat       :    "%Y-%m-%d",     // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc3
+    });
+	
+	function catcald3(cal3) {
+        var date = cal3.date;
+        var time = date.getTime()
+        var date2 = new Date(time);      
+		document.getElementById("f_date_f").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_f",   		// id of the input field
+    ifFormat       :    "%Y-%m-%d",     // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald3
+    });	
+
+{/literal}	
+//-->
+</script>

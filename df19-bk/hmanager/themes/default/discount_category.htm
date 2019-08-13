@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http//www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head> 
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	discount_category.htm		後台商品分類折扣編輯 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0083001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0083001	2010/08/30	廷俊	a.建立商品分類折扣
+	│											b.新增、修改、刪除成功提示訊息
+	│											c.新增內容後，顯示建立者資訊；修改內容後，則顯示最後一筆修改者資訊
+	│	2.	v1.0.1.0083101	2010/08/31	廷俊	a.驗證是否選取分類、折扣率為0~100的數值
+	│											b.若無輸入折扣率，系統將預設為100%
+	│	3.	v1.0.1.0090601	2010/09/06	廷俊	增加驗證生效日期須小於等於截止日期
+	└=======================================================================================┘
+-->
+<script type="text/javascript">
+<!--
+	var warming_Category="{$warming_Category}";
+	var warming_Discount="{$warming_Discount}";
+	var warming_date="{$warming_date}";
+{literal}
+/*
+	2010-08-31 edit by 廷俊
+	----------------------------------------------------
+	驗證是否選取分類、折扣率為0~100的數值
+	---------------------------------------------------- 			
+	2010-09-06 edit by 廷俊
+	----------------------------------------------------
+	增加驗證生效日期須小於等於截止日期
+	---------------------------------------------------- 			
+*/		
+	//存檔防呆
+	function chkpost(){
+		msg="";
+		var ck_int=/^\d+(\.\d+)?$/;
+		var item_id=document.getElementById("item_id").value;
+		var discount=document.getElementById("discount").value;
+		if(item_id==0){
+			msg += warming_Category + "\r\n";
+		}
+		if(document.getElementById("discount_star").value > document.getElementById("discount_end").value){
+			msg += warming_date + "\r\n";
+		}
+		if(discount!=""){
+			if(!ck_int.test(discount) || discount<0 || discount>100){
+				msg += warming_Discount + "\r\n";
+			}
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}	
+{/literal}
+//-->
+</script>
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn" id="button" value="{$Btn_ListDiscount}" onclick="location.href='{$BtnUnfoListUrl}';" />
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-30 edit by 廷俊
+	----------------------------------------------------
+	新增、修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<div id="show_table3">
+<FORM METHOD=POST enctype="multipart/form-data" ACTION="discount_categorylist.php?act=save" onsubmit="return chkpost();" >
+	<table border="0" cellpadding="2" cellspacing="2" align="center" width="80%" height="100%">
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td align="left">
+				<INPUT TYPE="hidden" NAME="discount_id" id="discount_id" value="{$discount_id}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$Category}</th>
+			<td align="left">{$CategoryList}<span style="color:red;">*</span></td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$Discount}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="discount" id="discount" value="{$discount}">%<br>
+				<span style="color:red;">{$Discount_text}</span>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$DiscountStar}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="discount_star" id="discount_star" value="{$discount_star}" readonly>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$DiscountEnd}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="discount_end" id="discount_end" value="{$discount_end}" readonly>
+			</td>
+		</tr>
+			<th align="right">{$DiscountState}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="discount_state" value="1" checked>{$DiscountStateY}
+				<INPUT TYPE="radio" NAME="discount_state" value="0" {if $discount_state=='0'}checked{/if}>{$DiscountStateN}
+			</td>
+		</tr>
+<!-- /*
+	2010-08-30 edit by 廷俊
+	----------------------------------------------------
+	新增內容後，顯示建立者資訊；修改內容後，則顯示最後一筆修改者資訊
+	---------------------------------------------------- 
+*/ -->	
+{if $RecordDate!=""}
+		<tr>
+			<th align="right">{$RecordDate}</th>
+			<td align="left">
+				<INPUT TYPE="text" value="{$record_date}" disabled>
+			</td>
+		</tr>	
+		<tr>
+			<th align="right">{$RecordUser}</th>
+			<td align="left">
+				<INPUT TYPE="text" value="{$record_user}" disabled>
+			</td>
+		</tr>
+{/if}		
+		<tr>
+			<td align="center" colspan="2">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+	</table>
+</FORM>
+</div>
+{literal}
+<script type="text/javascript">
+<!--
+	today = new Date();
+	
+	function catcalc(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date1 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("discount_star").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "discount_star",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc
+    });
+	
+	function catcald(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date2 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("discount_end").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "discount_end",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald
+    });
+//-->
+</script>
+{/literal}
+{$temp_log}</body>
+</html>

@@ -1,0 +1,23 @@
+{section name=i loop=$umDiscuz}
+<div align="left" class="discuss_list_table">
+	<img src="themes/{$themes_na}/images/class_title.gif" border="0" align="absmiddle" />
+	{$umDiscuz[i].discusstype_na}&nbsp;&nbsp;&nbsp;{$umDiscuz[i].btnpost}
+	<input type="hidden" name="pofileornot" id="pofileornot" value="{$umDiscuz[i].permitfile}" />
+</div> 
+<!-- 討論區列表 -->
+<table width="100%" border="0" cellpadding="2" cellspacing="2" class="discuss_list_content">
+  <tr>
+    <td width="10%" align="center" class="discuss_list_title" id="discuzid">{$discuzid}</td>
+    <td width="45%" align="center" class="discuss_list_title" id="discuztitle">{$discuztitle}</td>
+    <td width="20%" align="center" class="discuss_list_title" id="discuzperson">{$discuzperson}</td>
+    <td width="25%" align="center" class="discuss_list_title" id="discuztime">{$discuztime}</td>
+  </tr>
+{$umDiscuz[i].dizlist}
+</table>
+
+<div align="right" class="discuss_list_table">
+{if $umDiscuz[i].dislistnum>5}
+    <a href="board.php?act=tyl&tyid={$umDiscuz[i].discusstype_id}" target="_self"><img src="themes/{$themes_na}/images/dash.gif" border="0" align="absmiddle" alt="more" />{$moredizcon}</a>
+{/if}
+</div>
+{/section}

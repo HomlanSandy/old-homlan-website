@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<script>
+var old_passwd="{$old_passwd}";
+var new_passwd="{$new_passwd}";
+var chknew_passwd="{$chknew_passwd}";
+var null_error="{$null_error}!";
+var pwd_chk_error="{$pwd_chk_error}!";
+var input_char_error="{$input_char_error}";
+{literal}
+<!--
+	function save_chk(){
+		var msg="";				
+		if (document.all("old_passwd").value==""){
+			msg+=old_passwd+null_error+"\r\n";
+		} 
+		if (document.all("new_passwd").value==""){
+			msg+=new_passwd+null_error+"\r\n";
+		}
+		if (document.all("chknew_passwd").value==""){
+			msg+=chknew_passwd+null_error+"\r\n";
+		}		
+		if (document.all("new_passwd").value!="" && document.all("chknew_passwd").value!="") {
+			if (document.all("new_passwd").value!=document.all("chknew_passwd").value) {msg+=pwd_chk_error+"\r\n";}
+		}
+		if (msg!=""){
+			alert(msg);	return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function input_value_chk(obj){
+		var reg=/^[a-zA-Z0-9_]+$/;		
+		if ((obj.value!="") && (!reg.test(obj.value))){
+			alert(input_char_error);
+			obj.value="";
+			obj.focus();
+		}
+	}
+-->
+{/literal}
+</script>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="12%" align="right">
+        <input name="button" type="submit" class="set_new_btn"  value="{$Btn_User}" onclick="location.href='{$BtnUsersListUrl2}';">
+      </td> 
+    </tr>
+  </table>
+</div>
+
+<div>
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+ 
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+<div id="show_table3">
+	{$sunline}
+</div>
+
+
+</body>
+</html>

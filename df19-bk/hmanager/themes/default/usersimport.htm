@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	usersimport.htm		後台會員名單匯入 的 HTML編輯頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.1.0102101
+	├=======================================================================================┤
+	│	1.	v2.0.0.0102101	2010/10/21	廷俊	a.新增會員名單匯入功能
+	│											b.驗證是否上傳檔案
+	│											c.驗證上傳檔案格式
+	│											d.載入PHPExcel套件
+	│											e.自動產生名單範例檔，可供下載
+	│											f.名單範例檔的欄位依會員登記項目的使用者自訂產生
+	│	2.	v2.0.0.0102201	2010/10/22	廷俊	a.名單範例檔的密碼、閱讀權限、折扣等級、性別等欄位，設為系統預設值
+	│											b.會員名單匯入時，設定 PHP 執行時間無限制
+	│											c.會員名單匯入時，釋放PHP記憶體
+	│											d.會員名單匯入時，載入PHPExcel套件
+	│											e.會員名單Excel匯入時，排除所有欄位值為空的行數
+	│											f.會員名單Excel匯入時，驗證所有會員帳號格式
+	│											g.會員名單Excel匯入時，驗證所有會員MAIL格式
+	│											h.會員名單Excel匯入時，驗證所有會員帳號是否重複，包含DB的資料
+	│											i.會員名單Excel匯入時，驗證所有會員MAIL是否重複，包含DB的資料
+	│											j.儲存成功提示訊息
+	│											k.會員名單匯入頁面，新增注意事項說明
+	│	3.	v2.0.8.1021101	2011/02/11	廷俊	顯示提醒目前『網站共用設定』->『後台會員新增至』的設定值
+	│	4.	v2.0.8.1022401	2011/02/24	廷俊	檔案格式錯誤，請上傳『 CSV 』類型的檔案！
+	│	5.	v2.0.8.1031801	2011/03/18	廷俊	調整會員名單匯入的版面配置
+	│	6.	v03.00.03.1050301	2011/05/05	廷俊	1.驗證是否有上傳檔案
+	│												2.若有上傳檔案，則驗證副檔名
+	│												3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	│												4.取得副檔名
+	│												5.將副檔名轉換為小寫
+	│	7.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+/*
+	2010-10-22 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否上傳檔案
+	2.驗證上傳檔案格式
+	---------------------------------------------------- 			
+	2011-05-05 edit by 廷俊
+	----------------------------------------------------
+	1.驗證是否有上傳檔案
+	2.若有上傳檔案，則驗證副檔名
+	3.取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+	4.取得副檔名
+	5.將副檔名轉換為小寫
+	---------------------------------------------------- 	
+*/
+var upload_select="{$upload_select}";
+var upload_format="{$upload_format}";
+{literal}
+	function chkpost(){
+		var fileName=document.getElementById('upfile').value;
+		//驗證是否有上傳檔案
+		if (fileName==""){
+			alert(upload_select);
+			return false;
+		//若有上傳檔案，則驗證副檔名
+		} else {
+			//取得檔名最後一個"點"的起始位元，若檔名無"點"則等於-1
+			extIndex = fileName.lastIndexOf('.');
+			//取得副檔名
+			fileType = fileName.substr(extIndex+1, fileName.length); 
+			//將副檔名轉換為小寫
+			fileType = fileType.toLowerCase();	
+			if (fileType!='csv'){
+				alert(upload_format);
+				return false;
+			}
+		}		
+	}
+{/literal}
+</script>
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle_usersimport}</td>
+      <td width="12%" align="right">&nbsp;
+       
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	儲存成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<div id="show_table3">
+ <form method=post action="{$savefrm_url}" enctype="multipart/form-data" onsubmit="return chkpost();">
+ <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="top">
+		<table border="0" cellpadding="2" cellspacing="2" align="center" width="85%">
+			<tr>
+				<td align="right" width="100">&nbsp;</td>
+				<td align="left">&nbsp;</td>
+			</tr>
+			<tr>
+				<th align="right">{$usersdownload}</th>
+				<td align="left">
+					<a href="{$download_url}">{$downloaded}</a>
+					<a href="{$download_url}"><img src="images/excel.png" border="0"></a>
+				</td>
+			</tr>	
+			<tr>
+				<th align="right">{$usersUpload}</th>
+				<td align="left"><INPUT TYPE="file" name="upfile" id="upfile" size="50"></td>
+			</tr>
+<!--
+	2011-02-11 edit by 廷俊
+	----------------------------------------------------
+	顯示提醒目前『網站共用設定』->『後台會員新增至』的設定值
+	----------------------------------------------------
+	2011-03-18 edit by 廷俊
+	----------------------------------------------------
+	調整會員名單匯入的版面配置
+	---------------------------------------------------- 
+-->
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td align="left"><font class="text_note">{$userinsert}</font></td>
+			</tr>	
+			<tr>
+				<th align="center" colspan="2">&nbsp;</th>
+			</tr>			
+			<tr>
+				<th align="center" colspan="2"><INPUT TYPE="submit" value="{$Btn_Save}"></th>
+			</tr>			
+			<tr>
+				<td align="left" colspan="2"><font class="text_note">{$ps}</font></td>
+			</tr>
+			<tr>
+				<th align="center" colspan="2">&nbsp;</th>
+			</tr>
+		</table>
+    </td>
+  </tr>
+ </table>
+ </form>
+</div>
+{$temp_log}</body>
+</html>

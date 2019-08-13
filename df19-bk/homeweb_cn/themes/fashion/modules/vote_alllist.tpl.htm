@@ -1,0 +1,27 @@
+<p align="center" class="vote_title">{$online_poll}</p>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left">
+{section name=i loop=$voteList}
+<table align="left">
+	<tr>
+		<td align="left" class="vote">
+		<form name="frmvote" action="vote.php?act=save" method="post">
+			<div class="vote_part">{$voteList[i].vote_title}</div>
+			<input type="hidden" value="{$voteList[i].votemain_id}" name="votemain_id">
+			<input type="hidden" value="{$voteList[i].oneormanychoice}" name="oneormanychoice">
+			{$voteList[i].allchoice}
+			<img src="{$voteList[i].captcha_url}" border="0" align="absmiddle">
+			<input name="captcha_num" type="text" id="captcha_num" size="4" maxlength="4" style="text-align:center;" />
+			<div>
+			  <input name="" type="submit" value="{$vote_post}" class="vote_btn" />
+			  <input type="button" value="{$vote_result}" class="vote_btn" onclick="location='vote.php?id={$voteList[i].votemain_id}&type={$voteList[i].oneormanychoice}'" onkeypress="location='vote.php?id={$voteList[i].votemain_id}'" />
+			</div>
+		</form>
+		</td>
+	</tr>
+</table>
+{/section} 
+    </td>
+  </tr>
+</table>

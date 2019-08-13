@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http//www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	users.htm		新增會員資料 的 HTM編輯頁面
+	│	開發者		│	玉玲
+	│	版本		│	v1.0.0.0081001
+	├=======================================================================================┤
+	│	1.	v1.0.1.0081001	2010/08/10	廷俊	增加會員的折扣等級
+	│	2.	v1.0.1.0081101	2010/08/11	廷俊	新增、修改、刪除成功提示訊息
+	│	3.	v1.0.1.0082601	2010/08/26	廷俊	a.取消『會員名稱』的使用者輸入提示
+	│											b.PHP程式輸出文字網頁(text/html)，錯誤訊息編碼為utf-8
+	│	4.	v1.0.1.0090101	2010/09/01	廷俊	新增會員時，驗證會員帳號只能輸入英文字母及數字
+	│	5.	v2.0.8.1021101	2011/02/11	廷俊	顯示提醒目前『網站共用設定』->『後台會員新增至』的設定值
+	│	6.	v2.0.8.1022401	2011/02/24	廷俊	1.開放會員資訊狀態功能設定
+	│											2.會員名稱的欄位後方顯示(開放會員編輯)
+	│	7.	v2.0.8.1031501	2011/03/15	廷俊	1.若會員登記項目勾選前台顯示，則在後台的會員編輯欄位後方顯示標記
+	│											2.新增標記的備註訊息為前台開放會員可編輯欄位資料
+	│	8.	v2.0.8.1031601	2011/03/16	廷俊	1.開放會員名稱、帳號、密碼、確認密碼、MAIL的欄位長度設定	
+	│											2.調整會員編輯頁面的版面配置
+	│	9.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->
+<script type="text/javascript">
+<!--
+var act_mod="{$act}";
+var manager_mod="{$manager_mod}"; 
+var lang_db="{$lang_db}";
+var warming_na="{$warming_na}";
+var warming_id="{$warming_id}";
+var warming_pw="{$warming_pw}";
+var warming_same="{$warming_same}";
+var warming_gp="{$warming_gp}";
+var warming_mail="{$warming_mail}";
+var warming_idre="{$warming_idre}";
+var warming_mailre="{$warming_mailre}";
+var warming_char_error="{$warming_char_error}";
+var warming_email_error="{$warming_email_error}";
+var warming_chgupid="{$warming_chgupid}";
+{literal}
+	function value_type_chk(obje){
+		var p_value=obje.value;
+		var reg_char=/^[a-zA-Z0-9_]+$/; 
+		
+		if (p_value!="" && !reg_char.test(p_value))
+		{
+			alert(warming_char_error);
+			obje.focus();
+		}
+	}
+/*
+	2010-05-14 edit by 廷俊
+	------------------------------------------------------
+	1.驗證會員email重複
+	2.更改驗證會員email
+	------------------------------------------------------		
+*/	
+	function chkmail(){
+		var reg_email=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; 
+		var UserMail=document.getElementById("UserMail").value
+		if (UserMail !="" && !reg_email.test(UserMail))
+		{
+			alert(warming_email_error);
+			document.getElementById("UserMail").focus();
+		}
+		document.getElementById("ifm").src="mem_chk.php?act=mail&data=" + UserMail;
+	}
+	
+/*	
+	送出資料時必要欄位資料判斷	
+*/
+	function chkpost(){
+		var msg="";		
+		if(document.getElementById("UserNa").value==''){
+			msg += warming_na + "\r\n";			
+		}
+		if(document.getElementById("UserLoginid").value==''){
+			msg += warming_id + "\r\n";			
+		}
+		if (act_mod=="add")
+		{
+			if((document.getElementById("UserPwd").value=='') && (document.getElementById("users_id").value=='')){
+				msg += warming_pw + "\r\n";
+			}
+			if(document.getElementById("UserPwd").value!=document.getElementById("UserConfirmPwd").value){
+				msg += warming_same + "\r\n";
+			}
+		}
+		
+		if(document.getElementById("selusergroupidlist").value==''){
+			msg += warming_gp + "\r\n";
+		}
+		
+ 		if(document.getElementById("UserMail").value==''){
+			msg += warming_mail + "\r\n";
+		}
+		
+		if(document.getElementById("loginidtxt").innerText!=''){
+			msg += warming_idre + "\r\n";
+		}		
+		
+		if(document.getElementById("mailre").innerText!=''){
+			msg += warming_mailre + "\r\n";
+		}
+		
+		
+		//若會員模式設定為推薦時，才需進一步判斷				
+		if (manager_mod==1 && lang_db==''){
+			if(document.getElementById("refereeidtxt").innerText!=''){
+				msg += "請輸入正確的推薦人資料" + "\r\n";
+			}
+			if (document.getElementById("referee_name").value==''){
+				msg += "推薦人姓名不得為空白" + "\r\n";
+			}
+			if (document.getElementById("referee_cell").value==''){
+				msg += "推薦人手機號碼不得為空白" + "\r\n";
+			}		
+		}			
+		
+		if(msg==''){
+			return true;		
+		}else{
+			alert(msg);
+			return false;
+		}		
+	}
+	
+	//判斷會員帳號是否重複
+	function chkloginid(){
+		var dataid=document.getElementById("UserLoginid").value;
+		document.getElementById("ifm").src="mem_chk.php?act=loginid&data=" + dataid;
+	}
+	
+	//新增選項
+	function addSelect(p_type){	
+		if (p_type==1){
+			var source=eval(document.getElementById('selgroupid'));
+			var dest=eval(document.getElementById('selgroupid2'));
+		}		
+		for(var i=0;i<=source.length-1;i++){
+			if (source.options[i].selected){
+				var new_option=new Option(source.options[i].text,source.options[i].value);				  
+				dest.options.add(new_option);
+				if (source.selectedIndex!=-1){
+					source.remove(i);
+				}
+			}
+		}	
+		//寫入隱藏欄位
+		insertdestvalue(p_type);
+	}
+	
+	//移除選項
+	function rmSelect(p_type){
+		if (p_type==1){
+			var source=eval(document.getElementById('selgroupid'));
+			var dest=eval(document.getElementById('selgroupid2'));
+		}	
+		for(var i=0;i<=dest.length-1;i++){
+			if (dest.options[i].selected){				
+				var new_option=new Option(dest.options[i].text,dest.options[i].value);				  
+				source.options.add(new_option);
+				if (dest.selectedIndex!=-1){
+					dest.remove(i);
+				}
+			}
+		}
+		//寫入隱藏欄位
+		insertdestvalue(p_type);
+	}
+	
+	//寫入隱藏值
+	function insertdestvalue(p_type){		
+		var selidlist="";
+		if (p_type==1){			
+			var dest=eval(document.getElementById('selgroupid2'));
+		}		
+		for(var j=0;j<=dest.length-1;j++){			
+			selidlist+=dest.options[j].value+',';
+		}
+		selidlist=selidlist.substring(0,selidlist.length-1);		
+		if (p_type==1){document.getElementById('selusergroupidlist').value=selidlist;}	
+	}
+	
+	//排除重複的名稱
+	function repeatchk(p_type){
+		if (p_type==1){
+			var source=eval(document.getElementById('selgroupid'));
+			var dest=eval(document.getElementById('selgroupid2'));
+		}		
+		if (source.length>0){
+			for(var i=0;i<=source.length-1;i++){
+				for(var j=0;j<=dest.length-1;j++){
+					if (source.options[i].value==dest.options[j].value){						
+						source.remove(i);			
+					}
+				}			
+			}
+		}		
+		//寫入隱藏欄位
+		insertdestvalue(p_type);		
+	}
+	
+	//判斷推薦人是否存在
+	function refermember(){
+		var UserReName=document.getElementById("referee_name").value;
+		var UserRePhone=document.getElementById("referee_cell").value;
+		var strCmnd="";
+		if (UserReName!="" && UserRePhone!=""){
+			strCmnd="mem_chk.php?act=ChkreferMember&UserReName="+UserReName+"&UserRePhone="+UserRePhone;		
+			document.getElementById("ifm").src=strCmnd;		
+		}else{
+			document.getElementById('refereeidtxt').innerText='';
+		}
+	}
+	
+	function chkpost2(){
+		var msg2="";
+		if (document.getElementById('chgUpUserName').value==''){
+			msg2+=warming_chgupid;
+		}
+		if (msg2==''){
+			return true;
+		} else {
+			alert(msg2);return false;			
+		}
+	}
+	
+{/literal}	
+//-->
+</script>
+<body>
+{$Message}
+<div id="use_title">
+ <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle1}</td>
+      <td width="12%" align="right">
+         {if $act=="edit" and $manager_mode=="1" } <input  type="submit" class="set_new_btn"  value="{$Btn_User}" onclick="location.href='{$BtnUsersListUrl}';"> {/if}
+      </td>
+    </tr>
+  </table>
+
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">基本資料</li>
+   {if $act=="edit" and $manager_mode=="1" and $users_id_value!="0" } <li class="TabbedPanelsTab" tabindex="0">變更上線</li> {/if}
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+ 
+
+<!--
+	2010-08-11 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 					
+-->	
+	  <div class="TabbedPanelsContent">
+		<iframe width=0% height=0% id="ifm"></iframe>
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td valign="top">
+		  <form method=post action="userslist.php?act=save" onsubmit="return chkpost();">
+			<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%">
+	<!--
+		2010-09-01 edit by 廷俊
+		----------------------------------------------------
+		新增會員時，驗證會員帳號只能輸入英文字母及數字
+		---------------------------------------------------- 
+		2011-02-24 edit by 廷俊
+		------------------------------------------------------
+		會員名稱的欄位後方顯示(開放會員編輯)
+		------------------------------------------------------	
+		2011-03-15 edit by 廷俊
+		------------------------------------------------------
+		1.若會員登記項目勾選前台顯示，則在後台的會員編輯欄位後方顯示標記
+		2.新增標記的備註訊息為前台開放會員可編輯欄位資料
+		------------------------------------------------------
+		2011-03-16 edit by 廷俊
+		------------------------------------------------------
+		開放會員名稱、帳號、密碼、確認密碼、MAIL的欄位長度設定
+		------------------------------------------------------		
+	-->
+				<tr>
+					<td width="25%" align="right">&nbsp;</td>
+					<td align="left">
+						<INPUT TYPE="hidden" NAME="users_id" id="users_id" value="{$users_id_value}">
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<th align="right">{$users_name}</th>
+					<td align="left">
+						<INPUT TYPE="text" NAME="UserNa" id="UserNa" size="{$users_name_size}" value="{$users_name_value}">
+						<span class="text_note">*</span><span style="color:blue;">*</span>
+					</td>
+				</tr>	
+				
+				{* 會員模式 為 推薦模組 時才會顯示 *}
+				{if $manager_mode=="1"}
+				<tr>
+					<th align="right">{$users_referee_name}</th>
+					<td align="left">
+						<INPUT TYPE="text" NAME="UserReName" id="referee_name" size="{$users_name_size}" value="{$users_referee_name_value}" onBlur="refermember();"{if $act=="edit"}readonly{/if}>
+						<span class="text_note">*</span>
+						<span style="color:blue;">*</span>
+							<span style="color:red;" id="refereeidtxt"></span>
+					</td>
+				</tr>
+				<tr>
+					<th align="right">{$users_referee_phone}</th>
+					<td align="left">
+						<INPUT TYPE="text" NAME="UserRePhone" id="referee_cell" size="{$users_name_size}" value="{$users_referee_phone_value}" onBlur="refermember();" {if $act=="edit"}readonly{/if}>
+						<span class="text_note">*</span>
+						<span style="color:blue;">*</span>
+					</td>
+				</tr>
+				{/if}
+				
+				<tr>
+					<th align="right">{$users_account}</th>
+					<td align="left">
+						<INPUT TYPE="text" NAME="UserLoginid" id="UserLoginid" size="{$users_account_size}" value="{$users_account_value}" {if $act=='add'}onblur="chkloginid();value_type_chk(this);"{else}readonly{/if}>
+						<span class="text_note">*</span><span style="color:blue;">*</span>{$input_char_text}
+						<span style="color:red;" id="loginidtxt"></span>
+					</td>
+				</tr>
+				
+				<tr {if $users_id!=''}style="display:none"{/if}>
+					<th align="right">{$users_password}</th>
+					<td align="left">
+						<INPUT TYPE="password" NAME="UserPwd" id="UserPwd" size="{$users_password_size}" onBlur="value_type_chk(this);">
+						<span class="text_note">*</span><span style="color:blue;">*</span>{$input_char_text}
+					</td>		
+				</tr>	
+				<tr {if $users_id!=''}style="display:none"{/if}>
+					<th align="right">{$password_confirm}</th>
+					<td align="left">
+						<INPUT TYPE="password" NAME="UserConfirmPwd" id="UserConfirmPwd" size="{$password_confirm_size}" onBlur="value_type_chk(this);">
+						<span class="text_note">*</span>{$input_char_text}
+					</td>
+				</tr>	
+	<!--
+		2010-05-19 edit by 廷俊
+		------------------------------------------------------
+		1.會員性別radio必須更改為非預設(使用者可定義是否顯示)
+		2.會員生日，必須更改為非預設(使用者可定義是否顯示)
+		3.會員生日使用小日期模組
+		------------------------------------------------------		
+				<tr>
+					<th align="right">{$users_sex}</th>
+					<td align="left"><INPUT TYPE="radio" NAME="UserSex" size="0" checked>{$UserSexSecret}<INPUT TYPE="radio" NAME="UserSex" size="1" {if $users_sex_value==1}checked{/if}>{$UserSexMale}<INPUT TYPE="radio" NAME="UserSex" size="2" {if $users_sex_value==2}checked{/if}>{$UserSexFemale}</td>
+				</tr>	
+				<tr>
+					<th align="right">{$users_birth}</th>
+					<td align="left">
+						{html_select_date start_year='-90' month_format='%m' field_order='YMD' revers_years='yes' time=$users_birth_value}
+					</td>
+				</tr> 
+	-->
+	<!--
+		2010-05-14 edit by 廷俊
+		------------------------------------------------------
+		1.驗證會員email重複
+		2.更改驗證會員email
+		------------------------------------------------------		
+	-->	
+				<tr>
+					<th align="right">{$users_email}</th>
+					<td align="left">
+						<INPUT TYPE="text" NAME="UserMail" id="UserMail" size="{$users_email_size}" value="{$users_email_value}" {if $act=='add'}onBlur="chkmail();"{else}readonly{/if}>
+						<span class="text_note" id="mailre" ></span><span class="text_note">*</span>
+					</td>
+				</tr>			
+				<tr>
+					<th align="right" valign="top">{$users_group}</th>
+					<td align="left">
+					<table border=0 cellpadding=0 cellspacing=0>
+						<tr>
+							<td align="center" bgcolor="#96C3F0">{$allusergrouplist1}</td>
+							<td>&nbsp;</td>
+								<td align="center" bgcolor="#96C3F0">{$allusergrouplist2}
+								<span class="text_note">*</span>
+							</td>
+						</tr>
+						<tr>
+							<td>{$usergroupsel1}</td>
+							<td align="center">
+								<input type="button" value="{$BtnAdd}=&gt;" class="button" onclick="addSelect(1);"><br>
+								<input type="button" value="&lt;={$BtnOut}" class="button" onclick="rmSelect(1);"><br>
+							</td>
+							<td>{$usergroupsel2}<input type="hidden" name="selusergroupidlist" id="selusergroupidlist" value="{$selusergroupidlist_value}"></td>
+						</tr>
+					</table>						
+					</td>
+				</tr>			
+	<!--
+		2010-08-10 edit by 廷俊
+		------------------------------------------------------
+		增加會員的折扣等級
+		------------------------------------------------------		
+	-->	
+				<tr>
+					<th align="right" valign="top">{$users_rank}</th>
+					<td align="left">{$userranksel}</td>
+				</tr>
+	<!--
+		2010-05-19 edit by 廷俊
+		------------------------------------------------------
+		會員資訊狀態->功能遮蔽
+		------------------------------------------------------		
+		2011-02-24 edit by 廷俊
+		------------------------------------------------------
+		開放會員資訊狀態功能設定
+		------------------------------------------------------		
+	-->				
+				<tr>
+					<th align="right">{$UserInfo}</th>
+					<td align="left">
+						<INPUT TYPE="radio" NAME="UserInfo" value="1" checked>{$UserInfoYes}
+						<INPUT TYPE="radio" NAME="UserInfo" value="0" {if $info_state=='0'}checked{/if}>{$UserInfoNo}
+					</td>
+				</tr>
+				
+				{section name=p loop=$umcolsList}
+				<tr>
+	<!-- 
+		2011-03-16 edit by 廷俊
+		------------------------------------------------------
+		調整會員編輯頁面的版面配置
+		------------------------------------------------------
+	-->
+					<th align="right" valign="top">{$umcolsList[p].usr_na}</th>
+					<td align="left">{$umcolsList[p].usr_text}</td>
+				</tr>
+				{/section}
+	<!--
+		2011-02-11 edit by 廷俊
+		----------------------------------------------------
+		顯示提醒目前『網站共用設定』->『後台會員新增至』的設定值
+		----------------------------------------------------
+	-->
+				<tr>
+					<td align="right">&nbsp;</td>
+					<td align="left">
+						{$show_state_text}<br>
+						<span class="text_note">{$userinsert}</span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" colspan="2">&nbsp;</td>
+				</tr>					
+				<tr>
+					<td colspan="2" align="center">
+						<INPUT TYPE="submit" value="{$Btn_Save}">
+						<INPUT TYPE="reset" value="{$Btn_Reset}">
+					</td>
+				</tr>		
+				<tr>
+					<td align="right" colspan="2">&nbsp;</td>
+				</tr>			
+			</table>
+			<input type="hidden" name="TabNum" value="0">
+		  </form>
+		</td>
+		</tr>
+		</table> 		
+	</div>
+
+{if $act=="edit" and $manager_mode=="1"}
+<div class="TabbedPanelsContent" id="TabbedPanelsContent">
+<!-- 
+		2011-11-11 edit by 健嘉
+		------------------------------------------------------
+		會員編輯 的 修改上線頁籤 區塊
+		------------------------------------------------------
+	-->
+		{if $act=="edit" and $manager_mode=="1"}
+		
+		<form name="frm2" method="post" action="userslist.php?act=change" onsubmit="return chkpost2();">
+			會員姓名&nbsp;<input type="text" value="{$users_name_value}" readonly> &nbsp;&nbsp;
+					<input type="hidden" value="{$users_id_value}" name="users_id">
+			目前上線&nbsp;<input type="text" value="{$users_referee_name_value}" readonly>&nbsp;&nbsp;
+			欲更改上線為&nbsp;<input type="text" name="chgUpUserName" id="chgUpUserName" readonly>
+						 <input type="hidden" name="chgUpUserId" id="chgUpUserId" readonly>
+						  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						  <input type="submit" value="變更" class="search_btn">
+		</form>
+		
+		<form name="seachfrm" method="post" action="userslist.php?act=edit&change_upmen=change_upmen&id={$users_id_value}">
+		
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td align="left">
+			  {$UserNa}
+			  <input name="textfield" type="text" id="textfield" size="8" value="{$textfield}">
+			  {$UserLoginid}
+			  <input name="textfield2" type="text" id="textfield2" size="8" value="{$textfield2}">
+			  {$UserState}
+			  {$infoSel}
+			  <img src="images/search_1.gif" width="20" height="20">
+			  <input type="hidden" name="perpagenum" value="{$perpagenum_value}"> 
+			  <input type="hidden" name="TabNum" value="1">
+			  <input type="submit" name="button2" class="search_btn" id="button2" value="{$UserSearch}" onClick="getUpUserList();">
+			</td>
+			</tr>
+		</table>
+		</form>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td width="30" height="25" align="center" valign="middle" class="table_td_01">選取</td>
+			  <td width="30" height="25" align="center" valign="middle" class="table_td_01">{$UserNo}</td>
+			  <td width="" height="25" align="center" valign="middle" class="table_td_01">{$UserNa}</td>
+			  <td width="" height="25" align="center" valign="middle" class="table_td_01">{$UserLoginid}</td>
+			  <td width="105" align="center" valign="middle" class="table_td_01">{$UserCheck}</td>  
+			  <td width="95" align="center" valign="middle" class="table_td_01">{$UserCheckdate}</td>
+			  <td width="95" align="center" valign="middle" class="table_td_01">{$UserLogindate}</td>
+			  <td width="60" align="center" valign="middle" class="table_td_01">{$UserState}</td>
+			{if $manager_mode=="1"}
+			{*  推薦人姓名 *}
+			  <td width="60" align="center" valign="middle" class="table_td_01">{$UserRefereeName}</td>
+			{/if}
+			</tr>
+			
+			{section name=i loop=$umUsers}
+			<tr>
+			   <td width="30" height="25" align="center" valign="middle" class="table_td_02">
+			   <input type="radio" name="chk" onclick="getreferdata('{$umUsers[i].recordnum}');"></td>
+			   <td height="25" valign="middle" align="center" class="table_td_02">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=$perpagenum_value}</td>
+			   <td height="25" valign="middle" align="left" class="table_td_02">{$umUsers[i].users_name}</td>
+			   <td height="25" valign="middle" align="left" class="table_td_02">{$umUsers[i].users_account}</td>
+			   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].users_emailchk}</td>
+			   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].users_register}</td>
+			   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].users_logindate}</td>
+			   <td height="25" valign="middle" align="center" class="table_td_02">{$umUsers[i].info_state}</td>
+			  
+			{if $manager_mode=="1"}
+			{*  推薦人姓名 *}
+			<td height="25" valign="middle" align="center" class="table_td_02">
+				{$umUsers[i].RefereeName}
+				<input type="hidden" name="RefereeName" id="RefereeName{$umUsers[i].recordnum}" value="{$umUsers[i].users_name}" readonly>
+				<input type="hidden" name="RefereeId" id="RefereeId{$umUsers[i].recordnum}" value="{$umUsers[i].users_id}" readonly>
+			</td>
+			{/if}
+			
+			</tr>
+			{/section}
+			
+		  </table>
+		
+		{/if}	
+		
+</div>
+{/if}
+	<script type="text/javascript">
+	<!--	
+	var TabShowNum={$TabShowNum};	
+	{literal}	
+	if (TabShowNum==0){
+		var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1"); 
+	} else {
+		var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1",{defaultTab:TabShowNum}); 
+	}	
+	
+	if(isNaN(document.getElementById("users_birth"))){
+		today = new Date();
+		function catcald(cal) {      
+			var date = cal.date;
+			var time = date.getTime()
+			var date2 = new Date(time);
+			//field.value = date2.print("%Y/%m/%d");
+			document.getElementById("users_birth").innerText=date2.print("%Y-%m-%d");
+		}
+		Calendar.setup({	
+			inputField     :    "users_birth",   // id of the input field    
+			ifFormat       :    "%Y-%m-%d",       // format of the input field
+			showsTime      :    false,
+			timeFormat     :    "24",
+			range          :    [today.getYear()-100,today.getYear()+100],
+			onUpdate       :    catcald
+		});  
+	}		
+	
+	function getreferdata(RowIdx){
+		document.getElementById("chgUpUserName").value=document.getElementById("RefereeName"+RowIdx).value;
+		document.getElementById("chgUpUserId").value=document.getElementById("RefereeId"+RowIdx).value;
+	}
+	{/literal}
+	//-->
+	</script>
+	
+{$temp_log}
+	</div>
+	
+</div>
+</div>
+</body>
+</html>
+<script>repeatchk(1)</script>
+

@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<script src="js/calendar.js" type="text/javascript"></script>
+<script src="js/calendar-en.js" type="text/javascript"></script>
+<script src="js/calendar-setup.js" type="text/javascript"></script>
+
+<link href="css/calendar-win2k-cold-1.css" rel="stylesheet" type="text/css" />
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	votelist.php		後台的投票管理列表 的PHP處理頁面
+	│	開發者		│	玉玲、Fish、智倩
+	│	版本		│	v2.0.0.0110401
+	├=======================================================================================┤
+	│	1.	v2.0.0.0110401	2010/11/04	娜娜	加入判斷有無輸入選項名稱
+	│	2.	v2.0.4.0121701	2010/12/17	廷俊	a.統一投票管理的程式執行流程與寫法
+	│											b.新增投票狀態功能
+	│											c.列表顯示投票狀態
+	│											d.判斷是否搜尋過條件，並把搜尋條件設為預設值
+	│											e.輸入查詢條件後 與 下拉式選擇頁碼，都必須selected查詢條件的值
+	│											f.搜尋條件加入投票狀態欄位下拉式選單，判斷是否搜尋過條件，並把搜尋條件設為預設值
+	│											g.項目列表加入搜尋條件判斷
+	│											h.編輯投票內容頁面，新增投票狀態的功能選項，並帶值設預設勾選
+	│											i.新增投票的模組編號
+	│											j.投票模組編號定義為"V+投票編號"
+	│											k.投票模組名稱定義為"投票-標題名稱"
+	│											l.投票模組定義引入modules/vote_list
+	│											m.編輯儲存時，寫入投票狀態與投票模組編號
+	│											n.編輯儲存時，判斷是否已有投票模組，是則更新，否則新增單一的投票模組
+	│											o.新增儲存時，先判斷投票編號再寫入投票模組編號，定義為"V+投票編號"
+	│											p.新增儲存時，加入投票模組，排序預設總數+1，狀態預設有效
+	│											q.刪除投票時，要刪除投票模組
+	│											r.刪除投票時，要刪除版面設定相關的投票模組設定
+	│	5.	v2.0.5.0122201	2010/12/22	廷俊	1.修正維護程式執行流程與寫法
+	│											2.投票項目列表，所有欄位項目居中、置頂
+	│											3.投票項目列表，新增投票項目的個別編號hidden欄位
+	│											4.投票項目所有欄位名稱，新增索引值
+	│											5.修正投票項目所有欄位的版面長度
+	│											6.投票項目列表，新增投票項目瀏覽上傳圖片欄位
+	│											7.若有此投票項目有上傳圖片，則顯示50x50的圖片，並置於移除按鈕的左邊
+	│											8.若有此投票項目有上傳圖片，則顯示移除按鈕，並置於圖片的右邊
+	│											9.按下移除圖片按鈕，觸發移除圖片的function
+	│											10.投票項目列表，新增欲移除圖片的hidden欄位
+	│											11.判斷是否有上傳圖片路徑/hyfiles$lang_dir/vote/
+	│											12.若無上傳圖片路徑則新增資料夾，權限設為777
+	│											13.依移除圖片的hidden欄位值，執行移除圖片，並設定資料庫中的圖片檔名為空
+	│											14.若移除圖片的hidden欄位值為空，則使用原資料庫中的圖片檔名
+	│											15.判斷使用者是否上傳檔案，有擇上傳圖片
+	│											16.上傳檔名重新編碼為投票項目的個別編號 . 附檔名
+	│											17.新增投票時，搜尋投票項目的最大值個別編號
+	│											18.上傳檔名重新編碼為投票項目的最大值個別編號+1 . 附檔名
+	│											19.刪除投票時，若投票項目中有含投票圖片，擇一併刪除
+	│											20.跳出警告訊息”確定移除圖片？”
+	│											21.記錄欲移除的圖片檔名至移除圖片的hidden欄位
+	│											22.隱藏欲移除的圖片
+	│											23.修正投票資料編輯頁面的版面配置
+	│	6.	v2.0.5.0122301	2010/12/23	廷俊	1.投票選項列表，新增設定每列選項數的欄位及功能
+	│											2.在動態新增投票選項欄位時，預設排序為選項個數
+	│											3.在動態新增投票選項欄位時，加入新增投票項目的個別編號hidden欄位
+	│											4.新增投票資料時，投票選項的預設排序為1、2
+	│	7.	v2.0.8.1031001	2011/03/10	廷俊	1.投票選項的圖片加入圖像設定
+	│											2.圖像設定可分為統一、個別設定、不啟用
+	│											3.各別顯示圖像設定中，統一、個別設定、不啟用的備註訊息
+	│											4.新增動態觸發欄位表單
+	│											5.統一圖像設定時，顯示統一圖像設定的備註訊息
+	│											6.統一圖像設定時，需顯示統一的圖像寬、高設定欄位
+	│											7.統一圖像設定時，隱藏個別設定圖像設定的區塊
+	│											8.個別設定圖像設定時，顯示個別設定圖像設定的備註訊息
+	│											9.個別設定圖像設定時，投票選項圖片的後方，需個別設定圖像寬、高設定欄位
+	│											10.個別設定圖像設定時，隱藏統一圖像設定的區塊
+	│											11.不啟用圖像設定時，顯示不啟用圖像設定的備註訊息
+	│											12.不啟用圖像設定時，隱藏統一圖像設定的區塊
+	│											13.不啟用圖像設定時，隱藏個別設定圖像設定的區塊
+	│											14.修正檔案瀏覽上傳欄位的寬度隨欄位變動
+	│	8.	v03.00.09.1060901	2011/06/17	廷俊	驗證每列選項數必須為大於0的正整數數值
+	│	9.	v03.00.10.1062001	2011-06-29	玉玲	1.新增css樣式項目說明text_note。
+	└=======================================================================================┘
+*/-->
+	<script language="javascript">
+<!--
+/*
+	2010-05-05 edit by 廷俊
+	------------------------------------------------------
+	增加驗證生效日期須小於等於截止日期
+	------------------------------------------------------		
+	2010-11-04 edit by 娜娜
+	------------------------------------------------------
+	投票管理新增投票加入js判斷有無輸入選項名稱
+	------------------------------------------------------	
+	2011-06-17 edit by 娜娜
+	------------------------------------------------------
+	驗證每列選項數必須為大於0的正整數數值
+	------------------------------------------------------		
+*/
+var warming_na="{$warming_na}";
+var warming_column="{$warming_column}";
+var warming_date="{$warming_date}";
+var warming_options="{$warming_options}";
+var cheDelete="{$cheDelete}";
+
+var ImgSysText="{$ImgSysText}";
+var ImgUsrText="{$ImgUsrText}";
+var ImgNoText="{$ImgNoText}";
+{literal}
+
+	function chkpost()
+	{
+		var msg="";
+		//正整數的正規表示式
+		var ck_int = /^[0-9]*[1-9][0-9]*$/;
+		var vote_title = document.getElementById("vote_title").value; 
+		var f_date_a = document.getElementById("f_date_a").value; 
+		var f_date_b = document.getElementById("f_date_b").value; 
+		var column_plots = document.getElementById("column_plots").value; 
+		
+		var choic = document.getElementsByName("choicena"); 
+		var choic_num = choic.length;
+		var msg_options=0;
+		if(vote_title==''){
+			msg += warming_na + "\r\n";
+		}
+		if(f_date_b > f_date_a){
+			msg += warming_date + "\r\n";
+		}
+		if(!ck_int.test(column_plots)){
+			msg += warming_column + "\r\n";
+		}
+		//判斷有無輸入選項名稱
+		for(var i=0; i<choic_num; i++)
+		{
+			if(choic[i].value=='')
+			{
+				msg_options=1;
+			}
+		}
+		if(msg_options==1)
+		{
+			msg += warming_options+"\r\n";
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+/*
+	2010-12-23 edit by 廷俊
+	------------------------------------------------------
+	1.在動態新增投票選項欄位時，預設排序為選項個數
+	2.在動態新增投票選項欄位時，加入新增投票項目的個別編號hidden欄位
+	------------------------------------------------------	
+	2011-03-09 edit by 廷俊
+	------------------------------------------------------
+	修正檔案瀏覽上傳欄位的寬度隨欄位變動
+	------------------------------------------------------	
+*/	
+//明細tb動態產生
+function tbRowAdd2(){
+	var strCmnd="";	
+	var RowsCount=document.all('MyTbDetail2').rows.length;
+	var Rowobje=document.all('MyTbDetail2').insertRow(RowsCount);
+	for(var i=0;i<5;i++){		
+		var objCell=Rowobje.insertCell(i);
+		objCell.align='center';	
+		if (i==0) {
+			strCmnd=RowsCount+"<INPUT TYPE=hidden NAME=voteassistant_id["+RowsCount+"] value="+RowsCount+">";
+		} else if (i==1) {
+			strCmnd="<input type=text name=choicena["+RowsCount+"] id=choicena size=30>";
+		} else if (i==2) {
+			strCmnd="<input type=text name=tnum["+RowsCount+"] size=3 value=0>";
+		} else if (i==3) {
+			strCmnd="<input type=text name=chorder["+RowsCount+"] size=3 value="+RowsCount+">";
+		} else if (i==4) {
+			strCmnd="<input type=file name=picture["+RowsCount+"] style=\"width:100%\">";	
+		}
+		objCell.innerHTML=strCmnd;
+	}
+}
+
+//明細tb動態刪除
+function tnRowDel2(){
+	var rowsCount=document.all('MyTbDetail2').rows.length;
+	if (rowsCount>3){
+		document.all('MyTbDetail2').deleteRow(rowsCount-1);
+	}	
+}
+/*
+	2010-12-22 edit by 廷俊
+	------------------------------------------------------
+	跳出警告訊息”確定移除圖片？”
+	記錄欲移除的圖片檔明至移除圖片的hidden欄位
+	隱藏欲移除的圖片
+	------------------------------------------------------
+*/	
+function del_images(image_name,i){	
+	if(confirm(cheDelete)){
+		document.getElementById('unlinkimage['+i+']').value=image_name;
+		document.getElementById('image['+i+']').style.display='none';
+		return true;
+	}else{
+		return false;
+	}
+}
+
+//動態觸發欄位表單
+function dynamic(){	
+	var PhotoSet=document.getElementsByName('PhotoSet');	//圖像設定
+	var ImgText=document.getElementById("ImgText");			//圖像設定備註說明的區塊
+	var ImgDefault=document.getElementById('ImgDefault');	//統一圖像設定的區塊
+	var items=document.all('MyTbDetail2').rows.length-1;	//選項數
+	//統一 圖像設定
+	if(PhotoSet[0].checked){
+		ImgText.innerHTML=ImgSysText;	//顯示統一圖像設定的備註訊息
+		ImgDefault.style.display='';	//統一圖像設定時，需顯示統一的圖像寬、高設定欄位
+		for(i=1;i<=items;i++){
+			var ImgUser=document.getElementById('ImgUser['+i+']');	//個別設定圖像設定的區塊
+			if (ImgUser != null){
+				ImgUser.style.display='none';	//隱藏個別設定圖像設定的區塊
+			}
+		}
+	//個別設定 圖像設定
+	}else if(PhotoSet[1].checked){
+		ImgText.innerHTML=ImgUsrText;	//顯示個別設定圖像設定的備註訊息
+		ImgDefault.style.display='none';	//隱藏統一圖像設定的區塊
+		//個別設定圖像設定時，投票選項圖片的後方，需顯示個別設定的圖像寬、高設定欄位
+		for(i=1;i<=items;i++){
+			var ImgUser=document.getElementById('ImgUser['+i+']');
+			if (ImgUser != null){
+				ImgUser.style.display='';	
+			}
+		}
+	//不啟用 圖像設定
+	}else if(PhotoSet[2].checked){
+		ImgText.innerHTML=ImgNoText;	//顯示不啟用圖像設定的備註訊息
+		ImgDefault.style.display='none';	//隱藏統一圖像設定的區塊
+		for(i=1;i<=items;i++){
+			var ImgUser=document.getElementById('ImgUser['+i+']');
+			if (ImgUser != null){
+				ImgUser.style.display='none';		//隱藏個別設定圖像設定的區塊
+			}
+		}		
+	}
+}
+	
+{/literal}	
+//-->
+</script>
+
+<body onload="dynamic();">
+
+<div id="use_title">
+	<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="72%" align="left">{$PageTitle2}</td>
+			<td width="12%" align="right">
+				<input name="button" type="submit" class="set_new_btn" id="button" value="{$btn_List}" onclick="location.href='{$BtnVoteListUrl}';">
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	新增、修改、刪除成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<div id="show_table3">
+<form method=post action="votelist.php?act=save" onsubmit="return chkpost();" enctype="multipart/form-data">
+	<table border="0" cellpadding="2" cellspacing="2" align="center" width="90%">
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td align="left">
+				<INPUT TYPE="hidden" NAME="votemain_id" value="{$votemain_id}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$VoteTitle}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="vote_title" id="vote_title" size="50" value="{$vote_title}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right" valign="top">{$VoteContent}</th>
+			<td align="left">
+				<TEXTAREA NAME="vote_introduce" ROWS="5" COLS="40">{$vote_introduce}</TEXTAREA>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$VoteMode}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="oneormanychoice" value="0" checked>{$ModeOne}
+				<INPUT TYPE="radio" NAME="oneormanychoice" value="1" {if $oneormanychoice=="1"}checked{/if}>{$ModeMany}
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$VoteStartDay}</th>
+			<td align="left">
+				<input type="text" name="vote_startdate" id="f_date_b" value="{$vote_startdate}" readonly>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$VoteEndDay}</th>
+			<td align="left">
+				<input type="text" name="vote_enddate" id="f_date_a" value="{$vote_enddate}" readonly>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$VoteOrder}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="vote_order" value="{$vote_order}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$VoteInTy}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="info_state" value="1" {$checkedyes}>{$mainartY}
+				<INPUT TYPE="radio" NAME="info_state" value="0" {$checkedno}>{$mainartN}
+			</td>
+		</tr>
+		<tr>
+			<th align="right">{$ColumnPlots}</th>
+			<td align="left">
+				<INPUT TYPE="text" NAME="column_plots" id="column_plots" value="{$column_plots}">
+			</td>
+		</tr>
+<!-- 
+	2011-03-09 edit by 廷俊
+	------------------------------------------------------
+	1.投票選項的圖片加入圖像設定
+	2.圖像設定可分為統一、個別設定、不啟用
+	3.各別顯示圖像設定中，統一、個別設定、不啟用的備註訊息
+	4.統一圖像設定時，需顯示統一的圖像寬、高設定欄位
+	------------------------------------------------------	
+-->
+		<tr>
+			<th align="right" valign="top">{$PhotoPixels}</th>
+			<td align="left" valign="middle">
+				<INPUT TYPE="radio" NAME="PhotoSet" value="0" onclick="dynamic();" checked>{$PhotoPixels_sys}
+				<INPUT TYPE="radio" NAME="PhotoSet" value="1" onclick="dynamic();" {if $pic_set=='1'}checked{/if}>{$PhotoPixels_usr}
+				<INPUT TYPE="radio" NAME="PhotoSet" value="2" onclick="dynamic();" {if $pic_set=='2'}checked{/if}>{$PhotoPixels_no}
+				<span id="ImgDefault">
+					<br>
+					{$ImgWidth}
+					<INPUT TYPE="text" NAME="PhotoWidth" size="1" maxlength="5" value="{$pic_width}" style="text-align:right;">
+					{$ImgHeight}
+					<INPUT TYPE="text" NAME="PhotoHeight" size="1" maxlength="5" value="{$pic_height}" style="text-align:right;">
+				</span>
+				<br>
+				<span class="text_note" id="ImgText"></span>
+			</td>
+		</tr>	
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<table id="MyTbDetail2" align="left" border="0" cellpadding="2" cellspacing="2" width="100%">
+					<tr>
+						<th width="" align="center">{$VoteId}</th>
+						<th width="" align="center">{$VoteChoiceNa}</th>
+						<th width="" align="center">{$VoteTicketNum}</th>
+						<th width="" align="center">{$VoteOrder}</th>
+						<td align="center" colspan="2">
+							<input type="button" name="Mode" id="btnAddOne" value="{$VoteAddRow}" onclick="tbRowAdd2();">
+							<input type="button" name="Mode" id="btndDelOne" value="{$VoteDeleteRow}" onclick="tnRowDel2();">
+						</td>
+					</tr>
+					{$tblstr}
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td align="left">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td align="left">&nbsp;</td>
+		</tr>
+	</table>
+</form>
+</div>
+{literal}
+<script type="text/javascript">
+<!--
+
+	today = new Date();
+	
+	function catcalc(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date1 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("f_date_a").innerText=date1.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_a",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcalc
+    });
+	
+	function catcald(cal) {
+        var date = cal.date;
+        var time = date.getTime()
+        var date2 = new Date(time);
+        //field.value = date2.print("%Y/%m/%d");
+		document.getElementById("f_date_b").innerText=date2.print("%Y-%m-%d");
+    }
+    Calendar.setup({
+    inputField     :    "f_date_b",   // id of the input field
+    ifFormat       :    "%Y-%m-%d",       // format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    range          :    [today.getYear()-100,today.getYear()+100],
+    onUpdate       :    catcald
+    });
+//-->
+</script>
+{/literal}
+{$temp_log}</body>
+</html>

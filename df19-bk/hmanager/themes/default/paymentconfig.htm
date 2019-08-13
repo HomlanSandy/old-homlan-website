@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	paymentconfig.htm		後台商品設定→付款設定 的 htm顯示頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.0.0081701
+	├=======================================================================================┤
+	│	1.	v1.0.1.0081701	2010/08/17	廷俊	取消2010-08-12的訂單設定、需求單設定，更正為編輯付款設定、出貨設定
+	│	2.	v1.0.1.0081901	2010/08/19	廷俊	a.付款設定寫死三種模式，遮蔽新增和刪除付款模式
+	│											b.匯款可設定運費、貨到付款可設定運費和手續費、自取不需設定
+	│	3.	v03.00.02.1040801	2011/04/14	廷俊	a.『自取』不可顯示運費設定
+	│												b.只有『貨到付款』可顯示手續費設定
+	│												c.付款設定編輯頁面，新增顯示付款方式的系統預設名稱
+	│												d.『玉山銀行-信用卡』顯示企業識別碼MID、URL、押碼M
+	│												e.『玉山銀行-虛擬帳號』顯示企業識別碼MID
+	│	4.	v03.00.02.1040801	2011/04/26	廷俊	a.修正設定狀態為啟用不啟用，而非有效無效
+	│												b.驗證玉山-信用卡的企業識別碼、測試URL、正式URL、押碼
+	│												c.若啟用測試URL，則需驗證測試URL
+	│												d.若啟用正式URL，則需驗證正式URL
+	│												e.驗證玉山-虛擬帳號的企業識別碼
+	│												f.修正設定狀態的欄位排序
+	└=======================================================================================┘
+*/-->	
+<script type="text/javascript">
+<!--
+var warming_na="{$warming_na}";
+var warming_MID="{$warming_MID}";
+var warming_UTest="{$warming_UTest}";
+var warming_U="{$warming_U}";
+var warming_M="{$warming_M}";
+var warming_PaySecurityID="{$warming_PaySecurityID}";
+var warming_SellerEmail="{$warming_SellerEmail}";
+{literal}
+/* 
+	2011-04-26 edit by 廷俊
+	----------------------------------------------------
+	1.驗證玉山-信用卡的企業識別碼、測試URL、正式URL、押碼
+	2.若啟用測試URL，則需驗證測試URL
+	3.若啟用正式URL，則需驗證正式URL
+	4.驗證玉山-虛擬帳號的企業識別碼
+	---------------------------------------------------- 
+	2011-09-09 edit by 玉玲
+	----------------------------------------------------
+	支付寶驗證企業識別碼、付款校驗碼、支付寶賣家帳號不能為空
+	----------------------------------------------------
+	
+ */
+	function chkpost(){
+		msg="";
+		var payment_id=document.getElementById("payment_id").value;		
+		var payment_na=document.getElementById("payment_na").value;	
+		//驗證付款方式
+		if(payment_na==''){
+			msg += warming_na + "\r\n";
+		}
+		//驗證玉山-信用卡的企業識別碼、測試URL、正式URL、押碼
+		if(payment_id==4){
+			var MID=document.getElementById("MID").value;
+			var U_state=document.getElementsByName("U_state");
+			var U_test=document.getElementById("U_test").value;
+			var U=document.getElementById("U").value;
+			var M=document.getElementById("M").value;
+			if(MID==''){
+				msg += warming_MID + "\r\n";
+			}
+			//若啟用測試URL，則需驗證測試URL
+			if(U_state[0].checked && U_test==''){
+				msg += warming_UTest + "\r\n";
+			}
+			//若啟用正式URL，則需驗證正式URL
+			if(U_state[1].checked && U==''){
+				msg += warming_U + "\r\n";
+			}
+			if(M==''){
+				msg += warming_M + "\r\n";
+			}
+		}
+		//驗證玉山-虛擬帳號的企業識別碼
+		if(payment_id==5){
+			var MID=document.getElementById("MID").value;
+			if(MID==''){
+				msg += warming_MID + "\r\n";
+			}
+		}
+		//驗證支付寶的企業識別碼
+		if(payment_id==6){
+			var PaySecurityID=document.getElementById("PaySecurityID").value;
+			if(PaySecurityID==''){
+				msg += warming_PaySecurityID + "\r\n";
+			}
+			var SellerEmail=document.getElementById("SellerEmail").value;
+			if(SellerEmail==''){
+				msg += warming_SellerEmail + "\r\n";
+			}
+		}
+		if(msg==''){
+			return true;
+		}else{
+			alert(msg);
+			return false;
+		}
+	}
+
+{/literal}
+//-->
+</script>
+<body>
+  <div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle2}</td>
+      <td width="12%" align="right">
+        <input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_ListPayment}" onclick="location.href='{$BtnListPaymentUrl}';">
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-17 edit by 廷俊
+	----------------------------------------------------
+	修改成功訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<!--
+	2010-08-19 edit by 廷俊
+	------------------------------------------------------
+	a.付款設定寫死三種模式，遮蔽新增和刪除付款模式
+	b.匯款可設定運費、貨到付款可設定運費和手續費、自取不需設定
+	------------------------------------------------------		
+	2011-04-14 edit by 廷俊
+	------------------------------------------------------
+	a.付款設定編輯頁面，新增顯示付款方式的系統預設名稱
+	b.『玉山銀行-信用卡』顯示企業識別碼MID、URL、押碼M 
+	c.『玉山銀行-虛擬帳號』顯示企業識別碼MID
+	d.『自取』不可顯示運費設定
+	e.只有『貨到付款』可顯示手續費設定
+	------------------------------------------------------		
+	2011-04-26 edit by 廷俊
+	------------------------------------------------------
+	a.修正設定狀態為啟用不啟用，而非有效無效
+	b.修正設定狀態的欄位排序
+	------------------------------------------------------		
+*/-->
+<div id="show_table3">
+<form name="frm" method="post" action="paymentconfig.php?act=save" enctype="multipart/form-data" onsubmit="return chkpost();"> 
+	<table width="100%" height="100%" border="0" cellspacing="2" cellpadding="2" align="center">
+		<tr>
+			<th align="right" width="120">&nbsp;</th>
+			<td align="left"><INPUT TYPE="hidden" NAME="payment_id" id="payment_id" value="{$payment_id}"></td>
+		</tr>
+		<tr>
+			<th align="right">{$PaymentSys}</th>
+			<td align="left">{$payment_sys}</td>
+		</tr>
+		<tr>
+			<th align="right">{$PaymentUser}</th>
+			<td align="left"><INPUT TYPE="text" NAME="payment_na" id="payment_na" size="50" value="{$payment_na}"></td>
+		</tr>
+		<tr>
+			<th align="right">{$InfoState}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="Info_State" value="1" checked>{$SetY}
+				<INPUT TYPE="radio" NAME="Info_State" value="0" {if $info_state=='0'}checked{/if}>{$SetN}
+			</td>
+		</tr>
+	<!-- 『玉山銀行-信用卡』顯示企業識別碼MID、URL、押碼M -->
+	{if $payment_id == 4}
+		<tr>
+			<th align="right">{$EnterpriseID}</th>
+			<td align="left"><INPUT TYPE="text" NAME="MID" id="MID" size="50" value="{$MID}"></td>
+		</tr>
+		<tr>
+			<th align="right"><INPUT TYPE="radio" NAME="U_state" value="0" checked>{$URLTest}</th>
+			<td align="left"><INPUT TYPE="text" NAME="U_test" id="U_test" size="50" value="{$U_test}"></td>
+		</tr>
+		<tr>
+			<th align="right"><INPUT TYPE="radio" NAME="U_state" value="1" {if $U_state=='1'}checked{/if}>{$URL}</th>
+			<td align="left"><INPUT TYPE="text" NAME="U" id="U" size="50" value="{$U}"></td>
+		</tr>	
+		<tr>
+			<th align="right">{$Coding}</th>
+			<td align="left"><INPUT TYPE="text" NAME="M" id="M" size="50" value="{$M}"></td>
+		</tr>
+	{/if}
+	<!-- 『玉山銀行-虛擬帳號』『支付寶』顯示企業識別碼MID -->
+	{if $payment_id == 5 || $payment_id == 6}
+		<tr>
+			<th align="right">{$EnterpriseID}</th>
+			<td align="left"><INPUT TYPE="text" NAME="MID" id="MID" size="50" value="{$MID}"></td>
+		</tr>
+	{/if}
+	<!-- 『支付寶』顯示付款驗證碼 -->
+	{if $payment_id == 6}
+		<tr>
+			<th align="right">{$PaySecurityID}</th>
+			<td align="left"><INPUT TYPE="text" NAME="PaySecurityID" id="PaySecurityID" size="50" value="{$PaySecurityID_Value}"></td>
+		</tr>
+	{/if}
+	<!-- 『支付寶』顯示賣家支付寶帳號 -->
+	{if $payment_id == 6}
+		<tr>
+			<th align="right">{$SellerEmail}</th>
+			<td align="left"><INPUT TYPE="text" NAME="SellerEmail" id="SellerEmail" size="50" value="{$SellerEmail_Value}"></td>
+		</tr>
+	{/if}
+	<!-- 『自取』『支付寶』不可顯示運費設定 -->
+	{if $payment_id != 3 && $payment_id != 6}
+		<tr>
+			<th align="right">{$FareSet}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="fare_set" value="1" checked>{$SetY}
+				<INPUT TYPE="radio" NAME="fare_set" value="0" {if $fare_set=='0'}checked{/if}>{$SetN}
+			</td>
+		</tr>
+	{/if}
+	<!-- 只有『貨到付款』可顯示手續費設定 -->
+	{if $payment_id == 2}
+		<tr>
+			<th align="right">{$FeeSet}</th>
+			<td align="left">
+				<INPUT TYPE="radio" NAME="fee_set" value="1" checked>{$SetY}
+				<INPUT TYPE="radio" NAME="fee_set" value="0" {if $fee_set=='0'}checked{/if}>{$SetN}
+			</td>
+		</tr>
+	{/if}
+		<tr>
+			<th align="right">{$PaymentOrder}</th>
+			<td align="left"><INPUT TYPE="text" NAME="payment_order" id="payment_order" size="16" value="{$payment_order}"></td>
+		</tr>
+		<tr>				
+			<th align="right" valign="top">{$PaymentDetail}</th>
+			<td align="left">{$FckEditor}</td>
+		</tr>			
+		<tr>				
+			<td align="center" colspan="2">&nbsp;</td>
+		</tr>
+		<tr>				
+			<td align="center" colspan="2">
+				<INPUT TYPE="submit" value="{$Btn_Save}">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+		<tr>				
+			<td align="center" colspan="2">&nbsp;</td>
+		</tr>
+	</table> 
+</form>	
+{$temp_log}</body>
+</html>

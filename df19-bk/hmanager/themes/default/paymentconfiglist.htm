@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="css/style1.css" rel="stylesheet" type="text/css" />
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	paymentconfig.htm		後台商品設定→付款設定 的 htm顯示頁面
+	│	開發者		│	廷俊
+	│	版本		│	v1.0.0.0081701
+	├=======================================================================================┤
+	│	1.	v1.0.1.0081701	2010/08/17	廷俊	取消2010-08-12的訂單設定、需求單設定，更正為編輯付款設定、出貨設定
+	│	2.	v1.0.1.0081901	2010/08/19	廷俊	a.付款設定寫死三種模式，遮蔽新增和刪除付款模式
+	│											b.匯款可設定運費、貨到付款可設定運費和手續費、自取不需設定
+	│	3.	v03.00.02.1040801	2011/04/14	廷俊	付款設定列表頁面調整版面配置
+	└=======================================================================================┘
+*/-->	
+<body>
+<!--
+	2010-08-19 edit by 廷俊
+	------------------------------------------------------
+	付款設定寫死三種模式，遮蔽新增和刪除付款模式
+	------------------------------------------------------		
+-->
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right">
+		<!--<input name="button" type="button" class="set_new_btn" id="button" value="{$Btn_AddPayment}" onclick="location.href='{$BtnAddPaymentUrl}';">-->
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-08-17 edit by 廷俊
+	----------------------------------------------------
+	修改成功訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<!--
+	2010-08-19 edit by 廷俊
+	------------------------------------------------------
+	a.付款設定寫死三種模式，遮蔽新增和刪除付款模式
+	b.匯款可設定運費、貨到付款可設定運費和手續費、自取不需設定
+	------------------------------------------------------		
+	2011-04-14 edit by 廷俊
+	------------------------------------------------------
+	付款設定列表頁面調整版面配置
+	------------------------------------------------------		
+-->
+<div id="show_table2" class="main_link">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+			<tr>     
+				<td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$PaymentId}</td>
+				<td width="150px" height="25" align="center" valign="middle" class="table_td_01">{$PaymentSys}</td>
+				<td width="" height="25" align="center" valign="middle" class="table_td_01">{$PaymentUser}</td>
+				<td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$FareSet}</td>
+				<td width="90px" height="25" align="center" valign="middle" class="table_td_01">{$FeeSet}</td>
+				<td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$PaymentOrder}</td>
+				<td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$InfoState}</td>	
+				<td width="60px" height="25" align="center" valign="middle" class="table_td_01">{$PaymentOperator}</td>
+			</tr>
+				{section name=i loop=$umpayment}
+			<tr>     
+				<td height="25" align="center" valign="middle" class="table_td_02">{math equation="x+(y-1)*z" x=$smarty.section.i.rownum y=$num_page z=$perpagenum_value}</td>
+				<td height="25" align="left" valign="middle" class="table_td_02">{$umpayment[i].payment_sys}</td>
+				<td height="25" align="left" valign="middle" class="table_td_02">{$umpayment[i].payment_na}</td>
+				<td height="25" align="center" valign="middle" class="table_td_02">{$umpayment[i].fare_set}</td>
+				<td height="25" align="center" valign="middle" class="table_td_02">{$umpayment[i].fee_set}</td>
+				<td height="25" align="center" valign="middle" class="table_td_02">{$umpayment[i].payment_order}</td>
+				<td height="25" align="center" valign="middle" class="table_td_02">{$umpayment[i].info_state}</td>	
+				<td height="25" valign="middle" align="center" class="table_td_02"><a href="{$umpayment[i].payment_url}">{$PaymentEdit}</a><!--&nbsp;|&nbsp;<a href="{$umpayment[i].delpayment_url}" onclick="return confirm('{$chkDelete}?');">{$PaymentDelete}</a>--></td>
+			</tr>
+				{/section}
+		</table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" height="30" align="left" class="table_td_03">
+    {$records_str}
+    </td>
+    <td width="50%" align="right" class="table_td_03">
+    {if $firsturl!=''}<a href="{$firsturl}">{$firstpage}</a>{else}{$firstpage}{/if}
+    {if $upperurl!=''}<a href="{$upperurl}">{$upperpage}</a>{else}{$upperpage}{/if}
+    {if $nexturl!=''}<a href="{$nexturl}">{$nextpage}</a>{else}{$nextpage}{/if}
+    {if $lasturl!=''}<a href="{$lasturl}">{$lastpage}</a>{else}{$lastpage}{/if}
+<!--
+	2010-08-06 edit by 廷俊
+	----------------------------------------------------
+	輸入查詢條件後 與 下拉式選擇頁碼，都必須selected查詢條件的值
+	---------------------------------------------------- 			
+-->
+    <select name="gotoPage" id="gotoPage" onChange="location.href=(this.value)">
+		{section name=i loop=$total_pages}
+			{if $smarty.section.i.rownum==$num_page}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}" selected>{$smarty.section.i.rownum}</option>
+			{else}
+				<option value="?perpagenum={$perpagenum_value}&num_page={$smarty.section.i.rownum}">{$smarty.section.i.rownum}</option>
+			{/if}
+		{/section}
+    </select>
+	{$PerPageNme}
+	{$umSetPageList}
+   </td>
+  </tr> 
+</table>
+</div>
+</form>	
+{$temp_log}</body>
+</html>

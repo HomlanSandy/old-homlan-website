@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<!-- /*
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	themes_select.htm	後台樣板套用
+	│	開發者		│	玉玲
+	│	版本		│	v03.00.08.1060201
+	├=======================================================================================┤
+	│	1.	v03.00.08.1060201	2011/06/08	廷俊	版面調整
+	└=======================================================================================┘
+*/ -->
+</head>
+
+<body>
+
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle_themes}</td>
+      <td width="12%" align="right">&nbsp;
+       
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
+	2010-09-14 edit by 廷俊
+	----------------------------------------------------
+	修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+
+<!--
+	2010-05-27 edit by 廷俊
+	------------------------------------------------------
+	1.自訂義樣版與預設樣版，要分兩個頁籤
+	2.修改按鈕語言別
+	3.無自訂樣版時，自訂樣版的頁籤disabled
+	------------------------------------------------------	
+	2011-06-08 edit by 廷俊
+	------------------------------------------------------
+	版面調整
+	------------------------------------------------------	
+-->	
+<div id="show_table2">
+	<form name="form" method="post" action="{$savefrm_url}">
+<!-- 頁籤起 -->
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">{$umTITLE1}</li>
+    <li class="TabbedPanelsTab" tabindex="0" {$disabled}>{$umTITLE2}</li>
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent">  
+	<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%">
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>			
+			{section name=p loop=$umlist1}				
+				<tr>{$umlist1[p].lists}</tr>								
+			{/section}	
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>				
+			<tr>
+				<td align="center" colspan="3">
+					<INPUT TYPE="submit" value="{$Btn_Save}">
+					<INPUT TYPE="reset" value="{$Btn_reset}">
+				</td>
+			</tr>	
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>			
+		</table>
+    </td>
+    </tr>
+    </table>
+  </div>
+    <div class="TabbedPanelsContent">  
+	<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top">
+		<table border="0" cellpadding="2" cellspacing="2" align="center"  width="80%">
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>		
+			{section name=p loop=$umlist2}				
+				<tr>{$umlist2[p].lists}</tr>								
+			{/section}	
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>			
+			<tr>
+				<td align="center" colspan="3"><INPUT TYPE="submit" value="{$Btn_Save}"><INPUT TYPE="reset" value="{$Btn_reset}"></td>
+			</tr>	
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>		
+		</table>
+    </td>
+    </tr>
+    </table>
+  </div>
+  </div>
+  </div>
+	</form>
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+//-->
+</script>
+<!-- 頁籤終 -->
+</div>
+
+{$temp_log}</body>
+</html>

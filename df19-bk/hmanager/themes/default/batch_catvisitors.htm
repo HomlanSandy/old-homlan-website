@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<!--
+	┌======================================┌───────┐========================================┐
+	├======================================│ 宣 告 │========================================┤
+	├======================================└───────┘========================================┤
+	│	程式用途	│	batch_catvisitors.htm	分類瀏覽排行 的 htm檔
+	│	開發者		│	廷俊
+	│	版本		│	v2.0.0.0110201
+	├=======================================================================================┤
+	│	1.	v2.0.0.0110201	2010/11/02	廷俊	a.新增瀏覽分類排行的php執行檔、語言檔、htm頁面檔
+	│											b.將分類列表，並加入checkbox選項、瀏覽人數、統計起始日期
+	│											c.全選的checkbox可觸發控制列表所有的checkbox
+	│											d.按下歸零統計的按鈕時，顯示確定訊息
+	│											e.將勾選的分類項目執行儲存，統計瀏覽人數歸零、並統計起始日期將從本日開始計算
+	│											f.顯示修改成功訊息
+	│	2.	v2.0.0.0110401	2010/11/04	廷俊	a.判斷是否搜尋過條件，並把搜尋條件設為預設值
+	│											b.設定儲存執行的連結，並且帶搜尋條件值
+	│											c.新增資訊狀態搜尋條件的下拉式選單，判斷是否搜尋過條件，並把搜尋條件設為預設值
+	│											d.列表預設排序為瀏覽人數
+	│											e.列表標題可反向排序內容，預設為由大到小排列
+	│											f.分類項目列表加入搜尋條件判斷
+	│											g.執行儲存後，轉址回瀏覽分類排行頁面，並帶搜尋條件值和顯示修改成功訊息
+	│											h.驗證是否有勾選欲將統計瀏覽人數歸零的分類項目
+	│											i.列表下方總計筆數記錄
+	└=======================================================================================┘
+*/-->
+<script language="JavaScript">
+<!--
+var Warming_checkbox="{$Warming_checkbox}"
+{literal}
+//全選的checkbox可觸發控制列表所有的checkbox
+function CheckAll(){
+	var ck = document.form.elements["box[]"]; 
+	var ckAll = document.form.allbox; 
+	//當沒有checkbox時 
+	if (!ck){ 
+		ckAll.checked = false; 
+	//當只有一個checkbox時	
+	}else if (!ck.length){  
+		ck.checked = ckAll.checked; 
+	//當有兩個以上的checkbox時 	
+	}else{ 
+		for (var i=0;i<ck.length;i++) 
+			ck[i].checked = ckAll.checked; 
+	} 
+}
+
+//驗證是否有勾選欲將統計瀏覽人數歸零的分類項目
+function chkpost(){
+	var msg = Warming_checkbox + "\r\n";
+	var ck = document.form.elements["box[]"]; 
+	//當沒有checkbox時 
+	if (!ck){
+	//當只有一個checkbox時	
+	}else if (!ck.length){ 
+		if(ck.checked == true){
+			msg = "";
+		}
+	//當有兩個以上的checkbox時	
+	}else{
+		for (var i=0;i<ck.length;i++){
+			if(ck[i].checked == true){
+				msg = "";
+			}
+		}
+	} 
+	if(msg==''){
+		return true;
+	}else{
+		alert(msg);
+		return false;
+	}
+}
+
+{/literal}
+-->	
+</script>
+
+<body>
+<div id="use_title">
+  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="72%" align="left">{$PageTitle}</td>
+      <td width="12%" align="right"></td>
+    </tr>
+  </table>
+</div>
+<!--
+	2010-07-28 edit by 廷俊
+	----------------------------------------------------
+	修改成功提示訊息
+	---------------------------------------------------- 			
+-->
+{$Message}
+<form name="seachfrm" method="post" action="batch_catvisitors.php?act=list">
+	<div id="search_block">
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="left">
+					{$CategoryNa}<input name="textfield" type="text" id="textfield" size="15" value="{$textfield}">
+					{$CategoryInfoSta}{$infoSel}     
+					<img src="images/search_1.gif" width="20" height="20">
+					<input name="button2" type="submit" class="search_btn" id="button2" value="{$InfoSearch}">
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<div id="show_table4" class="main_link">
+<form name="form" method=post action="{$savefrm_act}" onsubmit="return confirm('{$Warming_SaveVisitors}');">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>     
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<input type="checkbox" name="allbox" onclick="CheckAll()">{$SelectAll}
+			</td>
+			<td width="" align="center" valign="middle" class="table_td_01">
+				<a href="{$href1}">{$CategoryNa}</a>
+			</td>
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<a href="{$href2}">{$CategoryType}</a>
+			</td>
+			<td width="90" align="center" valign="middle" class="table_td_01">
+				<a href="{$href3}">{$CategoryDisable}</a>
+			</td>
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<a href="{$href4}">{$CategoryOrder}</a>
+			</td>  
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<a href="{$href5}">{$CategoryInfoSta}</a>
+			</td> 	  
+			<td width="60" align="center" valign="middle" class="table_td_01">
+				<a href="{$href6}">{$Visitors}</a>
+			</td>
+			<td width="120" align="center" valign="middle" class="table_td_01">
+				<a href="{$href7}">{$Visitors_StrtDate}</a>
+			</td>
+		</tr>
+	{section name=i loop=$umCatslist}
+		<tr>          
+			<td valign="middle" align="center" class="table_td_02"><input type="checkbox" name="box[]" value="{$umCatslist[i].cats_id}"></td>   
+			<td valign="middle" class="table_td_02">{$umCatslist[i].cats_na}</td>	   
+			<td valign="middle" align="center" class="table_td_02">{$umCatslist[i].cats_type}</td>
+			<td valign="middle" align="center" class="table_td_02">{$umCatslist[i].cat_show}</td>
+			<td valign="middle" align="center" class="table_td_02">{$umCatslist[i].gds_order_no}</td>	   
+			<td valign="middle" align="center" class="table_td_02">{$umCatslist[i].info_state}</td>
+			<td valign="middle" align="center" class="table_td_02">{$umCatslist[i].visitors}</td>
+			<td valign="middle" align="center" class="table_td_02">{$umCatslist[i].visitors_date}</td>
+		</tr>
+	{/section}
+	</table>
+	<table border="0" cellpadding="0" cellspacing="0" align="center"  width="98%">		
+		<tr>		
+			<td align="center" class="table_td_03">&nbsp;</td>
+		</tr>
+		<tr>		
+			<td align="left" class="table_td_03">{$records_str}</td>
+		</tr>
+		<tr>		
+			<td align="center" class="table_td_03">&nbsp;</td>
+		</tr>
+		<tr>		
+			<td align="center" class="table_td_03">
+				<INPUT TYPE="submit" value="{$Btn_Save}" onclick="return chkpost();">
+				<INPUT TYPE="reset" value="{$Btn_Reset}">
+			</td>
+		</tr>
+		<tr>		
+			<td align="center" class="table_td_03">&nbsp;</td>
+		</tr>
+	</table>
+</form>	
+</div>
+{$temp_log}</body>
+</html>

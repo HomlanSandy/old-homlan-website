@@ -1,0 +1,46 @@
+<table valign="top" class="news_list_table" align="left" width="100%">
+<tr>
+	<td>
+<!-- 頁籤起 -->
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    {section name=i loop=$umNewscat}
+    <li class="TabbedPanelsTab" tabindex="0">{$umNewscat[i].newscat_na}</li>
+	{/section}
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+	{section name=i loop=$umNewscat}
+    <div class="TabbedPanelsContent">
+    <div align="left"><a href="news.php?commend_id={$umNewscat[i].newscat_id}" target="_self"><img src="themes/{$themes_na}/images/news.gif" alt="{$firstpage}" border="0" align="middle" />{$umNewscat[i].newscat_na}</a></div>
+	{$umNewscat[i].newslist}
+	<div id="page{$umNewscat[i].newscat_id}">
+	<table valign="top" width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<td height="30" align="right" valign="middle" >
+        <div class="pages_link">
+		{if $umNewscat[i].firsturl!=''}<a target="outputTarget" href="{$umNewscat[i].firsturl}"><img src="themes/{$themes_na}/images/first_c.gif" alt="{$firstpage}" border="0" align="middle" /></a>{else}<img src="themes/{$themes_na}/images/first.gif" alt="{$firstpage}" border="0" align="middle" />{/if}
+		{if $umNewscat[i].upperurl!=''}<a target="outputTarget" href="{$umNewscat[i].upperurl}"><img src="themes/{$themes_na}/images/back_c.gif" alt="{$upperpage}" border="0" align="middle" /></a>{else}<img src="themes/{$themes_na}/images/back.gif" alt="{$upperpage}" border="0" align="middle" />{/if}
+		{$umNewscat[i].str_page}
+		{if $umNewscat[i].nexturl!=''}<a target="outputTarget" href="{$umNewscat[i].nexturl}"><img src="themes/{$themes_na}/images/next_c.gif" alt="{$nextpage}" border="0" align="middle" /></a>{else}<img src="themes/{$themes_na}/images/next.gif" alt="{$nextpage}" border="0" align="middle" />{/if}
+		{if $umNewscat[i].lasturl!=''}<a target="outputTarget" href="{$umNewscat[i].lasturl}"><img src="themes/{$themes_na}/images/last_c.gif" alt="{$lastpage}" border="0" align="middle" /></a>{else}<img src="themes/{$themes_na}/images/last.gif" alt="{$lastpage}" border="0" align="middle" />{/if}
+        </div>
+	   </td>
+	  </tr> 
+	</table>
+	</div>
+	</div>
+	{/section}
+  </div>
+</div>
+
+{literal}
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+//-->
+</script>
+{/literal}
+<!-- 頁籤終 -->
+	</td>
+</tr>
+</table>
